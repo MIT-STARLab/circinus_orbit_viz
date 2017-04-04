@@ -1,9 +1,28 @@
 {
 	"renderers": [
-		"/Apps/AutomatedConstViz/movie_rev3/renderers/test.js"
+		"/Apps/AutomatedConstViz/movie_rev3/renderers/test.js",
+        "/Apps/AutomatedConstViz/movie_rev3/renderers/datavol.js"
 	],
 	"renderMapping": {
-		"Satellite/CubeSat1": ["Test"],
-		"Satellite/CubeSat2": ["Test"]
+		"Satellite/CubeSat1": ["DataVol"],
+        "Satellite/CubeSat2": ["DataVol"],
+        "Satellite/CubeSat3": ["DataVol"],
+        "Satellite/CubeSat4": ["DataVol"],
+        "Satellite/CubeSat5": ["DataVol"],
+        "Satellite/CubeSat6": ["DataVol"],
+        "Satellite/CubeSat7": ["DataVol"],
+        "Satellite/CubeSat8": ["DataVol"],
+        "Satellite/CubeSat9": ["DataVol"],
+        "Satellite/CubeSat10": ["DataVol"],
+        "Satellite/CubeSat11": ["DataVol"],
+        "Satellite/CubeSat12": ["DataVol"],
+        "Satellite/CubeSat13": ["DataVol"],
+        "Satellite/CubeSat14": ["DataVol"],
+        "Satellite/CubeSat15": ["DataVol"],
+        "Satellite/CubeSat16": ["DataVol"],
+        "Satellite/CubeSat17": ["DataVol"],
+        "Satellite/CubeSat18": ["DataVol"],
+        "Satellite/CubeSat19": ["DataVol"],
+        "Satellite/CubeSat20": ["DataVol"]
 	}
 }
