@@ -1,0 +1,105 @@
+
+[
+  {
+    "id":"document",
+    "name":"simple",
+    "version":"1.0",
+    "clock":{
+      "interval":"2012-03-15T10:00:00Z/2012-03-16T10:00:00Z",
+      "currentTime":"2012-03-15T10:00:00Z",
+      "multiplier":60,
+      "range":"LOOP_STOP",
+      "step":"SYSTEM_CLOCK_MULTIPLIER"
+    }
+  },
+  {
+    "id":"Facility/TenesseeFire",
+    "name":"TenesseeFire",
+    "availability":"2012-03-15T17:34:00Z/2012-03-15T17:46:00Z",
+    "description":"<!--HTML-->\r\n<p>\r\nOh god, fire\r\n</p>",
+    "billboard":{
+      "eyeOffset":{
+        "cartesian":[
+          0,0,0
+        ]
+      },
+      "horizontalOrigin":"CENTER",
+      "image": {
+        "uri": "forest-fire-free-clipart-1.png"
+      },
+      "scale":0.5,
+      "show":true,
+      "verticalOrigin":"CENTER"
+    },
+    "position":{
+      "cartographicDegrees": [ -80, 35.7, 0 ]
+    }
+  },
+  {
+    "id" : "sat6_fireobs",
+    "name" : "sat6_fireobs_cone",
+    "availability":"2012-03-15T17:36:00Z/2012-03-15T17:42:00Z",
+    "cylinder" : {
+        "length" : 530000.0,
+        "topRadius" : 0.0,
+        "bottomRadius" : 400000.0,
+        "material" : {
+            "solidColor" : {
+                "color" : {
+                    "rgba" : [255, 0, 0, 150]
+                }
+            }
+        },
+        "fill" : true
+    },
+    "position":{
+      "interpolationAlgorithm":"LAGRANGE",
+      "interpolationDegree":5,
+      "referenceFrame":"INERTIAL",
+      "epoch":"2012-03-15T10:00:00Z",
+      "cartesian":[
+        27300,6165469.78,0,2391767.662,
+        27600,5049078.926,0,4270874.87,
+        27900,3381136.11,0,5683439.871,
+        28200,1343843.737,0,6475156.691
+      ]
+    }
+  },
+  {
+    "id":"Xlnk/Sat6-to-Sat5",
+    "name":"6 to 5 xlnk for fire alert",
+    "availability":"2012-03-15T10:00:00Z/2012-03-16T10:00:00Z",
+    "polyline":{
+      "show":[
+        {
+          "interval":"2012-03-15T10:00:00Z/2012-03-15T17:39:05Z",
+          "boolean":false
+        },
+        {
+          "interval":"2012-03-15T17:39:05Z/2012-03-15T17:39:34Z",
+          "boolean":true
+        },
+        {
+          "interval":"2012-03-15T17:39:34Z/2012-03-16T10:00:00Z",
+          "boolean":false
+        }
+      ],
+      "width":6,
+      "material":{
+        "solidColor":{
+          "color":{
+            "rgba":[
+              255,165,0,255
+            ]
+          }
+        }
+      },
+      "followSurface":false,
+      "positions":{
+        "references":[
+          "Satellite/CubeSat6#position","Satellite/CubeSat5#position"
+        ]
+      }
+    }
+  }
+]

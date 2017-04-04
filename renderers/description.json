@@ -1,0 +1,9 @@
+{
+	"renderers": [
+		"/Apps/AutomatedConstViz/movie_rev3/renderers/test.js"
+	],
+	"renderMapping": {
+		"Satellite/CubeSat1": ["Test"],
+		"Satellite/CubeSat2": ["Test"]
+	}
+}
