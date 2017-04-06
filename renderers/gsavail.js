@@ -17,6 +17,10 @@ class GSavailAuxRenderer {
         var img2 = new Image();
         img2.src = 'renderers/cloud.png';
         this.cloudImg = img2;
+
+        var img3 = new Image();
+        img3.src = 'renderers/moon.png';
+        this.moonImg = img3;
 	}
 
 	/**
@@ -39,7 +43,26 @@ class GSavailAuxRenderer {
 
 
                 if (gs_availability == true) {
-                    ctx.drawImage(this.sunImg, pos.x + 10, pos.y - 50, 50 ,50);
+                    // Need to figure out whether to draw sun or moon.
+
+                    // center of the earth
+                    var earthCenter = new Cesium.Cartesian3(0, -6371, 0);
+
+                    var sunPos = Cesium.Simon1994PlanetaryPositions.computeSunPositionInEarthInertialFrame(viewer.clock.currentTime, new Cesium.Cartesian3());
+
+                    // vec from center of earth to sat
+                    var earthCenterToSat = Cesium.Cartesian3.subtract(ent.position.getValue(viewer.clock.currentTime), earthCenter, new Cesium.Cartesian3())
+
+                    // find angle between vector to sun and vector to sat. If greater than 90deg, it's night for the GS
+                    var angle = Cesium.Cartesian3.angleBetween(sunPos, earthCenterToSat)
+
+                    if (angle > Math.PI/2) {
+                        ctx.drawImage(this.moonImg, pos.x + 10, pos.y - 50, 40 ,40);
+                    }
+                    else {
+                        ctx.drawImage(this.sunImg, pos.x + 10, pos.y - 50, 50 ,50);
+                    }
+
                 }
                 else {
                     ctx.drawImage(this.cloudImg, pos.x + 10, pos.y - 50, 50,50);
