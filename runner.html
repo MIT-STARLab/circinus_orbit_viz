@@ -54,6 +54,21 @@
         Cesium.CzmlDataSource.updaters.push(processDataVol);
 
 
+        function processGSavail(entity, packet, entityCollection, sourceUri) {
+          var customPropertyData = packet.gs_availability;
+
+          var customProperty = entity.gs_availability;
+          if (customProperty === undefined) {
+            entity.addProperty('gs_availability');
+          }
+
+          // this is on line 104382 in Cesium.js
+          Cesium.CzmlDataSource.processPacketData(Boolean, entity, 'gs_availability', customPropertyData, undefined, sourceUri);
+        }
+
+        Cesium.CzmlDataSource.updaters.push(processGSavail);
+
+
         // Load orbit data CZML file
         viewer.dataSources.add(Cesium.CzmlDataSource.load('app_data_files/sats_file.czml'));
          // viewer.dataSources.add(Cesium.CzmlDataSource.load('app_data_files/fire_sequence.czml'));

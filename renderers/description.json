@@ -1,7 +1,8 @@
 {
 	"renderers": [
-		"/Apps/AutomatedConstViz/movie_rev3/renderers/test.js",
-        "/Apps/AutomatedConstViz/movie_rev3/renderers/datavol.js"
+		"/Apps/MATLAB_sat_viz/renderers/test.js",
+        "/Apps/MATLAB_sat_viz/renderers/datavol.js",
+        "/Apps/MATLAB_sat_viz/renderers/gsavail.js"
 	],
 	"renderMapping": {
 		"Satellite/CubeSat1": ["DataVol"],
@@ -23,6 +24,10 @@
         "Satellite/CubeSat17": ["DataVol"],
         "Satellite/CubeSat18": ["DataVol"],
         "Satellite/CubeSat19": ["DataVol"],
-        "Satellite/CubeSat20": ["DataVol"]
+        "Satellite/CubeSat20": ["DataVol"],
+        "Facility/Haleakala 1": ["GSavail"],
+        "Facility/Piura 2": ["GSavail"],
+        "Facility/Dadaab 3": ["GSavail"],
+        "Facility/Darwin 4": ["GSavail"]
 	}
 }
