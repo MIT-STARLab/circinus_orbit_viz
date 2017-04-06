@@ -101,6 +101,7 @@ The output file is just the full czml file that will be created after appending 
 Those inputs being set, now you can run the tool and generate the input file:
 
 ```
+$ cd MATLAB_sat_viz/app_data_files
 $ python update_sats_file.py
 ```
 
