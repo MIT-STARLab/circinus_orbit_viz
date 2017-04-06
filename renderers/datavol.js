@@ -41,7 +41,7 @@ class DataVolAuxRenderer {
                     var total_horizontal_len = datavol;
                 }
                 var start_x = pos.x + 30;
-                var start_y = pos.y + 10;
+                var start_y = pos.y + 20;
                 var gauge_height = 20;
 
                 // put a gold border around data gauge
@@ -60,9 +60,9 @@ class DataVolAuxRenderer {
                 }
 
                 // label for data vol
-                // ctx.font = '16px monospace';
-                // ctx.fillStyle = 'white';
-                // ctx.fillText(datavol.toString(), start_x+4, start_y + 17);
+                ctx.font = '12px monospace';
+                ctx.fillStyle = 'white';
+                ctx.fillText(Math.round(datavol).toString(), start_x+4, start_y + 15);
             }
 
         }
