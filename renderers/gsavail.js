@@ -9,6 +9,14 @@ class GSavailAuxRenderer {
 	 */
 	constructor() {
 		this.randomID = Math.floor(Math.random() * 100);
+
+        var img1 = new Image();
+        img1.src = 'renderers/sun.png';
+        this.sunImg = img1;
+
+        var img2 = new Image();
+        img2.src = 'renderers/cloud.png';
+        this.cloudImg = img2;
 	}
 
 	/**
@@ -19,36 +27,24 @@ class GSavailAuxRenderer {
 	 * @param visible boolean, true if visible (not occluded)
 	 */
 	render(ctx, ent, pos, visible) {
+        // console.log('yo')
+
 		if (!visible) return;
 
         if ('gs_availability' in ent && ent.gs_availability !== undefined) {
-            // console.log('yo')
 
-            var gs_availability = ent.gs_availability.getValue(viewer.clock.currentTime)
+            var gs_availability = ent.gs_availability.getValue(viewer.clock.currentTime);
 
             if (gs_availability !== undefined) {
-                var img = new Image();   // Create new img element
+
 
                 if (gs_availability == true) {
-
-                    img.src = 'renderers/sun.png'; // Set source path
-                    ctx.drawImage(img, pos.x + 10, pos.y - 50, 50 ,50)
+                    ctx.drawImage(this.sunImg, pos.x + 10, pos.y - 50, 50 ,50);
                 }
                 else {
-                    img.src = 'renderers/cloud.png'; // Set source path
-                    ctx.drawImage(img, pos.x + 10, pos.y - 50, 50,50)
+                    ctx.drawImage(this.cloudImg, pos.x + 10, pos.y - 50, 50,50);
                 }
-
-                // var start_x = pos.x + 30;
-                // var start_y = pos.y + 10;
-                // var gauge_height = 20;
-
-                // // put a gold border around data gauge
-                // ctx.fillStyle = 'rgba(255,215,0,0.7)'; // gold
-                // ctx.fillRect( start_x, start_y, 15+4, gauge_height+4);
-
             }
-
         }
 	}
 
