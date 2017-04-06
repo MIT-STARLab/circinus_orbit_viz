@@ -64,7 +64,7 @@ class BatteryAuxRenderer {
                 // label for battery
                 ctx.font = '12px monospace';
                 ctx.fillStyle = 'white';
-                ctx.fillText(Math.round(battery).toString(), start_x+gauge_len+10, start_y + 10);
+                ctx.fillText(battery.toPrecision(4).toString(), start_x+gauge_len+10, start_y + 10);
 
             }
 
