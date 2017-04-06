@@ -12,8 +12,8 @@
     }
   },
   {
-    "id": "Facility/Prudhoe Bay 1",
-    "name": "Prudhoe Bay 1",
+    "id": "Facility/Inuvik 1",
+    "name": "Inuvik 1",
     "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
     "description": "<!--HTML-->\r\n<p>\r\nno description\r\n</p>",
     "billboard": {
@@ -44,11 +44,11 @@
       },
       "show": true,
       "style": "FILL_AND_OUTLINE",
-      "text": "Prudhoe Bay 1",
+      "text": "Inuvik 1",
       "verticalOrigin": "CENTER"
     },
     "position": {
-      "cartographicDegrees": [-148.75, 70.37, 0]
+      "cartographicDegrees": [-133.723, 68.3607, 0]
     }
   },
   {
@@ -88,12 +88,12 @@
       "verticalOrigin": "CENTER"
     },
     "position": {
-      "cartographicDegrees": [-147.65, 64.84, 0]
+      "cartographicDegrees": [-147.7164, 64.8378, 0]
     }
   },
   {
-    "id": "Facility/Seattle 3",
-    "name": "Seattle 3",
+    "id": "Facility/San Luis Obispo 3",
+    "name": "San Luis Obispo 3",
     "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
     "description": "<!--HTML-->\r\n<p>\r\nno description\r\n</p>",
     "billboard": {
@@ -124,16 +124,16 @@
       },
       "show": true,
       "style": "FILL_AND_OUTLINE",
-      "text": "Seattle 3",
+      "text": "San Luis Obispo 3",
       "verticalOrigin": "CENTER"
     },
     "position": {
-      "cartographicDegrees": [-122.33, 47.61, 0]
+      "cartographicDegrees": [-120.7054055, 35.2725611, 0]
     }
   },
   {
-    "id": "Facility/New Mexico 4",
-    "name": "New Mexico 4",
+    "id": "Facility/Hawaii 4",
+    "name": "Hawaii 4",
     "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
     "description": "<!--HTML-->\r\n<p>\r\nno description\r\n</p>",
     "billboard": {
@@ -164,16 +164,16 @@
       },
       "show": true,
       "style": "FILL_AND_OUTLINE",
-      "text": "New Mexico 4",
+      "text": "Hawaii 4",
       "verticalOrigin": "CENTER"
     },
     "position": {
-      "cartographicDegrees": [-106.33, 32.79, 0]
+      "cartographicDegrees": [-156.26, 20.72, 0]
     }
   },
   {
-    "id": "Facility/New England 5",
-    "name": "New England 5",
+    "id": "Facility/Panama 5",
+    "name": "Panama 5",
     "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
     "description": "<!--HTML-->\r\n<p>\r\nno description\r\n</p>",
     "billboard": {
@@ -204,16 +204,16 @@
       },
       "show": true,
       "style": "FILL_AND_OUTLINE",
-      "text": "New England 5",
+      "text": "Panama 5",
       "verticalOrigin": "CENTER"
     },
     "position": {
-      "cartographicDegrees": [-71.64, 42.94, 0]
+      "cartographicDegrees": [-80.7821, 8.538, 0]
     }
   },
   {
-    "id": "Facility/Hawaii 6",
-    "name": "Hawaii 6",
+    "id": "Facility/Cordoba 6",
+    "name": "Cordoba 6",
     "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
     "description": "<!--HTML-->\r\n<p>\r\nno description\r\n</p>",
     "billboard": {
@@ -244,16 +244,16 @@
       },
       "show": true,
       "style": "FILL_AND_OUTLINE",
-      "text": "Hawaii 6",
+      "text": "Cordoba 6",
       "verticalOrigin": "CENTER"
     },
     "position": {
-      "cartographicDegrees": [-155.58, 19.9, 0]
+      "cartographicDegrees": [-64.1888, -31.4201, 0]
     }
   },
   {
-    "id": "Facility/Florida 7",
-    "name": "Florida 7",
+    "id": "Facility/Argentina 7",
+    "name": "Argentina 7",
     "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
     "description": "<!--HTML-->\r\n<p>\r\nno description\r\n</p>",
     "billboard": {
@@ -284,16 +284,16 @@
       },
       "show": true,
       "style": "FILL_AND_OUTLINE",
-      "text": "Florida 7",
+      "text": "Argentina 7",
       "verticalOrigin": "CENTER"
     },
     "position": {
-      "cartographicDegrees": [-80.93, 26.75, 0]
+      "cartographicDegrees": [-67.7735569, -53.7790629, 0]
     }
   },
   {
-    "id": "Facility/Argentina 8",
-    "name": "Argentina 8",
+    "id": "Facility/Svalbard 8",
+    "name": "Svalbard 8",
     "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
     "description": "<!--HTML-->\r\n<p>\r\nno description\r\n</p>",
     "billboard": {
@@ -324,16 +324,16 @@
       },
       "show": true,
       "style": "FILL_AND_OUTLINE",
-      "text": "Argentina 8",
+      "text": "Svalbard 8",
       "verticalOrigin": "CENTER"
     },
     "position": {
-      "cartographicDegrees": [-70.92, -53.16, 0]
+      "cartographicDegrees": [20.9752, 77.875, 0]
     }
   },
   {
-    "id": "Facility/Brazil 9",
-    "name": "Brazil 9",
+    "id": "Facility/Vardo 9",
+    "name": "Vardo 9",
     "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
     "description": "<!--HTML-->\r\n<p>\r\nno description\r\n</p>",
     "billboard": {
@@ -364,16 +364,16 @@
       },
       "show": true,
       "style": "FILL_AND_OUTLINE",
-      "text": "Brazil 9",
+      "text": "Vardo 9",
       "verticalOrigin": "CENTER"
     },
     "position": {
-      "cartographicDegrees": [-45.63, -18.42, 0]
+      "cartographicDegrees": [31.1094, 70.3706, 0]
     }
   },
   {
-    "id": "Facility/Munich 10",
-    "name": "Munich 10",
+    "id": "Facility/Tromso 10",
+    "name": "Tromso 10",
     "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
     "description": "<!--HTML-->\r\n<p>\r\nno description\r\n</p>",
     "billboard": {
@@ -404,16 +404,16 @@
       },
       "show": true,
       "style": "FILL_AND_OUTLINE",
-      "text": "Munich 10",
+      "text": "Tromso 10",
       "verticalOrigin": "CENTER"
     },
     "position": {
-      "cartographicDegrees": [11.58, 48.14, 0]
+      "cartographicDegrees": [18.9553, 69.6492, 0]
     }
   },
   {
-    "id": "Facility/Norway 11",
-    "name": "Norway 11",
+    "id": "Facility/Grimstad 11",
+    "name": "Grimstad 11",
     "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
     "description": "<!--HTML-->\r\n<p>\r\nno description\r\n</p>",
     "billboard": {
@@ -444,16 +444,16 @@
       },
       "show": true,
       "style": "FILL_AND_OUTLINE",
-      "text": "Norway 11",
+      "text": "Grimstad 11",
       "verticalOrigin": "CENTER"
     },
     "position": {
-      "cartographicDegrees": [14.78, 67.32, 0]
+      "cartographicDegrees": [8.5949, 58.3447, 0]
     }
   },
   {
-    "id": "Facility/South Africa 12",
-    "name": "South Africa 12",
+    "id": "Facility/Spain 12",
+    "name": "Spain 12",
     "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
     "description": "<!--HTML-->\r\n<p>\r\nno description\r\n</p>",
     "billboard": {
@@ -484,16 +484,16 @@
       },
       "show": true,
       "style": "FILL_AND_OUTLINE",
-      "text": "South Africa 12",
+      "text": "Spain 12",
       "verticalOrigin": "CENTER"
     },
     "position": {
-      "cartographicDegrees": [27.69, -25.89, 0]
+      "cartographicDegrees": [-3.7492, 40.4637, 0]
     }
   },
   {
-    "id": "Facility/Dubai 13",
-    "name": "Dubai 13",
+    "id": "Facility/Azores 13",
+    "name": "Azores 13",
     "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
     "description": "<!--HTML-->\r\n<p>\r\nno description\r\n</p>",
     "billboard": {
@@ -524,16 +524,16 @@
       },
       "show": true,
       "style": "FILL_AND_OUTLINE",
-      "text": "Dubai 13",
+      "text": "Azores 13",
       "verticalOrigin": "CENTER"
     },
     "position": {
-      "cartographicDegrees": [55.27, 25.2, 0]
+      "cartographicDegrees": [-25.6756, 37.7412, 0]
     }
   },
   {
-    "id": "Facility/Singapore 14",
-    "name": "Singapore 14",
+    "id": "Facility/Central Africa 14",
+    "name": "Central Africa 14",
     "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
     "description": "<!--HTML-->\r\n<p>\r\nno description\r\n</p>",
     "billboard": {
@@ -564,16 +564,16 @@
       },
       "show": true,
       "style": "FILL_AND_OUTLINE",
-      "text": "Singapore 14",
+      "text": "Central Africa 14",
       "verticalOrigin": "CENTER"
     },
     "position": {
-      "cartographicDegrees": [103.82, 1.35, 0]
+      "cartographicDegrees": [9.749752, 4.520619, 0]
     }
   },
   {
-    "id": "Facility/Guam 15",
-    "name": "Guam 15",
+    "id": "Facility/Hartebeesthoek 15",
+    "name": "Hartebeesthoek 15",
     "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
     "description": "<!--HTML-->\r\n<p>\r\nno description\r\n</p>",
     "billboard": {
@@ -604,16 +604,16 @@
       },
       "show": true,
       "style": "FILL_AND_OUTLINE",
-      "text": "Guam 15",
+      "text": "Hartebeesthoek 15",
       "verticalOrigin": "CENTER"
     },
     "position": {
-      "cartographicDegrees": [144.79, 13.44, 0]
+      "cartographicDegrees": [28.08, -25.64, 0]
     }
   },
   {
-    "id": "Facility/Japan 16",
-    "name": "Japan 16",
+    "id": "Facility/Dubai 16",
+    "name": "Dubai 16",
     "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
     "description": "<!--HTML-->\r\n<p>\r\nno description\r\n</p>",
     "billboard": {
@@ -644,16 +644,16 @@
       },
       "show": true,
       "style": "FILL_AND_OUTLINE",
-      "text": "Japan 16",
+      "text": "Dubai 16",
       "verticalOrigin": "CENTER"
     },
     "position": {
-      "cartographicDegrees": [139.67, 37.52, 0]
+      "cartographicDegrees": [55.27, 25.1, 0]
     }
   },
   {
-    "id": "Facility/New Zealand 17",
-    "name": "New Zealand 17",
+    "id": "Facility/Mauritius 17",
+    "name": "Mauritius 17",
     "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
     "description": "<!--HTML-->\r\n<p>\r\nno description\r\n</p>",
     "billboard": {
@@ -684,11 +684,171 @@
       },
       "show": true,
       "style": "FILL_AND_OUTLINE",
-      "text": "New Zealand 17",
+      "text": "Mauritius 17",
       "verticalOrigin": "CENTER"
     },
     "position": {
-      "cartographicDegrees": [168.38, -46.51, 0]
+      "cartographicDegrees": [57.5522, -20.3484, 0]
+    }
+  },
+  {
+    "id": "Facility/Bangelore 18",
+    "name": "Bangelore 18",
+    "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
+    "description": "<!--HTML-->\r\n<p>\r\nno description\r\n</p>",
+    "billboard": {
+      "eyeOffset": {
+        "cartesian": [0, 0, 0]
+      },
+      "horizontalOrigin": "CENTER",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACvSURBVDhPrZDRDcMgDAU9GqN0lIzijw6SUbJJygUeNQgSqepJTyHG91LVVpwDdfxM3T9TSl1EXZvDwii471fivK73cBFFQNTT/d2KoGpfGOpSIkhUpgUMxq9DFEsWv4IXhlyCnhBFnZcFEEuYqbiUlNwWgMTdrZ3JbQFoEVG53rd8ztG9aPJMnBUQf/VFraBJeWnLS0RfjbKyLJA8FkT5seDYS1Qwyv8t0B/5C2ZmH2/eTGNNBgMmAAAAAElFTkSuQmCC",
+      "pixelOffset": {
+        "cartesian2": [0, 0]
+      },
+      "scale": 2.0,
+      "show": true,
+      "verticalOrigin": "CENTER"
+    },
+    "label": {
+      "fillColor": {
+        "rgba": [0, 255, 255, 255]
+      },
+      "font": "11pt Lucida Console",
+      "horizontalOrigin": "LEFT",
+      "outlineColor": {
+        "rgba": [0, 0, 0, 255]
+      },
+      "outlineWidth": 2,
+      "pixelOffset": {
+        "cartesian2": [12, 0]
+      },
+      "show": true,
+      "style": "FILL_AND_OUTLINE",
+      "text": "Bangelore 18",
+      "verticalOrigin": "CENTER"
+    },
+    "position": {
+      "cartographicDegrees": [77.5946, 12.9716, 0]
+    }
+  },
+  {
+    "id": "Facility/Singapore 19",
+    "name": "Singapore 19",
+    "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
+    "description": "<!--HTML-->\r\n<p>\r\nno description\r\n</p>",
+    "billboard": {
+      "eyeOffset": {
+        "cartesian": [0, 0, 0]
+      },
+      "horizontalOrigin": "CENTER",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACvSURBVDhPrZDRDcMgDAU9GqN0lIzijw6SUbJJygUeNQgSqepJTyHG91LVVpwDdfxM3T9TSl1EXZvDwii471fivK73cBFFQNTT/d2KoGpfGOpSIkhUpgUMxq9DFEsWv4IXhlyCnhBFnZcFEEuYqbiUlNwWgMTdrZ3JbQFoEVG53rd8ztG9aPJMnBUQf/VFraBJeWnLS0RfjbKyLJA8FkT5seDYS1Qwyv8t0B/5C2ZmH2/eTGNNBgMmAAAAAElFTkSuQmCC",
+      "pixelOffset": {
+        "cartesian2": [0, 0]
+      },
+      "scale": 2.0,
+      "show": true,
+      "verticalOrigin": "CENTER"
+    },
+    "label": {
+      "fillColor": {
+        "rgba": [0, 255, 255, 255]
+      },
+      "font": "11pt Lucida Console",
+      "horizontalOrigin": "LEFT",
+      "outlineColor": {
+        "rgba": [0, 0, 0, 255]
+      },
+      "outlineWidth": 2,
+      "pixelOffset": {
+        "cartesian2": [12, 0]
+      },
+      "show": true,
+      "style": "FILL_AND_OUTLINE",
+      "text": "Singapore 19",
+      "verticalOrigin": "CENTER"
+    },
+    "position": {
+      "cartographicDegrees": [103.8198, 1.3521, 0]
+    }
+  },
+  {
+    "id": "Facility/Tokyo 20",
+    "name": "Tokyo 20",
+    "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
+    "description": "<!--HTML-->\r\n<p>\r\nno description\r\n</p>",
+    "billboard": {
+      "eyeOffset": {
+        "cartesian": [0, 0, 0]
+      },
+      "horizontalOrigin": "CENTER",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACvSURBVDhPrZDRDcMgDAU9GqN0lIzijw6SUbJJygUeNQgSqepJTyHG91LVVpwDdfxM3T9TSl1EXZvDwii471fivK73cBFFQNTT/d2KoGpfGOpSIkhUpgUMxq9DFEsWv4IXhlyCnhBFnZcFEEuYqbiUlNwWgMTdrZ3JbQFoEVG53rd8ztG9aPJMnBUQf/VFraBJeWnLS0RfjbKyLJA8FkT5seDYS1Qwyv8t0B/5C2ZmH2/eTGNNBgMmAAAAAElFTkSuQmCC",
+      "pixelOffset": {
+        "cartesian2": [0, 0]
+      },
+      "scale": 2.0,
+      "show": true,
+      "verticalOrigin": "CENTER"
+    },
+    "label": {
+      "fillColor": {
+        "rgba": [0, 255, 255, 255]
+      },
+      "font": "11pt Lucida Console",
+      "horizontalOrigin": "LEFT",
+      "outlineColor": {
+        "rgba": [0, 0, 0, 255]
+      },
+      "outlineWidth": 2,
+      "pixelOffset": {
+        "cartesian2": [12, 0]
+      },
+      "show": true,
+      "style": "FILL_AND_OUTLINE",
+      "text": "Tokyo 20",
+      "verticalOrigin": "CENTER"
+    },
+    "position": {
+      "cartographicDegrees": [139.6917, 35.6895, 0]
+    }
+  },
+  {
+    "id": "Facility/New Zealand 21",
+    "name": "New Zealand 21",
+    "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
+    "description": "<!--HTML-->\r\n<p>\r\nno description\r\n</p>",
+    "billboard": {
+      "eyeOffset": {
+        "cartesian": [0, 0, 0]
+      },
+      "horizontalOrigin": "CENTER",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACvSURBVDhPrZDRDcMgDAU9GqN0lIzijw6SUbJJygUeNQgSqepJTyHG91LVVpwDdfxM3T9TSl1EXZvDwii471fivK73cBFFQNTT/d2KoGpfGOpSIkhUpgUMxq9DFEsWv4IXhlyCnhBFnZcFEEuYqbiUlNwWgMTdrZ3JbQFoEVG53rd8ztG9aPJMnBUQf/VFraBJeWnLS0RfjbKyLJA8FkT5seDYS1Qwyv8t0B/5C2ZmH2/eTGNNBgMmAAAAAElFTkSuQmCC",
+      "pixelOffset": {
+        "cartesian2": [0, 0]
+      },
+      "scale": 2.0,
+      "show": true,
+      "verticalOrigin": "CENTER"
+    },
+    "label": {
+      "fillColor": {
+        "rgba": [0, 255, 255, 255]
+      },
+      "font": "11pt Lucida Console",
+      "horizontalOrigin": "LEFT",
+      "outlineColor": {
+        "rgba": [0, 0, 0, 255]
+      },
+      "outlineWidth": 2,
+      "pixelOffset": {
+        "cartesian2": [12, 0]
+      },
+      "show": true,
+      "style": "FILL_AND_OUTLINE",
+      "text": "New Zealand 21",
+      "verticalOrigin": "CENTER"
+    },
+    "position": {
+      "cartographicDegrees": [174.886, -40.9006, 0]
     }
   },
   {
