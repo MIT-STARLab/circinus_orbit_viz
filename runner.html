@@ -69,6 +69,21 @@
         Cesium.CzmlDataSource.updaters.push(processGSavail);
 
 
+        function processSatBattery(entity, packet, entityCollection, sourceUri) {
+          var customPropertyData = packet.battery;
+
+          var customProperty = entity.battery;
+          if (customProperty === undefined) {
+            entity.addProperty('battery');
+          }
+
+          // this is on line 104382 in Cesium.js
+          Cesium.CzmlDataSource.processPacketData(Number, entity, 'battery', customPropertyData, undefined, sourceUri);
+        }
+
+        Cesium.CzmlDataSource.updaters.push(processSatBattery);
+
+
         // Load orbit data CZML file
         viewer.dataSources.add(Cesium.CzmlDataSource.load('app_data_files/sats_file.czml'));
          // viewer.dataSources.add(Cesium.CzmlDataSource.load('app_data_files/fire_sequence.czml'));
