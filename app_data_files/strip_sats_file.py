@@ -1,17 +1,20 @@
 import json
+from collections import OrderedDict
 
 fd = open("./sats_file.czml", "r")
 
-czml = json.load(fd)
+czml = json.load(fd,object_pairs_hook=OrderedDict)
 czml_stripped = []
 
 for pkt in czml:
 
     if 'id' in pkt.keys():
 
-        if ('document' in pkt['id']) or ('Facility/' in pkt['id']) or ('Target/' in pkt['id']) or ('Rectangle/' in pkt['id']):
+        if ('document' in pkt['id']) or ('Target/' in pkt['id']) or ('Rectangle/' in pkt['id']):
             pass
         elif ('Satellite' in pkt['id']) and ('billboard' in pkt.keys()):
+            pass
+        elif ('Facility/' in pkt['id']) and ('billboard' in pkt.keys()):
             pass
         else:
             continue
