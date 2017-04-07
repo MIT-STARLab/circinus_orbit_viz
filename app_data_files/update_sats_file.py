@@ -10,8 +10,8 @@ import sys
 
 simulation_input_file_path = '/Users/ktikennedy/Dropbox (MIT)/MIT/Research/MDO Paper Work/Comm_constellation_MDO/landing_pad/timing_output.mat'
 czml_tools_path = '/Users/ktikennedy/Dropbox (MIT)/MIT/Research/MDO Paper Work/OrbitPropagation/czml/Tools'
-# czml_header_file = './sats_file.czml'
-czml_header_file = './czml_headers/sats_file_single_sfn_0_0_1.czml'
+czml_header_file = './sats_file.czml'
+# czml_header_file = './czml_headers/sats_file_single_sfn_0_0_1.czml'
 output_file = './sats_file.czml'
 
 

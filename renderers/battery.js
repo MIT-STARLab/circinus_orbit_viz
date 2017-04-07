@@ -46,11 +46,19 @@ class BatteryAuxRenderer {
                 // ctx.fillStyle = 'rgb(255,215,255)'; // white
                 ctx.clearRect(start_x+2, start_y + 2 , gauge_len, gauge_height);
 
-                if (battery > 45) {
+                // this is the average of the number for all satellites
+                // roughly, if the battery is below this level, no xlnks should be happening
+                var min_batt_pre_eclipse = 41.777;
+
+                // this is the average of the number for all satellites
+                // roughly, if the battery is below this level, no dlinks should be happening
+                var min_batt_pre_eclipse_with_dlnk_fudge = 40.777;
+
+                if (battery > min_batt_pre_eclipse) {
                     ctx.fillStyle = 'rgba(0, 255, 0, 0.5)';
                 }
-                else if (battery > 40) {
-                    ctx.fillStyle = 'rgba(173,255,47, 0.5)';
+                else if (battery > min_batt_pre_eclipse_with_dlnk_fudge) {
+                    ctx.fillStyle = 'rgba(100,149,237, 0.5)';
                 }
                 else if (battery > min_desired_DOD) {
                     ctx.fillStyle = 'rgba(255,255,0, 0.5)';
