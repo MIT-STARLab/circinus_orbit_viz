@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Use correct character set. -->
+    <meta charset="utf-8">
+    <!-- Tell IE to use the latest, best version. -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>My Constellation Sim!</title>
+    <script src="../../../Build/Cesium/Cesium.js"></script>
+    <style>
+    @import url(../../../Build/Cesium/Widgets/widgets.css);
+    html,
+    body,
+    #cesiumContainer {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="cesiumContainer"></div>
+    <script src="cstar/js/easing.js"></script>
+    <script src="cstar/js/studio.js"></script>
+    <script src="cstar/js/debugger.js"></script>
+    <script src="cstar/js/dolly.js"></script>
+    <script src="cstar/js/auxrender.js"></script>
+
+    <script>
+        // Kit's Bing maps api key below
+        Cesium.BingMapsApi.defaultKey = 'Agj5ndBXB0yXYb6uDBH1WniyN5mhOQNtI0Qx23E85he9zirUK-csAUI0Z0zG8zfM';
+
+        var viewer = new Cesium.Viewer('cesiumContainer');
+
+        // got this from https://groups.google.com/forum/#!searchin/cesium-dev/custom$20czml$20properties|sort:relevance/cesium-dev/Y7TYqLBKVTw/d8M60oAIaisJ
+        function processDataVol(entity, packet, entityCollection, sourceUri) {
+          var customPropertyData = packet.datavol;
+
+          var customProperty = entity.datavol;
+          if (customProperty === undefined) {
+            entity.addProperty('datavol');
+          }
+
+          // this is on line 104382 in Cesium.js
+          Cesium.CzmlDataSource.processPacketData(Number, entity, 'datavol', customPropertyData, undefined, sourceUri);
+        }
+
+        Cesium.CzmlDataSource.updaters.push(processDataVol);
+
+
+        function processGSavail(entity, packet, entityCollection, sourceUri) {
+          var customPropertyData = packet.gs_availability;
+
+          var customProperty = entity.gs_availability;
+          if (customProperty === undefined) {
+            entity.addProperty('gs_availability');
+          }
+
+          // this is on line 104382 in Cesium.js
+          Cesium.CzmlDataSource.processPacketData(Boolean, entity, 'gs_availability', customPropertyData, undefined, sourceUri);
+        }
+
+        Cesium.CzmlDataSource.updaters.push(processGSavail);
+
+
+        function processBattery(entity, packet, entityCollection, sourceUri) {
+          var customPropertyData = packet.battery;
+
+          var customProperty = entity.battery;
+          if (customProperty === undefined) {
+            entity.addProperty('battery');
+          }
+
+          // this is on line 104382 in Cesium.js
+          Cesium.CzmlDataSource.processPacketData(Number, entity, 'battery', customPropertyData, undefined, sourceUri);
+        }
+
+        Cesium.CzmlDataSource.updaters.push(processBattery);
+
+
+        function processEclipses(entity, packet, entityCollection, sourceUri) {
+          var customPropertyData = packet.eclipse;
+
+          var customProperty = entity.eclipse;
+          if (customProperty === undefined) {
+            entity.addProperty('eclipse');
+          }
+
+          // this is on line 104382 in Cesium.js
+          Cesium.CzmlDataSource.processPacketData(Boolean, entity, 'eclipse', customPropertyData, undefined, sourceUri);
+        }
+
+        Cesium.CzmlDataSource.updaters.push(processEclipses);
+
+
+        // Load orbit data CZML file
+        viewer.dataSources.add(Cesium.CzmlDataSource.load('app_data_files/sats_file.czml'));
+         // viewer.dataSources.add(Cesium.CzmlDataSource.load('app_data_files/fire_sequence.czml'));
+
+
+        var grip = new Grip();
+        // grip.load('storyboard/storyboard.json');
+        // grip.attach();
+
+        var dolly = new Dolly();
+        dolly.attach();
+
+
+        var ar = new AuxRenderer();
+        ar.load('renderers/description.json');
+        ar.attach();
+
+        var debug = new Debugger();
+
+        viewer.camera.flyHome(0);
+
+        var scene = viewer.scene;
+
+    </script>
+</body>
+
+</html>
