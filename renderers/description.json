@@ -1,10 +1,10 @@
 {
 	"renderers": [
-		"/Apps/MATLAB_sat_viz/renderers/test.js",
-        "/Apps/MATLAB_sat_viz/renderers/datavol.js",
-        "/Apps/MATLAB_sat_viz/renderers/gsavail.js",
-        "/Apps/MATLAB_sat_viz/renderers/battery.js",
-        "/Apps/MATLAB_sat_viz/renderers/eclipses.js"
+		"/Apps/MATLAB_SatViz/renderers/test.js",
+        "/Apps/MATLAB_SatViz/renderers/datavol.js",
+        "/Apps/MATLAB_SatViz/renderers/gsavail.js",
+        "/Apps/MATLAB_SatViz/renderers/battery.js",
+        "/Apps/MATLAB_SatViz/renderers/eclipses.js"
 	],
 	"renderMapping": {
 		"Satellite/CubeSat1": ["DataVol","Battery","Eclipses"],
