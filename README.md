@@ -1,4 +1,4 @@
-# MATLAB_sat_viz
+# MATLAB_SatViz
 For quick and easy visualization of constellation simulation output from MATLAB
 
 ## Setup Instruction
