@@ -46,15 +46,34 @@ class GSavailAuxRenderer {
                     // Need to figure out whether to draw sun or moon.
 
                     // center of the earth
-                    var earthCenter = new Cesium.Cartesian3(0, -6371, 0);
+                    var earthCenter = new Cesium.Cartesian3(0, 0, 0);
 
-                    var sunPos = Cesium.Simon1994PlanetaryPositions.computeSunPositionInEarthInertialFrame(viewer.clock.currentTime, new Cesium.Cartesian3());
+                    var sunPos_eci = Cesium.Simon1994PlanetaryPositions.computeSunPositionInEarthInertialFrame(viewer.clock.currentTime, new Cesium.Cartesian3());
 
-                    // vec from center of earth to sat
-                    var earthCenterToSat = Cesium.Cartesian3.subtract(ent.position.getValue(viewer.clock.currentTime), earthCenter, new Cesium.Cartesian3())
+                    // vec from center of earth to GS
+                    var earthCenterToGS_ecef = Cesium.Cartesian3.subtract(ent.position.getValue(viewer.clock.currentTime), earthCenter, new Cesium.Cartesian3())
+
+                    // TEME is an earth centered inertial frame, and though the cesium documentation is not very explicit, this seems to be the same inertial frame as that used for Simon1994PlanetaryPositions.computeSunPositionInEarthInertialFrame above
+                    var inertialToFixed = Cesium.Transforms.computeTemeToPseudoFixedMatrix(viewer.clock.currentTime);
+
+                    var sunPos_ecef = Cesium.Matrix3.multiplyByVector(inertialToFixed, sunPos_eci, new Cesium.Cartesian3());
 
                     // find angle between vector to sun and vector to sat. If greater than 90deg, it's night for the GS
-                    var angle = Cesium.Cartesian3.angleBetween(sunPos, earthCenterToSat)
+                    var angle = Cesium.Cartesian3.angleBetween(sunPos_ecef, earthCenterToGS_ecef);
+
+                    // console.log(ent.id.toString())
+                    // // var String str1 = ent.id.toString();
+                    // if ( ent.id.toString() === "Facility/Dadaab 3") {
+                    //     console.log('Dadaabb 3')
+                    //     console.log('current time: '+viewer.clock.currentTime.toString())
+
+                    //     console.log('entpos: '+ent.position.getValue(viewer.clock.currentTime).toString())
+                    //     console.log('sunPos_ecef: '+sunPos_ecef.toString())
+                    //     console.log('earthCenterToGS_ecef: '+earthCenterToGS_ecef.toString())
+                    //     // console.log('earthCenterToGS: '+earthCenterToGS.toString())
+                    //     console.log((angle * 180 / Math.PI).toString())
+                    // }
+
 
                     if (angle > Math.PI/2) {
                         ctx.drawImage(this.moonImg, pos.x + 10, pos.y - 50, 40 ,40);
