@@ -51,13 +51,14 @@ class BatteryAuxRenderer {
                 var min_batt_pre_eclipse = 41.777;
 
                 // this is the average of the number for all satellites
-                // roughly, if the battery is below this level, no dlinks should be happening
-                var min_batt_pre_eclipse_with_dlnk_fudge = 40.777;
+                // roughly, if the battery is below this level, no xlinks should be happening at all
+                // diff_orbit_crosslink_batt_fudge = 3.5
+                var min_batt_pre_eclipse_with_xlnk_fudge = 38.277;
 
                 if (battery > min_batt_pre_eclipse) {
                     ctx.fillStyle = 'rgba(0, 255, 0, 0.5)';
                 }
-                else if (battery > min_batt_pre_eclipse_with_dlnk_fudge) {
+                else if (battery > min_batt_pre_eclipse_with_xlnk_fudge) {
                     ctx.fillStyle = 'rgba(100,149,237, 0.5)';
                 }
                 else if (battery > min_desired_DOD) {
