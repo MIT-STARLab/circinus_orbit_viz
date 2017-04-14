@@ -8,6 +8,8 @@ import sys
 # Inputs
 #############################
 
+# might have to also modify the slashes in here if you're in e.g. windows / -> \
+
 simulation_input_file_path = '/Users/ktikennedy/Dropbox (MIT)/MIT/Research/MDO Paper Work/Comm_constellation_MDO/landing_pad/timing_output.mat'
 czml_tools_path = '/Users/ktikennedy/Dropbox (MIT)/MIT/Research/MDO Paper Work/OrbitPropagation/czml/Tools'
 czml_header_file = './sats_file.czml'
@@ -15,6 +17,8 @@ czml_header_file = './sats_file.czml'
 output_file = './sats_file.czml'
 
 
+output_viz_czml_file = './viz_out.json'
+renderer_description_file = '../renderers/description.json'
 
 
 #############################
@@ -33,9 +37,8 @@ strip_file(czml_header_file)
 
 # now create the extra czml content for visualization - obs cones, comm links, data volumes, battery indicator, GS availability, eclipse indicator...
 sys.path.append(czml_tools_path)
-from VizInputsGenerator import generateVizInputs
+from VizInputsGenerator import generateVizInputs, writeRendererDescription
 
-output_viz_czml_file = './viz_out.json'
 generateVizInputs(file_from_sim = simulation_input_file_path, output_viz_czml_file = output_viz_czml_file)
 
 
@@ -56,3 +59,18 @@ fd2.close()
 fd3 = open(output_file, "w")
 
 json.dump(final_czml,fd3,indent=4)
+
+
+
+# Also take care of renderer description file
+renderers_list = [
+        "/Apps/MATLAB_SatViz/renderers/test.js",
+        "/Apps/MATLAB_SatViz/renderers/datavol.js",
+        "/Apps/MATLAB_SatViz/renderers/gsavail.js",
+        "/Apps/MATLAB_SatViz/renderers/battery.js",
+        "/Apps/MATLAB_SatViz/renderers/eclipses.js"
+    ]
+
+renderer_mapping = {'Satellite':["DataVol","Battery","Eclipses"],'Facility':["GSavail"]}
+
+writeRendererDescription(simulation_input_file_path,renderer_description_file,renderers_list, renderer_mapping)
