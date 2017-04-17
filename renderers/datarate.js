@@ -25,17 +25,40 @@ class DataRateAuxRenderer {
 
         if ('polyline' in ent && ent.polyline !== undefined) {
 
-            ent.polyline.width = 15;
+            var show = ent.polyline.show.getValue(viewer.clock.currentTime);
 
-            console.log('rate change')
+            if (show !== undefined && show === true) {
 
-            // var gs_availability = ent.gs_availability.getValue(viewer.clock.currentTime);
+                if ('datarate' in ent && ent.datarate !== undefined) {
 
-            // if (gs_availability !== undefined) {
+                    var datarate = ent.datarate.getValue(viewer.clock.currentTime);
 
+                    if (datarate !== undefined) {
 
+                        var show_rate_change = true
+                        if (show_rate_change) {
+                            ent.polyline.width = datarate;
+                        }
 
-            // }
+                        // console.log('rate change')
+
+                        // figure out identifier character to add in front of datarate number
+                        let link_char = undefined;
+                        if (ent.id.includes('Xlnk')) {
+                            link_char = 'x'
+                        }
+                        if (ent.id.includes('Dlnk')) {
+                            link_char = 'd'
+                        }
+
+                        // label for battery
+                        ctx.font = '12px monospace';
+                        ctx.fillStyle = 'white';
+                        ctx.fillText(link_char + ' ' + datarate.toPrecision(3).toString() + ' Mbps', pos.x + 50, pos.y - 20);
+
+                    }
+                }
+            }
         }
 	}
 
