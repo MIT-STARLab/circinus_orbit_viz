@@ -1,127 +1,41 @@
 {
   "renderers": [
-    "/Apps/MATLAB_SatViz/renderers/test.js", 
-    "/Apps/MATLAB_SatViz/renderers/datavol.js", 
-    "/Apps/MATLAB_SatViz/renderers/gsavail.js", 
-    "/Apps/MATLAB_SatViz/renderers/battery.js", 
-    "/Apps/MATLAB_SatViz/renderers/eclipses.js"
-  ], 
+    "/Apps/MATLAB_SatViz/renderers/test.js",
+    "/Apps/MATLAB_SatViz/renderers/datavol.js",
+    "/Apps/MATLAB_SatViz/renderers/gsavail.js",
+    "/Apps/MATLAB_SatViz/renderers/battery.js",
+    "/Apps/MATLAB_SatViz/renderers/eclipses.js",
+    "/Apps/MATLAB_SatViz/renderers/datarate.js"
+  ],
   "renderMapping": {
-    "Satellite/CubeSat0": [
-      "DataVol", 
-      "Battery", 
-      "Eclipses"
-    ], 
-    "Satellite/CubeSat1": [
-      "DataVol", 
-      "Battery", 
-      "Eclipses"
-    ], 
-    "Satellite/CubeSat2": [
-      "DataVol", 
-      "Battery", 
-      "Eclipses"
-    ], 
-    "Satellite/CubeSat3": [
-      "DataVol", 
-      "Battery", 
-      "Eclipses"
-    ], 
-    "Satellite/CubeSat4": [
-      "DataVol", 
-      "Battery", 
-      "Eclipses"
-    ], 
-    "Satellite/CubeSat5": [
-      "DataVol", 
-      "Battery", 
-      "Eclipses"
-    ], 
-    "Satellite/CubeSat6": [
-      "DataVol", 
-      "Battery", 
-      "Eclipses"
-    ], 
-    "Satellite/CubeSat7": [
-      "DataVol", 
-      "Battery", 
-      "Eclipses"
-    ], 
-    "Satellite/CubeSat8": [
-      "DataVol", 
-      "Battery", 
-      "Eclipses"
-    ], 
-    "Satellite/CubeSat9": [
-      "DataVol", 
-      "Battery", 
-      "Eclipses"
-    ], 
-    "Satellite/CubeSat10": [
-      "DataVol", 
-      "Battery", 
-      "Eclipses"
-    ], 
-    "Satellite/CubeSat11": [
-      "DataVol", 
-      "Battery", 
-      "Eclipses"
-    ], 
-    "Satellite/CubeSat12": [
-      "DataVol", 
-      "Battery", 
-      "Eclipses"
-    ], 
-    "Satellite/CubeSat13": [
-      "DataVol", 
-      "Battery", 
-      "Eclipses"
-    ], 
-    "Satellite/CubeSat14": [
-      "DataVol", 
-      "Battery", 
-      "Eclipses"
-    ], 
-    "Satellite/CubeSat15": [
-      "DataVol", 
-      "Battery", 
-      "Eclipses"
-    ], 
-    "Satellite/CubeSat16": [
-      "DataVol", 
-      "Battery", 
-      "Eclipses"
-    ], 
-    "Satellite/CubeSat17": [
-      "DataVol", 
-      "Battery", 
-      "Eclipses"
-    ], 
-    "Satellite/CubeSat18": [
-      "DataVol", 
-      "Battery", 
-      "Eclipses"
-    ], 
-    "Satellite/CubeSat19": [
-      "DataVol", 
-      "Battery", 
-      "Eclipses"
-    ], 
-    "Facility/Haleakala 1": [
-      "GSavail"
-    ], 
-    "Facility/Piura 2": [
-      "GSavail"
-    ], 
-    "Facility/Dadaab 3": [
-      "GSavail"
-    ], 
-    "Facility/Darwin 4": [
-      "GSavail"
-    ]
-  }, 
+    "Satellite/CubeSat0": ["DataVol", "Battery", "Eclipses"],
+    "Satellite/CubeSat1": ["DataVol", "Battery", "Eclipses"],
+    "Satellite/CubeSat2": ["DataVol", "Battery", "Eclipses"],
+    "Satellite/CubeSat3": ["DataVol", "Battery", "Eclipses"],
+    "Satellite/CubeSat4": ["DataVol", "Battery", "Eclipses"],
+    "Satellite/CubeSat5": ["DataVol", "Battery", "Eclipses"],
+    "Satellite/CubeSat6": ["DataVol", "Battery", "Eclipses"],
+    "Satellite/CubeSat7": ["DataVol", "Battery", "Eclipses"],
+    "Satellite/CubeSat8": ["DataVol", "Battery", "Eclipses"],
+    "Satellite/CubeSat9": ["DataVol", "Battery", "Eclipses"],
+    "Satellite/CubeSat10": ["DataVol", "Battery", "Eclipses"],
+    "Satellite/CubeSat11": ["DataVol", "Battery", "Eclipses"],
+    "Satellite/CubeSat12": ["DataVol", "Battery", "Eclipses"],
+    "Satellite/CubeSat13": ["DataVol", "Battery", "Eclipses"],
+    "Satellite/CubeSat14": ["DataVol", "Battery", "Eclipses"],
+    "Satellite/CubeSat15": ["DataVol", "Battery", "Eclipses"],
+    "Satellite/CubeSat16": ["DataVol", "Battery", "Eclipses"],
+    "Satellite/CubeSat17": ["DataVol", "Battery", "Eclipses"],
+    "Satellite/CubeSat18": ["DataVol", "Battery", "Eclipses"],
+    "Satellite/CubeSat19": ["DataVol", "Battery", "Eclipses"],
+    "Facility/Haleakala 1": ["GSavail"],
+    "Facility/Piura 2": ["GSavail"],
+    "Facility/Dadaab 3": ["GSavail"],
+    "Facility/Darwin 4": ["GSavail"],
+    "Xlnk/Sat3-Sat4": ["DataRate"]
+  },
   "timetags": {
-    "sim_output_updated": "14-Apr-2017 15:57:03", 
+    "sim_output_updated": "14-Apr-2017 15:57:03",
     "json_updated": "2017-04-14 16:04:25Z"
   }
 }

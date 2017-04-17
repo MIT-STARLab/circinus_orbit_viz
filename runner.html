@@ -48,7 +48,7 @@
           }
 
           // this is on line 104382 in Cesium.js
-          Cesium.CzmlDataSource.processPacketData(Number, entity, 'datavol', customPropertyData, undefined, sourceUri);
+          Cesium.CzmlDataSource.processPacketData(Number, entity, 'datavol', customPropertyData, undefined, sourceUri, entityCollection);
         }
 
         Cesium.CzmlDataSource.updaters.push(processDataVol);
@@ -63,7 +63,7 @@
           }
 
           // this is on line 104382 in Cesium.js
-          Cesium.CzmlDataSource.processPacketData(Boolean, entity, 'gs_availability', customPropertyData, undefined, sourceUri);
+          Cesium.CzmlDataSource.processPacketData(Boolean, entity, 'gs_availability', customPropertyData, undefined, sourceUri, entityCollection);
         }
 
         Cesium.CzmlDataSource.updaters.push(processGSavail);
@@ -78,7 +78,7 @@
           }
 
           // this is on line 104382 in Cesium.js
-          Cesium.CzmlDataSource.processPacketData(Number, entity, 'battery', customPropertyData, undefined, sourceUri);
+          Cesium.CzmlDataSource.processPacketData(Number, entity, 'battery', customPropertyData, undefined, sourceUri, entityCollection);
         }
 
         Cesium.CzmlDataSource.updaters.push(processBattery);
@@ -93,10 +93,26 @@
           }
 
           // this is on line 104382 in Cesium.js
-          Cesium.CzmlDataSource.processPacketData(Boolean, entity, 'eclipse', customPropertyData, undefined, sourceUri);
+          Cesium.CzmlDataSource.processPacketData(Boolean, entity, 'eclipse', customPropertyData, undefined, sourceUri, entityCollection);
         }
 
         Cesium.CzmlDataSource.updaters.push(processEclipses);
+
+
+        // For processing proxy position - which can be used to add an arbitrary position value to any czml packet
+        function processPositionProxy(entity, packet, entityCollection, sourceUri) {
+          var customPropertyData = packet.position_proxy;
+
+          var customProperty = entity.position_proxy;
+          if (customProperty === undefined) {
+            entity.addProperty('position_proxy');
+          }
+
+          // this is on line 104542 in Cesium.js
+          Cesium.CzmlDataSource.processPositionPacketData(entity, 'position_proxy', customPropertyData, undefined, sourceUri, entityCollection);
+        }
+
+        Cesium.CzmlDataSource.updaters.push(processPositionProxy);
 
 
         // Load orbit data CZML file
