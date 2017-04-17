@@ -99,6 +99,22 @@
         Cesium.CzmlDataSource.updaters.push(processEclipses);
 
 
+
+        function processDataRate(entity, packet, entityCollection, sourceUri) {
+          var customPropertyData = packet.datarate;
+
+          var customProperty = entity.datarate;
+          if (customProperty === undefined) {
+            entity.addProperty('datarate');
+          }
+
+          // this is on line 104382 in Cesium.js
+          Cesium.CzmlDataSource.processPacketData(Number, entity, 'datarate', customPropertyData, undefined, sourceUri, entityCollection);
+        }
+
+        Cesium.CzmlDataSource.updaters.push(processDataRate);
+
+
         // For processing proxy position - which can be used to add an arbitrary position value to any czml packet
         function processPositionProxy(entity, packet, entityCollection, sourceUri) {
           var customPropertyData = packet.position_proxy;
