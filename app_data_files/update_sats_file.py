@@ -68,9 +68,10 @@ renderers_list = [
         "/Apps/MATLAB_SatViz/renderers/datavol.js",
         "/Apps/MATLAB_SatViz/renderers/gsavail.js",
         "/Apps/MATLAB_SatViz/renderers/battery.js",
-        "/Apps/MATLAB_SatViz/renderers/eclipses.js"
+        "/Apps/MATLAB_SatViz/renderers/eclipses.js",
+        "/Apps/MATLAB_SatViz/renderers/datarate.js"
     ]
 
-renderer_mapping = {'Satellite':["DataVol","Battery","Eclipses"],'Facility':["GSavail"]}
+renderer_mapping = {'Satellite':["DataVol","Battery","Eclipses"],'Facility':["GSavail"],'Dlnk':["DataRate"]}
 
 writeRendererDescription(simulation_input_file_path,renderer_description_file,renderers_list, renderer_mapping)
