@@ -9,6 +9,10 @@ class DataRateAuxRenderer {
 	 */
 	constructor() {
 		this.randomID = Math.floor(Math.random() * 100);
+
+        var img1 = new Image();
+        img1.src = 'renderers/x.png';
+        this.xImg = img1;
 	}
 
 	/**
@@ -27,7 +31,7 @@ class DataRateAuxRenderer {
 
             var show = ent.polyline.show.getValue(viewer.clock.currentTime);
 
-            if (show !== undefined && show === true) {
+            if (show !== undefined) {
 
                 if ('datarate' in ent && ent.datarate !== undefined) {
 
@@ -35,30 +39,73 @@ class DataRateAuxRenderer {
 
                     if (datarate !== undefined) {
 
-                        var show_rate_change = true
-                        if (show_rate_change) {
-                            ent.polyline.width = datarate;
+                        if ( !(show === false &&  datarate <= 0)) {
+                            // write the data rate
+                            let link_char = undefined;
+                            if (ent.id.includes('Xlnk')) {
+                                link_char = 'x';
+                            }
+                            if (ent.id.includes('Dlnk')) {
+                                link_char = 'd';
+                            }
+                            ctx.font = '12px monospace';
+                            ctx.fillStyle = 'white';
+                            ctx.fillText(link_char + ' ' + datarate.toPrecision(3).toString() + ' Mbps', pos.x + 60, pos.y - 20);
                         }
 
-                        // console.log('rate change')
+                        // do things with polyline - including displaying errors if necessary
 
-                        // figure out identifier character to add in front of datarate number
-                        let link_char = undefined;
-                        if (ent.id.includes('Xlnk')) {
-                            link_char = 'x'
+                        // normal case
+                        if (show === true &&  datarate > 0) {
+
+                            var show_rate_change = true
+                            if (show_rate_change) {
+                                ent.polyline.width = datarate/10;
+                            }
+                            else {
+                                ent.polyline.width = 6;
+                            }
+
+                            // console.log('rate change')
+
+                            // figure out identifier character to add in front of datarate number
+                            if (ent.id.includes('Xlnk')) {
+                                ent.polyline.material.color._value.alpha = 1;
+                                ent.polyline.material.color._value.blue = 0;
+                                ent.polyline.material.color._value.red = 1;
+                                ent.polyline.material.color._value.green = 0;
+                            }
+                            if (ent.id.includes('Dlnk')) {
+                                ent.polyline.material.color._value.alpha = 1;
+                                ent.polyline.material.color._value.blue = 1;
+                                ent.polyline.material.color._value.red = 0;
+                                ent.polyline.material.color._value.green = 0;
+                            }
+
                         }
-                        if (ent.id.includes('Dlnk')) {
-                            link_char = 'd'
+                        // data rate shouldn't be zero with polyline displayed
+                        else if (show === true &&  datarate <= 0) {
+                            ent.polyline.width = 100;
+                            ent.polyline.material.color._value.alpha = 1;
+                            ent.polyline.material.color._value.blue = 0;
+                            ent.polyline.material.color._value.red = 1;
+                            ent.polyline.material.color._value.green = 1;
+                            ctx.drawImage(this.xImg, pos.x + 70, pos.y - 20, 40 ,40);
                         }
-
-                        // label for battery
-                        ctx.font = '12px monospace';
-                        ctx.fillStyle = 'white';
-                        ctx.fillText(link_char + ' ' + datarate.toPrecision(3).toString() + ' Mbps', pos.x + 50, pos.y - 20);
-
+                        // data rate shouldn't be greater than zero if this isn't a link time
+                        else if (show === false &&  datarate > 0) {
+                            ctx.drawImage(this.xImg, pos.x + 70, pos.y - 20, 40 ,40);
+                        }
                     }
                 }
             }
+            // else {
+            //    ent.polyline.show = true;
+            //    ent.polyline.material.color._value.alpha = 1;
+            //    ent.polyline.material.color._value.blue = 0;
+            //    ent.polyline.material.color._value.red = 1;
+            //    ent.polyline.material.color._value.green = 1;
+            // }
         }
 	}
 
