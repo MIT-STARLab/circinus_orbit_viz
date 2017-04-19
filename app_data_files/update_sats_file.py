@@ -72,6 +72,6 @@ renderers_list = [
         "/Apps/MATLAB_SatViz/renderers/datarate.js"
     ]
 
-renderer_mapping = {'Satellite':["DataVol","Battery","Eclipses"],'Facility':["GSavail"],'Dlnk':["DataRate"]}
+renderer_mapping = {'Satellite':["DataVol","Battery","Eclipses"],'Facility':["GSavail"],'Dlnk':["DataRate"],'Xlnk':["DataRate"]}
 
 writeRendererDescription(simulation_input_file_path,renderer_description_file,renderers_list, renderer_mapping)
