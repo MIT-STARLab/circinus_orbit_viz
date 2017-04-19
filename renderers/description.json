@@ -1,100 +1,494 @@
 {
   "renderers": [
-    "/Apps/MATLAB_SatViz/renderers/test.js",
-    "/Apps/MATLAB_SatViz/renderers/datavol.js",
-    "/Apps/MATLAB_SatViz/renderers/gsavail.js",
-    "/Apps/MATLAB_SatViz/renderers/battery.js",
-    "/Apps/MATLAB_SatViz/renderers/eclipses.js",
+    "/Apps/MATLAB_SatViz/renderers/test.js", 
+    "/Apps/MATLAB_SatViz/renderers/datavol.js", 
+    "/Apps/MATLAB_SatViz/renderers/gsavail.js", 
+    "/Apps/MATLAB_SatViz/renderers/battery.js", 
+    "/Apps/MATLAB_SatViz/renderers/eclipses.js", 
     "/Apps/MATLAB_SatViz/renderers/datarate.js"
-  ],
+  ], 
   "renderMapping": {
-    "Satellite/CubeSat1": ["DataVol", "Battery", "Eclipses"],
-    "Satellite/CubeSat2": ["DataVol", "Battery", "Eclipses"],
-    "Satellite/CubeSat3": ["DataVol", "Battery", "Eclipses"],
-    "Satellite/CubeSat4": ["DataVol", "Battery", "Eclipses"],
-    "Satellite/CubeSat5": ["DataVol", "Battery", "Eclipses"],
-    "Satellite/CubeSat6": ["DataVol", "Battery", "Eclipses"],
-    "Satellite/CubeSat7": ["DataVol", "Battery", "Eclipses"],
-    "Satellite/CubeSat8": ["DataVol", "Battery", "Eclipses"],
-    "Satellite/CubeSat9": ["DataVol", "Battery", "Eclipses"],
-    "Satellite/CubeSat10": ["DataVol", "Battery", "Eclipses"],
-    "Satellite/CubeSat11": ["DataVol", "Battery", "Eclipses"],
-    "Satellite/CubeSat12": ["DataVol", "Battery", "Eclipses"],
-    "Satellite/CubeSat13": ["DataVol", "Battery", "Eclipses"],
-    "Satellite/CubeSat14": ["DataVol", "Battery", "Eclipses"],
-    "Satellite/CubeSat15": ["DataVol", "Battery", "Eclipses"],
-    "Satellite/CubeSat16": ["DataVol", "Battery", "Eclipses"],
-    "Satellite/CubeSat17": ["DataVol", "Battery", "Eclipses"],
-    "Satellite/CubeSat18": ["DataVol", "Battery", "Eclipses"],
-    "Satellite/CubeSat19": ["DataVol", "Battery", "Eclipses"],
-    "Satellite/CubeSat20": ["DataVol", "Battery", "Eclipses"],
-    "Facility/Haleakala 1": ["GSavail"],
-    "Facility/Piura 2": ["GSavail"],
-    "Facility/Dadaab 3": ["GSavail"],
-    "Facility/Darwin 4": ["GSavail"],
-    "Dlnk/Sat1-GS1": ["DataRate"],
-    "Dlnk/Sat1-GS2": ["DataRate"],
-    "Dlnk/Sat1-GS3": ["DataRate"],
-    "Dlnk/Sat1-GS4": ["DataRate"],
-    "Dlnk/Sat2-GS1": ["DataRate"],
-    "Dlnk/Sat2-GS2": ["DataRate"],
-    "Dlnk/Sat2-GS3": ["DataRate"],
-    "Dlnk/Sat2-GS4": ["DataRate"],
-    "Dlnk/Sat3-GS1": ["DataRate"],
-    "Dlnk/Sat3-GS2": ["DataRate"],
-    "Dlnk/Sat3-GS3": ["DataRate"],
-    "Dlnk/Sat3-GS4": ["DataRate"],
-    "Dlnk/Sat4-GS1": ["DataRate"],
-    "Dlnk/Sat4-GS2": ["DataRate"],
-    "Dlnk/Sat4-GS3": ["DataRate"],
-    "Dlnk/Sat4-GS4": ["DataRate"],
-    "Dlnk/Sat5-GS1": ["DataRate"],
-    "Dlnk/Sat5-GS2": ["DataRate"],
-    "Dlnk/Sat5-GS3": ["DataRate"],
-    "Dlnk/Sat5-GS4": ["DataRate"],
-    "Dlnk/Sat6-GS1": ["DataRate"],
-    "Dlnk/Sat6-GS2": ["DataRate"],
-    "Dlnk/Sat6-GS3": ["DataRate"],
-    "Dlnk/Sat6-GS4": ["DataRate"],
-    "Dlnk/Sat7-GS1": ["DataRate"],
-    "Dlnk/Sat7-GS2": ["DataRate"],
-    "Dlnk/Sat7-GS3": ["DataRate"],
-    "Dlnk/Sat7-GS4": ["DataRate"],
-    "Dlnk/Sat8-GS1": ["DataRate"],
-    "Dlnk/Sat8-GS2": ["DataRate"],
-    "Dlnk/Sat8-GS3": ["DataRate"],
-    "Dlnk/Sat8-GS4": ["DataRate"],
-    "Dlnk/Sat9-GS1": ["DataRate"],
-    "Dlnk/Sat9-GS2": ["DataRate"],
-    "Dlnk/Sat9-GS3": ["DataRate"],
-    "Dlnk/Sat9-GS4": ["DataRate"],
-    "Dlnk/Sat10-GS1": ["DataRate"],
-    "Dlnk/Sat10-GS2": ["DataRate"],
-    "Dlnk/Sat10-GS3": ["DataRate"],
-    "Dlnk/Sat10-GS4": ["DataRate"],
-    "Dlnk/Sat11-GS2": ["DataRate"],
-    "Dlnk/Sat11-GS3": ["DataRate"],
-    "Dlnk/Sat12-GS2": ["DataRate"],
-    "Dlnk/Sat12-GS3": ["DataRate"],
-    "Dlnk/Sat13-GS2": ["DataRate"],
-    "Dlnk/Sat13-GS3": ["DataRate"],
-    "Dlnk/Sat14-GS2": ["DataRate"],
-    "Dlnk/Sat14-GS3": ["DataRate"],
-    "Dlnk/Sat15-GS2": ["DataRate"],
-    "Dlnk/Sat15-GS3": ["DataRate"],
-    "Dlnk/Sat16-GS2": ["DataRate"],
-    "Dlnk/Sat16-GS3": ["DataRate"],
-    "Dlnk/Sat17-GS2": ["DataRate"],
-    "Dlnk/Sat17-GS3": ["DataRate"],
-    "Dlnk/Sat18-GS2": ["DataRate"],
-    "Dlnk/Sat18-GS3": ["DataRate"],
-    "Dlnk/Sat19-GS2": ["DataRate"],
-    "Dlnk/Sat19-GS3": ["DataRate"],
-    "Dlnk/Sat20-GS2": ["DataRate"],
-    "Dlnk/Sat20-GS3": ["DataRate"]
-  },
+    "Satellite/CubeSat1": [
+      "DataVol", 
+      "Battery", 
+      "Eclipses"
+    ], 
+    "Satellite/CubeSat2": [
+      "DataVol", 
+      "Battery", 
+      "Eclipses"
+    ], 
+    "Satellite/CubeSat3": [
+      "DataVol", 
+      "Battery", 
+      "Eclipses"
+    ], 
+    "Satellite/CubeSat4": [
+      "DataVol", 
+      "Battery", 
+      "Eclipses"
+    ], 
+    "Satellite/CubeSat5": [
+      "DataVol", 
+      "Battery", 
+      "Eclipses"
+    ], 
+    "Satellite/CubeSat6": [
+      "DataVol", 
+      "Battery", 
+      "Eclipses"
+    ], 
+    "Satellite/CubeSat7": [
+      "DataVol", 
+      "Battery", 
+      "Eclipses"
+    ], 
+    "Satellite/CubeSat8": [
+      "DataVol", 
+      "Battery", 
+      "Eclipses"
+    ], 
+    "Satellite/CubeSat9": [
+      "DataVol", 
+      "Battery", 
+      "Eclipses"
+    ], 
+    "Satellite/CubeSat10": [
+      "DataVol", 
+      "Battery", 
+      "Eclipses"
+    ], 
+    "Satellite/CubeSat11": [
+      "DataVol", 
+      "Battery", 
+      "Eclipses"
+    ], 
+    "Satellite/CubeSat12": [
+      "DataVol", 
+      "Battery", 
+      "Eclipses"
+    ], 
+    "Satellite/CubeSat13": [
+      "DataVol", 
+      "Battery", 
+      "Eclipses"
+    ], 
+    "Satellite/CubeSat14": [
+      "DataVol", 
+      "Battery", 
+      "Eclipses"
+    ], 
+    "Satellite/CubeSat15": [
+      "DataVol", 
+      "Battery", 
+      "Eclipses"
+    ], 
+    "Satellite/CubeSat16": [
+      "DataVol", 
+      "Battery", 
+      "Eclipses"
+    ], 
+    "Satellite/CubeSat17": [
+      "DataVol", 
+      "Battery", 
+      "Eclipses"
+    ], 
+    "Satellite/CubeSat18": [
+      "DataVol", 
+      "Battery", 
+      "Eclipses"
+    ], 
+    "Satellite/CubeSat19": [
+      "DataVol", 
+      "Battery", 
+      "Eclipses"
+    ], 
+    "Satellite/CubeSat20": [
+      "DataVol", 
+      "Battery", 
+      "Eclipses"
+    ], 
+    "Facility/Haleakala 1": [
+      "GSavail"
+    ], 
+    "Facility/Piura 2": [
+      "GSavail"
+    ], 
+    "Facility/Dadaab 3": [
+      "GSavail"
+    ], 
+    "Facility/Darwin 4": [
+      "GSavail"
+    ], 
+    "Dlnk/Sat1-GS1": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat1-GS2": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat1-GS3": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat1-GS4": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat2-GS1": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat2-GS2": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat2-GS3": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat2-GS4": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat3-GS1": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat3-GS2": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat3-GS3": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat3-GS4": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat4-GS1": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat4-GS2": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat4-GS3": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat4-GS4": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat5-GS1": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat5-GS2": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat5-GS3": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat5-GS4": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat6-GS1": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat6-GS2": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat6-GS3": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat6-GS4": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat7-GS1": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat7-GS2": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat7-GS3": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat7-GS4": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat8-GS1": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat8-GS2": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat8-GS3": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat8-GS4": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat9-GS1": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat9-GS2": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat9-GS3": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat9-GS4": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat10-GS1": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat10-GS2": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat10-GS3": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat10-GS4": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat11-GS2": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat11-GS3": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat12-GS2": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat12-GS3": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat13-GS2": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat13-GS3": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat14-GS2": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat14-GS3": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat15-GS2": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat15-GS3": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat16-GS2": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat16-GS3": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat17-GS2": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat17-GS3": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat18-GS2": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat18-GS3": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat19-GS2": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat19-GS3": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat20-GS2": [
+      "DataRate"
+    ], 
+    "Dlnk/Sat20-GS3": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat1-Sat2": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat1-Sat10": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat1-Sat11": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat1-Sat12": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat1-Sat19": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat1-Sat20": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat2-Sat3": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat2-Sat11": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat2-Sat12": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat2-Sat13": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat2-Sat20": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat3-Sat4": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat3-Sat11": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat3-Sat12": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat3-Sat13": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat3-Sat14": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat4-Sat5": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat4-Sat12": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat4-Sat13": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat4-Sat14": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat4-Sat15": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat5-Sat6": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat5-Sat13": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat5-Sat14": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat5-Sat15": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat5-Sat16": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat6-Sat7": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat6-Sat14": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat6-Sat15": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat6-Sat16": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat6-Sat17": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat7-Sat8": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat7-Sat14": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat7-Sat15": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat7-Sat16": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat7-Sat17": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat7-Sat18": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat8-Sat9": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat8-Sat15": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat8-Sat16": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat8-Sat17": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat8-Sat18": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat8-Sat19": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat9-Sat10": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat9-Sat17": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat9-Sat18": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat9-Sat19": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat9-Sat20": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat10-Sat11": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat10-Sat18": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat10-Sat19": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat10-Sat20": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat11-Sat12": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat11-Sat20": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat12-Sat13": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat13-Sat14": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat14-Sat15": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat15-Sat16": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat16-Sat17": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat17-Sat18": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat18-Sat19": [
+      "DataRate"
+    ], 
+    "Xlnk/Sat19-Sat20": [
+      "DataRate"
+    ]
+  }, 
   "timetags": {
-    "sim_output_updated": "17-Apr-2017 17:29:46",
-    "json_updated": "2017-04-17 17:50:11Z"
+    "sim_output_updated": "19-Apr-2017 12:04:46", 
+    "json_updated": "2017-04-19 12:34:54Z"
   }
 }
