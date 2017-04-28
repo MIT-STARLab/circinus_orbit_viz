@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <title>My Constellation Sim!</title>
     <script src="../../../Build/Cesium/Cesium.js"></script>
+    <script src="../../../node_modules/cesium-sensor-volumes/dist/cesium-sensor-volumes.min.js"></script>
     <style>
     @import url(../../../Build/Cesium/Widgets/widgets.css);
     html,
@@ -31,6 +32,7 @@
     <script src="cstar/js/debugger.js"></script>
     <script src="cstar/js/dolly.js"></script>
     <script src="cstar/js/auxrender.js"></script>
+    <script src="cstar/js/setupczml.js"></script>
 
     <script>
         // Kit's Bing maps api key below
@@ -38,102 +40,16 @@
 
         var viewer = new Cesium.Viewer('cesiumContainer');
 
-        // got this from https://groups.google.com/forum/#!searchin/cesium-dev/custom$20czml$20properties|sort:relevance/cesium-dev/Y7TYqLBKVTw/d8M60oAIaisJ
-        function processDataVol(entity, packet, entityCollection, sourceUri) {
-          var customPropertyData = packet.datavol;
-
-          var customProperty = entity.datavol;
-          if (customProperty === undefined) {
-            entity.addProperty('datavol');
-          }
-
-          // this is on line 104382 in Cesium.js
-          Cesium.CzmlDataSource.processPacketData(Number, entity, 'datavol', customPropertyData, undefined, sourceUri, entityCollection);
-        }
-
-        Cesium.CzmlDataSource.updaters.push(processDataVol);
+        // add all the processors for custom CZML properties. See setupczml.js
+        pushCZMLProcessors();
 
 
-        function processGSavail(entity, packet, entityCollection, sourceUri) {
-          var customPropertyData = packet.gs_availability;
+        var dataSourcePromise = Cesium.CzmlDataSource.load('app_data_files/sats_file.czml');
 
-          var customProperty = entity.gs_availability;
-          if (customProperty === undefined) {
-            entity.addProperty('gs_availability');
-          }
+        // add desired callbacks for the various objects in sats_file. See setupczml.js
+        dataSourcePromise = dataSourcePromise.then(addCallbacks);
 
-          // this is on line 104382 in Cesium.js
-          Cesium.CzmlDataSource.processPacketData(Boolean, entity, 'gs_availability', customPropertyData, undefined, sourceUri, entityCollection);
-        }
-
-        Cesium.CzmlDataSource.updaters.push(processGSavail);
-
-
-        function processBattery(entity, packet, entityCollection, sourceUri) {
-          var customPropertyData = packet.battery;
-
-          var customProperty = entity.battery;
-          if (customProperty === undefined) {
-            entity.addProperty('battery');
-          }
-
-          // this is on line 104382 in Cesium.js
-          Cesium.CzmlDataSource.processPacketData(Number, entity, 'battery', customPropertyData, undefined, sourceUri, entityCollection);
-        }
-
-        Cesium.CzmlDataSource.updaters.push(processBattery);
-
-
-        function processEclipses(entity, packet, entityCollection, sourceUri) {
-          var customPropertyData = packet.eclipse;
-
-          var customProperty = entity.eclipse;
-          if (customProperty === undefined) {
-            entity.addProperty('eclipse');
-          }
-
-          // this is on line 104382 in Cesium.js
-          Cesium.CzmlDataSource.processPacketData(Boolean, entity, 'eclipse', customPropertyData, undefined, sourceUri, entityCollection);
-        }
-
-        Cesium.CzmlDataSource.updaters.push(processEclipses);
-
-
-
-        function processDataRate(entity, packet, entityCollection, sourceUri) {
-          var customPropertyData = packet.datarate;
-
-          var customProperty = entity.datarate;
-          if (customProperty === undefined) {
-            entity.addProperty('datarate');
-          }
-
-          // this is on line 104382 in Cesium.js
-          Cesium.CzmlDataSource.processPacketData(Number, entity, 'datarate', customPropertyData, undefined, sourceUri, entityCollection);
-        }
-
-        Cesium.CzmlDataSource.updaters.push(processDataRate);
-
-
-        // For processing proxy position - which can be used to add an arbitrary position value to any czml packet
-        function processPositionProxy(entity, packet, entityCollection, sourceUri) {
-          var customPropertyData = packet.position_proxy;
-
-          var customProperty = entity.position_proxy;
-          if (customProperty === undefined) {
-            entity.addProperty('position_proxy');
-          }
-
-          // this is on line 104542 in Cesium.js
-          Cesium.CzmlDataSource.processPositionPacketData(entity, 'position_proxy', customPropertyData, undefined, sourceUri, entityCollection);
-        }
-
-        Cesium.CzmlDataSource.updaters.push(processPositionProxy);
-
-
-        // Load orbit data CZML file
-        viewer.dataSources.add(Cesium.CzmlDataSource.load('app_data_files/sats_file.czml'));
-         // viewer.dataSources.add(Cesium.CzmlDataSource.load('app_data_files/fire_sequence.czml'));
+        viewer.dataSources.add(dataSourcePromise);
 
 
         var grip = new Grip();
@@ -153,6 +69,8 @@
         viewer.camera.flyHome(0);
 
         var scene = viewer.scene;
+
+        // addOrientationCallback(ar);
 
     </script>
 </body>
