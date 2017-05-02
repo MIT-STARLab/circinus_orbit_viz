@@ -20,7 +20,7 @@ $ node server.js
 
 So that's how you run the server for visualization.
 
-We also need to install another [package(https://github.com/jlouns/cesium-sensor-volumes) for sensor visualization.
+We also need to install another [package](https://github.com/jlouns/cesium-sensor-volumes) for sensor visualization.
 
 To do this, in the Cesium-1.27 directory, use
 ```
@@ -96,10 +96,13 @@ First you should open the file and update the necessary inputs:
 
 ```python
 simulation_input_file_path = '/Users/ktikennedy/Dropbox (MIT)/MIT/Research/MDO Paper Work/Comm_constellation_MDO/landing_pad/timing_output.mat'
-czml_tools_path = '/Users/ktikennedy/Dropbox (MIT)/MIT/Research/MDO Paper Work/OrbitPropagation/czml/Tools'
+czml_tools_path = '../OrbitPropagation/czml/Tools'
 
 czml_header_file = './czml_headers/sats_file_single_sfn_0_0_1.czml'
+
 output_file = './sats_file.czml'
+renderer_description_file = '../renderers/description.json'
+viz_objects_file = './viz_objects.json'
 ```
 
 The first two lines are pretty self explanatory: modify the paths listed based on where the *Comm_constellation_MDO* and *OrbitPropagation* repos are on your machine.
@@ -110,7 +113,7 @@ For the time being, stick to the provided hearder files in MATLAB_sat_viz/app_da
 
 Though as an alternative, I generally set czml_header_file just to './sats_file.czml', which allows me to use the header that is currently already being used for the visualization.
 
-The output file is just the full czml file that will be created after appending things together. This should be sats_file.czml, because that's what the app's main runner.html page is expecting.
+The first output file is just the full czml file that will be created after appending things together. This should be sats_file.czml, because that's what the app's main runner.html page is expecting. The final two output files contain input parameters for the AuxRenderer and callbacks, leave those the same as well.
 
 Those inputs being set, now you can run the tool and generate the input file:
 
@@ -137,7 +140,9 @@ When we originally cloned MATLAB_SatViz, i.e.
 ```
 $ git clone --recursive https://github.mit.edu/star-lab/MATLAB_SatViz.git
 ```
-we used the --recursive flag to grab the submodule files as well. In general though, the files in the submodule are versioned distinctly from the main repo (MATLAB_SatViz). If you make changes to the files in MATLAB_SatViz, then the submodules aren't affected.
+we used the --recursive flag to grab the submodule files as well. (can also clone the repo normally, and use "$ git submodule init" to grab the submodule files)
+
+In general though, the files in the submodule are versioned distinctly from the main repo (MATLAB_SatViz). If you make changes to the files in MATLAB_SatViz, then the submodules aren't affected.
 
 MATLAB_SatViz has a reference to a particular commit of the submodules, the code snapshot that it works with. If another user on a different machine updates the submodule code and changes MATLAB_SatViz's recorded commit of that submodule, then when you pull the latest commits to MATLAB_SatViz to your machine, you won't actually get the latest submodule commits required. Generally, if you do a git status in the top directory for MATLAB_SatViz, you should see some indication that the CSTAR or OrbitPropagation commit reference has changed. To update the actual files on your machine, you'll use:
 ```

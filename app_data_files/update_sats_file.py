@@ -14,10 +14,8 @@ simulation_input_file_path = '/Users/ktikennedy/Dropbox (MIT)/MIT/Research/MDO P
 czml_tools_path = '../OrbitPropagation/czml/Tools'
 czml_header_file = './sats_file.czml'
 # czml_header_file = './czml_headers/sats_file_single_sfn_0_0_1.czml'
+
 output_file = './sats_file.czml'
-
-
-output_viz_czml_file = './viz_out.json'
 renderer_description_file = '../renderers/description.json'
 viz_objects_file = './viz_objects.json'
 
@@ -26,6 +24,7 @@ viz_objects_file = './viz_objects.json'
 # Code
 #############################
 
+output_viz_czml_file = './viz_out.json'
 
 print 'simulation_input_file_path: '+simulation_input_file_path
 print 'czml_tools_path: '+czml_tools_path
