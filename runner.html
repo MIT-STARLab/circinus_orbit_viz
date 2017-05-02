@@ -43,11 +43,21 @@
         // add all the processors for custom CZML properties. See setupczml.js
         pushCZMLProcessors();
 
-
+        // start loading czml file
         var dataSourcePromise = Cesium.CzmlDataSource.load('app_data_files/sats_file.czml');
 
-        // add desired callbacks for the various objects in sats_file. See setupczml.js
-        dataSourcePromise = dataSourcePromise.then(addCallbacks);
+        // fetch the list of objects in the simulation that need to be operated on by addCallbacks() below
+        var viz_objects_path = 'app_data_files/viz_objects.json';
+        var viz_objects_json;
+        fetch(viz_objects_path)
+            .then(result => result.json())
+            .then(obj => {
+                viz_objects_json = obj;
+                // console.log(viz_objects_json.callbacks.orientation[0]);
+
+                // add desired callbacks for the various objects in sats_file. See setupczml.js
+                dataSourcePromise = dataSourcePromise.then(result => addCallbacks(result,viz_objects_json));
+            });
 
         viewer.dataSources.add(dataSourcePromise);
 
