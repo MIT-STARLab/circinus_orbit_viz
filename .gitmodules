@@ -1,3 +1,6 @@
 [submodule "CSTAR"]
 	path = CSTAR
 	url = git@github.mit.edu:star-lab/CSTAR.git
+[submodule "OrbitPropagation"]
+	path = OrbitPropagation
+	url = git@github.mit.edu:star-lab/OrbitPropagation.git

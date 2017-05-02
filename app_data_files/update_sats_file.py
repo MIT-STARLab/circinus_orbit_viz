@@ -11,7 +11,7 @@ import sys
 # might have to also modify the slashes in here if you're in e.g. windows / -> \
 
 simulation_input_file_path = '/Users/ktikennedy/Dropbox (MIT)/MIT/Research/MDO Paper Work/Comm_constellation_MDO/landing_pad/timing_output.mat'
-czml_tools_path = '/Users/ktikennedy/Dropbox (MIT)/MIT/Research/MDO Paper Work/OrbitPropagation/czml/Tools'
+czml_tools_path = '../OrbitPropagation/czml/Tools'
 czml_header_file = './sats_file.czml'
 # czml_header_file = './czml_headers/sats_file_single_sfn_0_0_1.czml'
 output_file = './sats_file.czml'
@@ -19,7 +19,7 @@ output_file = './sats_file.czml'
 
 output_viz_czml_file = './viz_out.json'
 renderer_description_file = '../renderers/description.json'
-viz_objects_file = '../app_data_files/viz_objects.json'
+viz_objects_file = './viz_objects.json'
 
 
 #############################
