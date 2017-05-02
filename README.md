@@ -149,6 +149,7 @@ MATLAB_SatViz has a reference to a particular commit of the submodules, the code
 $ git submodule update
 ```
 
+## Dependencies
 
-
-
+1. CesiumJS 1.27
+2. [cesium-sensor-volumes](https://github.com/jlouns/cesium-sensor-volumes)
