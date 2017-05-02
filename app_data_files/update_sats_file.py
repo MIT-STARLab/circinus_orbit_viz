@@ -19,6 +19,7 @@ output_file = './sats_file.czml'
 
 output_viz_czml_file = './viz_out.json'
 renderer_description_file = '../renderers/description.json'
+viz_objects_file = '../app_data_files/viz_objects.json'
 
 
 #############################
@@ -37,7 +38,7 @@ strip_file(czml_header_file)
 
 # now create the extra czml content for visualization - obs cones, comm links, data volumes, battery indicator, GS availability, eclipse indicator...
 sys.path.append(czml_tools_path)
-from VizInputsGenerator import generateVizInputs, writeRendererDescription
+from VizInputsGenerator import generateVizInputs, writeRendererDescription, writeVizObjectsFile
 
 generateVizInputs(file_from_sim = simulation_input_file_path, output_viz_czml_file = output_viz_czml_file)
 
@@ -75,3 +76,9 @@ renderers_list = [
 renderer_mapping = {'Satellite':["DataVol","Battery","Eclipses"],'Facility':["GSavail"],'Dlnk':["DataRate"],'Xlnk':["DataRate"]}
 
 writeRendererDescription(simulation_input_file_path,renderer_description_file,renderers_list, renderer_mapping)
+
+
+# Also take care of visualization objects file
+callbacks_mapping = {'Satellite':["orientation","drawNadirRF"]}
+
+writeVizObjectsFile(simulation_input_file_path,viz_objects_file, callbacks_mapping)
