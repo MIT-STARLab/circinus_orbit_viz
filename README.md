@@ -47,11 +47,13 @@ $ cd /path_on_your_machine/Cesium-1.27/Apps
 
 Now we can actually clone the repo.
 
-To clone the repo correctly, use recursive option on git clone (to grab all the CSTAR and OrbitPropagation library files immediately):
+To clone the repo correctly, use recursive option on git clone with SSH (to grab all the CSTAR and OrbitPropagation library files immediately):
 
 ```
-$ git clone --recursive https://github.mit.edu/star-lab/MATLAB_SatViz.git
+$ git clone --recursive git@github.mit.edu:star-lab/MATLAB_SatViz.git
 ```
+
+Note that you can't use HTTPS with the MIT enterprise github. See [this page](https://github.mit.edu/star-lab/lab_wiki/wiki/Accessing-STAR-Lab-Git-Repos) for more info.
 
 You should now be set up to run the visualization code!
 
