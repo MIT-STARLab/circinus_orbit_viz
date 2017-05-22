@@ -22,6 +22,9 @@ def strip_file(strip_file = "./sats_file.czml"):
 
             czml_stripped.append(pkt)
 
+        elif ('metadata_file_writer' in pkt.keys()):
+            czml_stripped.append(pkt)
+
 
     fd.close()
     # fd2 = open("/Users/ktikennedy/Dropbox (MIT)/Cesium/Cesium-1.27/Apps/AutomatedConstViz/movie_rev3/app_data_files/autoconst_sats2.czml", "w")
