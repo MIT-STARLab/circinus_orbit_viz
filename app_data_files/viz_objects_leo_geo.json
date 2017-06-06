@@ -1,0 +1,17 @@
+{
+  "callbacks": {
+    "orientation": [
+      "Satellite/CubeSat1",
+      "Satellite/CubeSat2"
+    ],
+    "drawNadirRF": [
+      "Satellite/CubeSat1",
+      "Satellite/CubeSat2"
+    ]
+  },
+  "metadata_satsfile_updater": {
+    "sim_output_updated": "2017 06 06 12:33:34",
+    "json_updated": "2017 06 06 12:55:20",
+    "file_writer_info_string": "created for 30 satellite scenario from matlab script Walker_generator_wrapper.m, using targets params file sheet 33_targ and gs sheet 1, for 259200 seconds with 10 seconds timestep; 3 plane walker with: , Walker RAAN 0 - 10, Walker RAAN 120 - 10, Walker RAAN 240 - 10, Walker RAAN 120 10, Walker RAAN 240 10"
+  }
+}
