@@ -44,10 +44,10 @@
         pushCZMLProcessors();
 
         // start loading czml file
-        var dataSourcePromise = Cesium.CzmlDataSource.load('app_data_files/sats_file.czml');
+        var dataSourcePromise = Cesium.CzmlDataSource.load('app_data_files/sats_file_leo_geo.czml');
 
         // fetch the list of objects in the simulation that need to be operated on by addCallbacks() below
-        var viz_objects_path = 'app_data_files/viz_objects.json';
+        var viz_objects_path = 'app_data_files/viz_objects_leo_geo.json';
         var viz_objects_json;
         fetch(viz_objects_path)
             .then(result => result.json())
