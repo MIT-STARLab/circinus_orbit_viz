@@ -14022,6 +14022,102 @@
         }
     },
     {
+        "id": "Satellite/CubeSat1/Sensor/Sensor1",
+        "name": "observation sensor 1 for satellite 1",
+        "parent": "Satellite/CubeSat1",
+        "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
+        "agi_conicSensor": {
+            "portionToDisplay": "COMPLETE",
+            "minimumClockAngle": 0.0,
+            "show": [
+                {
+                    "boolean": true,
+                    "interval": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z"
+                }
+            ],
+            "lateralSurfaceMaterial": {
+                "solidColor": {
+                    "color": {
+                        "rgba": [
+                            0,
+                            255,
+                            0,
+                            51
+                        ]
+                    }
+                }
+            },
+            "showIntersection": true,
+            "radius": 50000000.0,
+            "intersectionColor": {
+                "rgba": [
+                    0,
+                    255,
+                    0,
+                    255
+                ]
+            },
+            "outerHalfAngle": 0.5,
+            "innerHalfAngle": 0,
+            "intersectionWidth": 2,
+            "maximumClockAngle": 6.283185307179586
+        },
+        "position": {
+            "reference": "Satellite/CubeSat1#position"
+        },
+        "orientation": {
+            "reference": "Satellite/CubeSat1#orientation"
+        }
+    },
+    {
+        "id": "Satellite/CubeSat2/Sensor/Sensor1",
+        "name": "observation sensor 1 for satellite 1",
+        "parent": "Satellite/CubeSat2",
+        "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
+        "agi_conicSensor": {
+            "portionToDisplay": "COMPLETE",
+            "minimumClockAngle": 0.0,
+            "show": [
+                {
+                    "boolean": true,
+                    "interval": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z"
+                }
+            ],
+            "lateralSurfaceMaterial": {
+                "solidColor": {
+                    "color": {
+                        "rgba": [
+                            0,
+                            255,
+                            0,
+                            51
+                        ]
+                    }
+                }
+            },
+            "showIntersection": true,
+            "radius": 50000000.0,
+            "intersectionColor": {
+                "rgba": [
+                    0,
+                    255,
+                    0,
+                    255
+                ]
+            },
+            "outerHalfAngle": 0.5,
+            "innerHalfAngle": 0,
+            "intersectionWidth": 2,
+            "maximumClockAngle": 6.283185307179586
+        },
+        "position": {
+            "reference": "Satellite/CubeSat2#position"
+        },
+        "orientation": {
+            "reference": "Satellite/CubeSat2#orientation"
+        }
+    },
+    {
         "metadata_file_writer": "dummy_string",
         "file_writer_info_string": "created for 2 satellite scenario from matlab script justsats_generator_wrapper.m, with no obs targets or ground stations, for 86400 seconds with 10 seconds timestep; ad hoc const with: , SSO 1030 LTAN - 1, GEO inc 0 - 1, 10:30 LTAN 1"
     }
