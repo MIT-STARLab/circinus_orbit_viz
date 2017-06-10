@@ -25,6 +25,8 @@ class DataVolAuxRenderer {
             // console.log('yo')
 
             var datavol = ent.datavol.getValue(viewer.clock.currentTime)
+            var horz_multiplier = 10;
+            var num_decimal_places=2;
 
             if (datavol !== undefined) {
 
@@ -46,23 +48,23 @@ class DataVolAuxRenderer {
 
                 // put a gold border around data gauge
                 ctx.fillStyle = 'rgba(255,215,0,0.7)'; // gold
-                ctx.fillRect( start_x, start_y, total_horizontal_len+4, gauge_height+4);
+                ctx.fillRect( start_x, start_y, (total_horizontal_len*horz_multiplier)+4, gauge_height+4);
 
                 // ctx.fillStyle = 'rgb(255,215,255)'; // white
-                ctx.clearRect(start_x+2, start_y + 2 , total_horizontal_len, gauge_height);
+                ctx.clearRect(start_x+2, start_y + 2 , total_horizontal_len*horz_multiplier, gauge_height);
 
                 ctx.fillStyle = 'rgba(0, 255, 255, 0.5)';
-                ctx.fillRect(start_x+2, start_y +2 , datavol, gauge_height);
+                ctx.fillRect(start_x+2, start_y +2 , datavol*horz_multiplier, gauge_height);
 
                 if (datavol_urgent !== undefined) {
                     ctx.fillStyle = 'rgba(255,69,0, 0.5)';
-                    ctx.fillRect(start_x+2 + datavol, start_y +2 , datavol_urgent, gauge_height);
+                    ctx.fillRect(start_x+2 + datavol, start_y +2 , datavol_urgent*horz_multiplier, gauge_height);
                 }
 
                 // label for data vol
                 ctx.font = '12px monospace';
                 ctx.fillStyle = 'white';
-                ctx.fillText(Math.round(datavol).toString(), start_x+4, start_y + 15);
+                ctx.fillText(datavol.toFixed(num_decimal_places), start_x+4, start_y + 15);
             }
 
         }
