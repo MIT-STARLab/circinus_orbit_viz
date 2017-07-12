@@ -25,7 +25,7 @@ class DataVolAuxRenderer {
             // console.log('yo')
 
             var datavol = ent.datavol.getValue(viewer.clock.currentTime)
-            var horz_multiplier = 10;
+            var horz_multiplier = 1;
             var num_decimal_places=2;
 
             if (datavol !== undefined) {
