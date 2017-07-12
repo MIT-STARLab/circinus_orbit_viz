@@ -28,7 +28,7 @@
         "cartesian2": [0, 0]
       },
       "scale": 0.2,
-      "show": true,
+      "show": false,
       "verticalOrigin": "CENTER"
     },
     "label": {
@@ -44,14 +44,14 @@
       "pixelOffset": {
         "cartesian2": [20, -30]
       },
-      "show": true,
+      "show": false,
       "style": "FILL_AND_OUTLINE",
       "text": "LEO (~600km)",
       "verticalOrigin": "CENTER"
     },
     "path": {
       "show": {
-        "boolean": true,
+        "boolean": false,
         "interval": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z"
       },
       "width": 1,
@@ -7008,7 +7008,7 @@
         "cartesian2": [0, 0]
       },
       "scale": 0.3,
-      "show": false,
+      "show": true,
       "verticalOrigin": "CENTER"
     },
     "label": {
@@ -7024,7 +7024,7 @@
       "pixelOffset": {
         "cartesian2": [20, -30]
       },
-      "show": false,
+      "show": true,
       "style": "FILL_AND_OUTLINE",
       "text": "GEO (~36,000km)",
       "verticalOrigin": "CENTER"
@@ -14015,7 +14015,8 @@
       "portionToDisplay": "COMPLETE",
       "minimumClockAngle": 0.0,
       "show": [{
-          "boolean": true, "interval": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z"
+          "boolean": true,
+          "interval": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z"
         }],
       "lateralSurfaceMaterial": {
         "solidColor": {
@@ -14062,7 +14063,7 @@
       "outlineColor": {
         "rgba": [0, 255, 0, 255]
       },
-      "show": false
+      "show": true
     }
   },
   {
@@ -14086,7 +14087,7 @@
       "outlineColor": {
         "rgba": [0, 255, 0, 255]
       },
-      "show": false
+      "show": true
     }
   },
   {
@@ -14110,7 +14111,7 @@
       "outlineColor": {
         "rgba": [0, 255, 0, 255]
       },
-      "show": false
+      "show": true
     }
   },
   {
