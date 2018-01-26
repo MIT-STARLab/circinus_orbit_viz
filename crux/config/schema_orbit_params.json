@@ -1,0 +1,89 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Satellite orbit input params",
+    "description": "set of choices for orbit input params",
+    "type": "object",
+    "definitions": {
+        "propagation_method": {
+            "type": "string",
+            "description": "The proprogation method to use. Will default to matlab_delkep",
+            "enum": ["matlab_delkep"],
+            "default" : "matlab_delkep"
+        },
+        "kepler_meananom": {                
+            "type": "object",
+            "required": ["a_km","e","i_deg","RAAN_deg","arg_per_deg","M"],
+            "additionalProperties": false,
+            "properties": {
+                "a_km": {
+                    "description": "semi-major axis in km",
+                    "type": "number",
+                    "minimum": 0,
+                    "default" : 6978
+                },
+                "e": {
+                    "description": "eccentricity (unitless)",
+                    "type": "number",
+                    "minimum": 0,
+                    "default" : 0
+                },
+                "i_deg": {
+                    "description": "inclination in degrees",
+                    "type": "number",
+                    "minimum": -180,
+                    "maximum": 180,
+                    "default" : 0
+                },
+                "RAAN_deg": {
+                    "description": "Right Ascension of the Ascending Node in degrees",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 360,
+                    "default" : 0
+                },
+                "arg_per_deg": {
+                    "description": "argument of periapsis in degrees. Leave as 0 for circular orbits",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 360,
+                    "default" : 0 
+                },
+                "M": {
+                    "description": "mean anomaly in degrees",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 360,
+                    "default" : 0 
+                }
+            }
+        },
+        "walker" : {},
+        "sat_orbit_params_elem": {
+            "type": "object", 
+            "oneOf": [
+                {
+                    "required":["sat_indx","propagation_method","kepler_meananom"],
+                    "additionalProperties":false,
+                    "properties": {
+                        "sat_indx": {"type": "number"},
+                        "propagation_method": {"$ref": "schema_orbit_params.json#/definitions/propagation_method"},
+                        "kepler_meananom": {"$ref": "schema_orbit_params.json#/definitions/kepler_meananom"}
+                    } 
+                },
+                {
+                    "required":["walker"],
+                    "additionalProperties":false,
+                    "properties": {
+                        "walker": {"$ref": "schema_orbit_params.json#/definitions/walker"}
+                    } 
+                }
+            ]
+        }
+    },
+    "properties": {
+        "sat_orbit_params": {
+            "type": "array",
+            "items": {"$ref": "schema_orbit_params.json#/definitions/sat_orbit_params_elem"}
+        } 
+    }
+}

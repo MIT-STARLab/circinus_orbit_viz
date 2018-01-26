@@ -1,0 +1,90 @@
+{
+    "version": "0.1",
+    "num_satellites": 1,
+    "scenario_params": {
+        "start_utc": "2018-01-18T11:39:50.520000Z",
+        "end_utc": "2018-01-19T11:39:50.520000Z",
+        "timestep_s": 5.0,
+        "use_crosslinks": true,
+        "all_sats_same_time_system": true,
+        "matlab_verbose": true
+    },
+    "sat_orbit_params": [
+        {
+            "sat_indx": 0,
+            "kepler_meananom": {
+                "a_km":  6978,
+                "e": 0,
+                "i_deg": 0,
+                "RAAN_deg": 0,
+                "arg_per_deg": 0,
+                "M": 0
+            },
+            "propagation_method": "matlab_delkep"
+        }
+    ],
+    "obs_params": {
+        "target_set_name": "MDO obs targets",
+        "target_sat_version": "1.0",
+        "elevation_cutoff_deg":60,
+        "targets": [
+            {"id": 0, "name": "Taiwan","name_pretty": "Taiwan 0","latitude_deg":23.6978,"longitude_deg":120.9605,"height_m":0},
+            {"id": 1, "name": "Dominican Republic","name_pretty": "Dominican Republic 1","latitude_deg":18.7357,"longitude_deg":-70.1627,"height_m":0},
+            {"id": 2, "name": "Jamaica","name_pretty": "Jamaica 2","latitude_deg":18.1096,"longitude_deg":-77.2975,"height_m":0},
+            {"id": 3, "name": "El Salvador","name_pretty": "El Salvador 3","latitude_deg":13.7942,"longitude_deg":-88.8965,"height_m":0},
+            {"id": 4, "name": "Guatemala","name_pretty": "Guatemala 4","latitude_deg":14.6349,"longitude_deg":-90.5069,"height_m":0},
+            {"id": 5, "name": "Antigua and Barbuda","name_pretty": "Antigua and Barbuda 5","latitude_deg":17.0608,"longitude_deg":-61.7964,"height_m":0},
+            {"id": 6, "name": "Japan","name_pretty": "Japan 6","latitude_deg":36.2048,"longitude_deg":138.2529,"height_m":0},
+            {"id": 7, "name": "Costa Rica","name_pretty": "Costa Rica 7","latitude_deg":9.7489,"longitude_deg":-83.7534,"height_m":0},
+            {"id": 8, "name": "Philippines","name_pretty": "Philippines 8","latitude_deg":12.8797,"longitude_deg":121.774,"height_m":0},
+            {"id": 9, "name": "Colombia","name_pretty": "Colombia 9","latitude_deg":4.5709,"longitude_deg":-74.2973,"height_m":0},
+            {"id": 10, "name": "Bangladesh","name_pretty": "Bangladesh 10","latitude_deg":23.685,"longitude_deg":90.3563,"height_m":0},
+            {"id": 11, "name": "Chile","name_pretty": "Chile 11","latitude_deg":-35.6751,"longitude_deg":-71.543,"height_m":0},
+            {"id": 12, "name": "Korea","name_pretty": "Korea 12","latitude_deg":35.9078,"longitude_deg":127.7669,"height_m":0},
+            {"id": 13, "name": "Turkey","name_pretty": "Turkey 13","latitude_deg":38.9637,"longitude_deg":35.2433,"height_m":0},
+            {"id": 14, "name": "Barbados","name_pretty": "Barbados 14","latitude_deg":13.1939,"longitude_deg":-59.5432,"height_m":0},
+            {"id": 15, "name": "Guam","name_pretty": "Guam 15","latitude_deg":13.4443,"longitude_deg":144.7937,"height_m":0},
+            {"id": 16, "name": "Uzbekistan","name_pretty": "Uzbekistan 16","latitude_deg":41.3775,"longitude_deg":64.5853,"height_m":0},
+            {"id": 17, "name": "Ecuador","name_pretty": "Ecuador 17","latitude_deg":-1.8312,"longitude_deg":-78.1834,"height_m":0},
+            {"id": 18, "name": "Venezuela","name_pretty": "Venezuela 18","latitude_deg":6.4238,"longitude_deg":-66.5897,"height_m":0},
+            {"id": 19, "name": "Peru","name_pretty": "Peru 19","latitude_deg":-9.19,"longitude_deg":-75.0152,"height_m":0},
+            {"id": 20, "name": "St. Kitts and Nevis","name_pretty": "St. Kitts and Nevis 20","latitude_deg":17.3578,"longitude_deg":-62.783,"height_m":0},
+            {"id": 21, "name": "Iran","name_pretty": "Iran 21","latitude_deg":32.4279,"longitude_deg":53.688,"height_m":0},
+            {"id": 22, "name": "Indonesia","name_pretty": "Indonesia 22","latitude_deg":-0.7893,"longitude_deg":113.9213,"height_m":0},
+            {"id": 23, "name": "Honduras","name_pretty": "Honduras 23","latitude_deg":15.2,"longitude_deg":-86.2419,"height_m":0},
+            {"id": 24, "name": "Greece","name_pretty": "Greece 24","latitude_deg":39.0742,"longitude_deg":21.8243,"height_m":0},
+            {"id": 25, "name": "Albania","name_pretty": "Albania 25","latitude_deg":41.1533,"longitude_deg":20.1683,"height_m":0},
+            {"id": 26, "name": "Mexico","name_pretty": "Mexico 26","latitude_deg":23.6345,"longitude_deg":-102.5528,"height_m":0},
+            {"id": 27, "name": "Hong Kong","name_pretty": "Hong Kong 27","latitude_deg":22.3964,"longitude_deg":114.1095,"height_m":0},
+            {"id": 28, "name": "Tajikistan","name_pretty": "Tajikistan 28","latitude_deg":38.861,"longitude_deg":71.2761,"height_m":0},
+            {"id": 29, "name": "Mozambique","name_pretty": "Mozambique 29","latitude_deg":-18.6657,"longitude_deg":35.5296,"height_m":0},
+            {"id": 30, "name": "Syria","name_pretty": "Syria 30","latitude_deg":34.8021,"longitude_deg":38.9968,"height_m":0},
+            {"id": 31, "name": "Bolivia","name_pretty": "Bolivia 31","latitude_deg":-16.2902,"longitude_deg":-63.5887,"height_m":0},
+            {"id": 32, "name": "United States","name_pretty": "United States 32","latitude_deg":37.0902,"longitude_deg":-95.7129,"height_m":0}
+        ]
+    },
+    "gs_params": {
+        "gs_network_name": "Space Flight Networks 2017",
+        "gs_network_version": "1.0",
+        "elevation_cutoff_deg":0,
+        "stations": [
+            {"id": 0, "name": "Prudhoe Bay","name_pretty": "Prudhoe Bay 0","latitude_deg":70.36621,"longitude_deg":-148.745529,"height_m":0,"type":"X-band"},
+            {"id": 1, "name": "Fairbanks","name_pretty": "Fairbanks 1","latitude_deg":64.836531,"longitude_deg":-147.651745,"height_m":0,"type":"X-band"},
+            {"id": 2, "name": "Seattle","name_pretty": "Seattle 2","latitude_deg":47.606,"longitude_deg":-122.33,"height_m":0,"type":"X-band"},
+            {"id": 3, "name": "New Mexico","name_pretty": "New Mexico 3","latitude_deg":32.7872,"longitude_deg":-106.3257,"height_m":0,"type":"X-band"},
+            {"id": 4, "name": "New England","name_pretty": "New England 4","latitude_deg":42.94235,"longitude_deg":-71.636095,"height_m":0,"type":"X-band"},
+            {"id": 5, "name": "Hawaii","name_pretty": "Hawaii 5","latitude_deg":19.8968,"longitude_deg":-155.5828,"height_m":0,"type":"X-band"},
+            {"id": 6, "name": "Florida","name_pretty": "Florida 6","latitude_deg":26.7542,"longitude_deg":-80.9337,"height_m":0,"type":"X-band"},
+            {"id": 7, "name": "Argentina","name_pretty": "Argentina 7","latitude_deg":-53.1638,"longitude_deg":-70.9171,"height_m":0,"type":"X-band"},
+            {"id": 8, "name": "Brazil","name_pretty": "Brazil 8","latitude_deg":-18.415921,"longitude_deg":-45.633627,"height_m":0,"type":"X-band"},
+            {"id": 9, "name": "Munich","name_pretty": "Munich 9","latitude_deg":48.1351,"longitude_deg":11.582,"height_m":0,"type":"X-band"},
+            {"id": 10, "name": "Norway","name_pretty": "Norway 10","latitude_deg":67.316,"longitude_deg":14.777,"height_m":0,"type":"X-band"},
+            {"id": 11, "name": "South Africa","name_pretty": "South Africa 11","latitude_deg":-25.89,"longitude_deg":27.6853,"height_m":0,"type":"X-band"},
+            {"id": 12, "name": "Dubai","name_pretty": "Dubai 12","latitude_deg":25.2048,"longitude_deg":55.2708,"height_m":0,"type":"X-band"},
+            {"id": 13, "name": "Singapore","name_pretty": "Singapore 13","latitude_deg":1.3521,"longitude_deg":103.8198,"height_m":0,"type":"X-band"},
+            {"id": 14, "name": "Guam","name_pretty": "Guam 14","latitude_deg":13.4443,"longitude_deg":144.7937,"height_m":0,"type":"X-band"},
+            {"id": 15, "name": "Japan","name_pretty": "Japan 15","latitude_deg":37.516871,"longitude_deg":139.666454,"height_m":0,"type":"X-band"},
+            {"id": 16, "name": "New Zealand","name_pretty": "New Zealand 16","latitude_deg":-46.512945,"longitude_deg":168.375952,"height_m":0,"type":"X-band"}
+        ]
+    }
+}

@@ -1,2 +1,4 @@
 viz_out.json
 *.pyc
+sats_file.czml
+viz_objects.json

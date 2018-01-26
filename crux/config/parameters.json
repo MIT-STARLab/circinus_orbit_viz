@@ -1,0 +1,18 @@
+{
+	"param1": {
+		"name": "An example checkbox parameter",
+		"type": "boolean",
+		"default": true
+	},
+	"param2": {
+		"name": "An example text field",
+		"type": "text",
+		"default": "some text"
+	},
+	"foo_param": {
+		"name": "An example dropdown",
+		"type": "dropdown",
+		"options": ["option a", "option 1"],
+		"default": "option a"
+	}
+}

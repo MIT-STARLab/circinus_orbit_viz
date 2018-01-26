@@ -1,0 +1,16 @@
+{
+	"foo": {
+		"type": "json",
+		"schema": {}
+	},
+	"bar": {
+		"type": "csv",
+		"schema": ["col1", "col2", "col3"]
+	},
+	"baz": {
+		"type": "text"
+	},
+	"qux": {
+		"type": "binary"
+	}
+}

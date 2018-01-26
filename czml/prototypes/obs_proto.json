@@ -1,0 +1,67 @@
+{
+    "PROTO_VERSION": "0.1",
+    "id": "Target/foo",
+    "name": "bar",
+    "availability": "2017-03-15T10:00:00Z/2017-03-16T10:00:00Z",
+    "description": "<!--HTML-->\r\n<p>\r\nno description\r\n</p>",
+    "billboard": {
+        "eyeOffset": {
+            "cartesian": [
+                0,
+                0,
+                0
+            ]
+        },
+        "horizontalOrigin": "CENTER",
+        "image": {
+            "uri": "target.jpg"
+        },
+        "pixelOffset": {
+            "cartesian2": [
+                0,
+                0
+            ]
+        },
+        "scale": 0.1,
+        "show": true,
+        "verticalOrigin": "CENTER"
+    },
+    "label": {
+        "fillColor": {
+            "rgba": [
+                0,
+                255,
+                255,
+                255
+            ]
+        },
+        "font": "11pt Lucida Console",
+        "horizontalOrigin": "LEFT",
+        "outlineColor": {
+            "rgba": [
+                0,
+                0,
+                0,
+                255
+            ]
+        },
+        "outlineWidth": 2,
+        "pixelOffset": {
+            "cartesian2": [
+                12,
+                0
+            ]
+        },
+        "show": true,
+        "style": "FILL_AND_OUTLINE",
+        "text": "baz",
+        "verticalOrigin": "CENTER"
+    },
+    "position": {
+        "cartographicDegrees": [
+            120.9605,
+            23.6978,
+            0
+        ]
+    }
+}
