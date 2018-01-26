@@ -1,0 +1,10 @@
+{
+    "orbit_prop_data": {
+        "type": "json",
+        "schema": "schema_orbit_prop_data.json"
+    },
+    "orbit_prop_inputs": {
+        "type": "json",
+        "schema": "schema_orbit_prop_inputs.json"
+    }
+}

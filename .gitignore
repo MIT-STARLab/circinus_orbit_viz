@@ -2,3 +2,9 @@
 .DS_Store
 ~$*
 *.orig
+
+# pycharm project directory
+.idea
+
+#compiled python
+.pyc

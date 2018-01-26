@@ -1,0 +1,10 @@
+{
+	"name": "Data Munger",
+	"version": "0.0.1",
+	"author": "Patrick Kage",
+	"description": "an example data-using pipeline component",
+	"startup": "sh crux/up.sh",
+	"input": "crux/input.json",
+	"parameters": "crux/config.json",
+	"output": "crux/output.json"
+}
