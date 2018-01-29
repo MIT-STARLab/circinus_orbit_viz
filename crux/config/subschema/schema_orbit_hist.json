@@ -1,0 +1,42 @@
+{
+    "version": "0.1",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Orbit prop data points",
+    "description": "Orbit proprogation data points history",
+    "type": "object",
+    "definitions": {
+        "orbit_point": {
+            "description": "orbit point in format [t (s), x (km), y (km), z (km)]",
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": {"type": "number"}
+        },
+        "sat_orbit_hist": {
+            "description": "Orbit history data for a single sat",
+            "type": "object",
+            "properties": {
+                "sat_indx": {
+                    "description": "Satellite index that owns this data",
+                    "type": "number",
+                    "minimum": 0,
+                    "default" : 0
+                },
+                "time_s_pos_km": {
+                    "description": "array of orbit points in temporal order",
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {"$ref": "schema_orbit_hist.json#/definitions/orbit_point"}
+                }
+            }
+        }
+    },
+    "properties": {
+        "sat_orbit_data": {
+            "description": "Array of orbit history data for every satellite",
+            "type": "array",
+            "minItems": 1,
+            "items": {"$ref": "schema_orbit_hist.json#/definitions/sat_orbit_hist"}
+        }
+    }
+}

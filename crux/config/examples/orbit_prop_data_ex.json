@@ -1,5 +1,6 @@
 {
     "scenario_params": {
+        "num_satellites": 1,
         "use_crosslinks": true,
         "end_utc": "2018-01-19T11:39:50.520000Z",
         "matlab_verbose": true,
@@ -7,7 +8,6 @@
         "all_sats_same_time_system": true,
         "start_utc": "2018-01-18T11:39:50.520000Z"
     },
-    "num_satellites": 1,
     "accesses_data": 12,
     "sat_orbit_data": [
         {

@@ -257,7 +257,7 @@ if __name__ == "__main__":
 	output = pr.run(data)
 	b = time.time()
 
-	with open('sats_file.czml','w') as f:
+	with open('../app_data_files/sats_file.czml','w') as f:
 		json.dump(output,f)
 
 	print('run time: %f'%(b-a))

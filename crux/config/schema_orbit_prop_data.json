@@ -1,0 +1,18 @@
+{
+    "version": "0.1",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Orbit prop output raw",
+    "description": "schema for raw orbit propagation output data",
+    "type": "object",
+    "required": ["version","scenario_params","sat_orbit_data"],
+    "properties": {
+        "version": {
+            "description": "version specifier to inform parsing in code. semantics: Major.Minor",
+            "type": "string",
+            "enum": ["0.1"]
+        },
+        "scenario_params": {"$ref": "subschema/schema_scenario_params.json#/properties/scenario_params"},
+        "sat_orbit_data": {"$ref": "subschema/schema_orbit_hist.json#/properties/sat_orbit_data"},
+        "acesses_data": {}
+    }
+}

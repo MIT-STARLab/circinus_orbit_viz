@@ -1,0 +1,13 @@
+# Random files
+.DS_Store
+~$*
+*.orig
+
+# pycharm project directory
+.idea
+
+#compiled python
+.pyc
+
+# temp example file
+prop_data_2.json
