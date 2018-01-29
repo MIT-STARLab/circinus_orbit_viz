@@ -1,26 +1,19 @@
 {
+    "version": "0.1",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "title": "Orbit prop data params",
     "description": "schema for params for that are used as inputs by the orbit propagation routines, including scenario timeframe, satellite orbits, and ground station configuration",
     "type": "object",
+    "required": ["version","scenario_params","sat_orbit_params","gs_params","obs_params"],
     "properties": {
         "version": {
             "description": "version specifier to inform parsing in code. semantics: Major.Minor",
             "type": "string",
             "enum": ["0.1"]
         },
-        "num_satellites": {"type": "integer"},
-        "scenario_time_params": {
-            "type": "object",
-            "properties": {
-                "start_utc": {
-                    "type": "string",
-                    "description": "epoch time at which the orbital parameters are valid",
-                    "default" : "2018-01-18T11:39:50.52Z"
-                }
-            }
-        },
-        "sat_orbit_params": {"$ref": "schema_orbit_params.json#/properties/sat_orbit_params"},
-        "gs_params": {}
+        "scenario_params": {"$ref": "subschema/schema_scenario_params.json#/properties/scenario_params"},
+        "sat_orbit_params": {"$ref": "subschema/schema_orbit_params.json#/properties/sat_orbit_params"},
+        "gs_params": {"$ref": "subschema/schema_gs_params.json#/properties/gs_params"},
+        "obs_params": {"$ref": "subschema/schema_obs_params.json#/properties/obs_params"}
     }
 }

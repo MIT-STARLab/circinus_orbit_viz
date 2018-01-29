@@ -1,7 +1,7 @@
 {
     "version": "0.1",
-    "num_satellites": 1,
     "scenario_params": {
+        "num_satellites": 1,
         "start_utc": "2018-01-18T11:39:50.520000Z",
         "end_utc": "2018-01-19T11:39:50.520000Z",
         "timestep_s": 5.0,
@@ -15,17 +15,41 @@
             "kepler_meananom": {
                 "a_km":  6978,
                 "e": 0,
-                "i_deg": 0,
+                "i_deg": 30,
                 "RAAN_deg": 0,
                 "arg_per_deg": 0,
                 "M": 0
+            },
+            "propagation_method": "matlab_delkep"
+        },
+        {
+            "sat_indx": 1,
+            "kepler_meananom": {
+                "a_km":  8000,
+                "e": 0.2,
+                "i_deg": 98,
+                "RAAN_deg": 0,
+                "arg_per_deg": 270,
+                "M": 30
+            },
+            "propagation_method": "matlab_delkep"
+        },
+        {
+            "sat_indx": 2,
+            "kepler_meananom": {
+                "a_km":  7278,
+                "e": 0.1,
+                "i_deg": -20,
+                "RAAN_deg": 10,
+                "arg_per_deg": 30,
+                "M": 120
             },
             "propagation_method": "matlab_delkep"
         }
     ],
     "obs_params": {
         "target_set_name": "MDO obs targets",
-        "target_sat_version": "1.0",
+        "target_set_version": "1",
         "elevation_cutoff_deg":60,
         "targets": [
             {"id": 0, "name": "Taiwan","name_pretty": "Taiwan 0","latitude_deg":23.6978,"longitude_deg":120.9605,"height_m":0},
@@ -65,26 +89,26 @@
     },
     "gs_params": {
         "gs_network_name": "Space Flight Networks 2017",
-        "gs_network_version": "1.0",
-        "elevation_cutoff_deg":0,
+        "gs_network_version": "1",
+        "elevation_cutoff_deg":10,
         "stations": [
-            {"id": 0, "name": "Prudhoe Bay","name_pretty": "Prudhoe Bay 0","latitude_deg":70.36621,"longitude_deg":-148.745529,"height_m":0,"type":"X-band"},
-            {"id": 1, "name": "Fairbanks","name_pretty": "Fairbanks 1","latitude_deg":64.836531,"longitude_deg":-147.651745,"height_m":0,"type":"X-band"},
-            {"id": 2, "name": "Seattle","name_pretty": "Seattle 2","latitude_deg":47.606,"longitude_deg":-122.33,"height_m":0,"type":"X-band"},
-            {"id": 3, "name": "New Mexico","name_pretty": "New Mexico 3","latitude_deg":32.7872,"longitude_deg":-106.3257,"height_m":0,"type":"X-band"},
-            {"id": 4, "name": "New England","name_pretty": "New England 4","latitude_deg":42.94235,"longitude_deg":-71.636095,"height_m":0,"type":"X-band"},
-            {"id": 5, "name": "Hawaii","name_pretty": "Hawaii 5","latitude_deg":19.8968,"longitude_deg":-155.5828,"height_m":0,"type":"X-band"},
-            {"id": 6, "name": "Florida","name_pretty": "Florida 6","latitude_deg":26.7542,"longitude_deg":-80.9337,"height_m":0,"type":"X-band"},
-            {"id": 7, "name": "Argentina","name_pretty": "Argentina 7","latitude_deg":-53.1638,"longitude_deg":-70.9171,"height_m":0,"type":"X-band"},
-            {"id": 8, "name": "Brazil","name_pretty": "Brazil 8","latitude_deg":-18.415921,"longitude_deg":-45.633627,"height_m":0,"type":"X-band"},
-            {"id": 9, "name": "Munich","name_pretty": "Munich 9","latitude_deg":48.1351,"longitude_deg":11.582,"height_m":0,"type":"X-band"},
-            {"id": 10, "name": "Norway","name_pretty": "Norway 10","latitude_deg":67.316,"longitude_deg":14.777,"height_m":0,"type":"X-band"},
-            {"id": 11, "name": "South Africa","name_pretty": "South Africa 11","latitude_deg":-25.89,"longitude_deg":27.6853,"height_m":0,"type":"X-band"},
-            {"id": 12, "name": "Dubai","name_pretty": "Dubai 12","latitude_deg":25.2048,"longitude_deg":55.2708,"height_m":0,"type":"X-band"},
-            {"id": 13, "name": "Singapore","name_pretty": "Singapore 13","latitude_deg":1.3521,"longitude_deg":103.8198,"height_m":0,"type":"X-band"},
-            {"id": 14, "name": "Guam","name_pretty": "Guam 14","latitude_deg":13.4443,"longitude_deg":144.7937,"height_m":0,"type":"X-band"},
-            {"id": 15, "name": "Japan","name_pretty": "Japan 15","latitude_deg":37.516871,"longitude_deg":139.666454,"height_m":0,"type":"X-band"},
-            {"id": 16, "name": "New Zealand","name_pretty": "New Zealand 16","latitude_deg":-46.512945,"longitude_deg":168.375952,"height_m":0,"type":"X-band"}
+            {"id": 0, "name": "Prudhoe Bay","name_pretty": "Prudhoe Bay 0","latitude_deg":70.36621,"longitude_deg":-148.745529,"height_m":0,"freq_class":"X-band"},
+            {"id": 1, "name": "Fairbanks","name_pretty": "Fairbanks 1","latitude_deg":64.836531,"longitude_deg":-147.651745,"height_m":0,"freq_class":"X-band"},
+            {"id": 2, "name": "Seattle","name_pretty": "Seattle 2","latitude_deg":47.606,"longitude_deg":-122.33,"height_m":0,"freq_class":"X-band"},
+            {"id": 3, "name": "New Mexico","name_pretty": "New Mexico 3","latitude_deg":32.7872,"longitude_deg":-106.3257,"height_m":0,"freq_class":"X-band"},
+            {"id": 4, "name": "New England","name_pretty": "New England 4","latitude_deg":42.94235,"longitude_deg":-71.636095,"height_m":0,"freq_class":"X-band"},
+            {"id": 5, "name": "Hawaii","name_pretty": "Hawaii 5","latitude_deg":19.8968,"longitude_deg":-155.5828,"height_m":0,"freq_class":"X-band"},
+            {"id": 6, "name": "Florida","name_pretty": "Florida 6","latitude_deg":26.7542,"longitude_deg":-80.9337,"height_m":0,"freq_class":"X-band"},
+            {"id": 7, "name": "Argentina","name_pretty": "Argentina 7","latitude_deg":-53.1638,"longitude_deg":-70.9171,"height_m":0,"freq_class":"X-band"},
+            {"id": 8, "name": "Brazil","name_pretty": "Brazil 8","latitude_deg":-18.415921,"longitude_deg":-45.633627,"height_m":0,"freq_class":"X-band"},
+            {"id": 9, "name": "Munich","name_pretty": "Munich 9","latitude_deg":48.1351,"longitude_deg":11.582,"height_m":0,"freq_class":"X-band"},
+            {"id": 10, "name": "Norway","name_pretty": "Norway 10","latitude_deg":67.316,"longitude_deg":14.777,"height_m":0,"freq_class":"X-band"},
+            {"id": 11, "name": "South Africa","name_pretty": "South Africa 11","latitude_deg":-25.89,"longitude_deg":27.6853,"height_m":0,"freq_class":"X-band"},
+            {"id": 12, "name": "Dubai","name_pretty": "Dubai 12","latitude_deg":25.2048,"longitude_deg":55.2708,"height_m":0,"freq_class":"X-band"},
+            {"id": 13, "name": "Singapore","name_pretty": "Singapore 13","latitude_deg":1.3521,"longitude_deg":103.8198,"height_m":0,"freq_class":"X-band"},
+            {"id": 14, "name": "Guam","name_pretty": "Guam 14","latitude_deg":13.4443,"longitude_deg":144.7937,"height_m":0,"freq_class":"X-band"},
+            {"id": 15, "name": "Japan","name_pretty": "Japan 15","latitude_deg":37.516871,"longitude_deg":139.666454,"height_m":0,"freq_class":"X-band"},
+            {"id": 16, "name": "New Zealand","name_pretty": "New Zealand 16","latitude_deg":-46.512945,"longitude_deg":168.375952,"height_m":0,"freq_class":"X-band"}
         ]
     }
 }
