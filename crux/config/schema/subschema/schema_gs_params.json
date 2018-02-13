@@ -1,28 +1,28 @@
 {
-    "version": "0.1",
+    "version": "0.2",
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "title": "Obs params",
-    "description": "Observation target parameters",
+    "title": "GS params",
+    "description": "Ground station parameters",
     "type": "object",
     "definitions": {
-        "targets": {                
+        "stations": {                
             "type": "object",
             "required": ["id","name","name_pretty","latitude_deg","longitude_deg","height_m"],
             "additionalProperties": false,
             "properties": {
                 "id": {
-                    "description": "Numerical id for the observation target. Assume this should start with 0 and increase contiguously by 1 for all gs",
+                    "description": "Numerical id for the ground station. Assume this should start with 0 and increase contiguously by 1 for all gs",
                     "type": "number",
                     "minimum": 0,
                     "default" : 0
                 },
                 "name": {
-                    "description": "Human readable (but not necessarily 'pretty' name for the obs target)",
+                    "description": "Human readable (but not necessarily 'pretty' name for the gs)",
                     "type": "string",
                     "default" : "Prudhoe Bay"
                 },
                 "name_pretty": {
-                    "description": "Human readable, and presentable ('pretty') in Cesium name for the obs target",
+                    "description": "Human readable, and presentable ('pretty') in Cesium name for the gs",
                     "type": "string",
                     "default" : "Prudhoe Bay 0"
                 },
@@ -41,39 +41,50 @@
                     "default" : -96.357277
                 },
                 "height_m": {
-                    "description": "Height of the obs target in meters",
+                    "description": "Height of the ground station in meters",
                     "type": "number",
                     "default" : 0
+                },
+                "freq_class": {
+                    "description": "A frequency class specifier for the ground station, used for classification in sim runs",
+                    "type": "string",
+                    "enum": ["X-band","Optical","Ka-band"],
+                    "default" : "X-band"
                 }
+
             }
         }
     },
     "properties": {
-        "obs_params": {
+        "gs_params": {
             "type": "object",
-            "required":["target_set_name","target_set_version","elevation_cutoff_deg","targets"],
+            "required":["num_stations","gs_network_name","gs_network_version","elevation_cutoff_deg","stations"],
             "additionalProperties": false,
             "properties": {
-                "target_set_name": {
+                "num_stations": {
+                    "type": "integer",
+                    "description": "Number of ground stations in this scenario",
+                },
+                "gs_network_name": {
                     "type": "string",
-                    "description": "Easy to use name for this set of observation targets",
+                    "description": "Easy to use name for this ground station network",
                     "default" : "Space Flight Networks 2017"
                 },
-                "target_set_version": {
+                "gs_network_version": {
                     "type": "string",
-                    "description": "Version for this instantiation of the obs target set. Should be updated if any of the parameters change, to provide traceability. Format: Major",
+                    "description": "Version for this instantiation of the gs network. Should be updated if any of the parameters change, to provide traceability. Format: Major",
                     "default" : "1"
                 },
                 "elevation_cutoff_deg": {
-                    "description": "Cutoff angle for when target can first/last be seen by satellites",
+                    "description": "Cutoff angle for when ground station can first see/stops seeing satellites",
                     "type": "number",
                     "minimum": 0,
                     "maximum": 90,
-                    "default" : 60.0
+                    "default" : 10.0
                 },
-                "targets": {
+                "stations": {
                     "type": "array",
-                    "items": {"$ref": "schema_obs_params.json#/definitions/targets"}
+                    "items": {"$ref": "schema_gs_params.json#/definitions/stations"}
                 }
             }
         }

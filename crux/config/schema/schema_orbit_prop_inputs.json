@@ -1,5 +1,5 @@
 {
-    "version": "0.1",
+    "version": "0.2",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "title": "Orbit prop data params",
     "description": "schema for params for that are used as inputs by the orbit propagation routines, including scenario timeframe, satellite orbits, and ground station configuration",
@@ -12,6 +12,7 @@
             "enum": ["0.1"]
         },
         "scenario_params": {"$ref": "subschema/schema_scenario_params.json#/properties/scenario_params"},
+        "sat_params": {"$ref": "subschema/schema_sat_params.json#/properties/sat_params"},
         "sat_orbit_params": {"$ref": "subschema/schema_orbit_params.json#/properties/sat_orbit_params"},
         "gs_params": {"$ref": "subschema/schema_gs_params.json#/properties/gs_params"},
         "obs_params": {"$ref": "subschema/schema_obs_params.json#/properties/obs_params"}
