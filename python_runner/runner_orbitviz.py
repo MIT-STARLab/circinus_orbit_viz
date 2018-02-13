@@ -165,7 +165,7 @@ class PipelineRunner:
 		cz = CzmlWrapper()
 
 		if viz_params['version'] == "0.1":
-			orbit_time_precision = viz_params['orbit_time_precision']
+			orbit_time_precision = viz_params['orbit_time_precision_s']
 
 		if orbit_prop_data['version'] == "0.1":
 

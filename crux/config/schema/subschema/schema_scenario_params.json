@@ -1,0 +1,46 @@
+{
+    "version": "0.2",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Scenario params",
+    "description": "Simulation scenario parameters",
+    "type": "object",
+    "properties": {
+        "scenario_params": {
+            "type": "object",
+            "required":["start_utc","end_utc","timestep_s","use_crosslinks","all_sats_same_time_system","matlab_verbose_orbitprop"],
+            "additionalProperties": false,
+            "properties": {
+                "start_utc": {
+                    "type": "string",
+                    "description": "start time of orbit propagation scenario",
+                    "default" : "2018-01-18T11:39:50.52Z"
+                },
+                "end_utc": {
+                    "type": "string",
+                    "description": "end time of orbit propagation scenario",
+                    "default" : "2018-01-19T11:39:50.52Z"
+                },
+                "timestep_s": {
+                    "type": "number",
+                    "description": "propagation timestep in seconds",
+                    "default" : 10.0
+                },
+                "use_crosslinks": {
+                    "type": "boolean",
+                    "description": "whether or not to calculate crosslink access times and use them in simulation",
+                    "default" : true
+                },
+                "all_sats_same_time_system": {
+                    "type": "boolean",
+                    "description": "If true, orbits will be propagated for ALL satellites from start_utc to end_utc",
+                    "default" : true
+                },
+                "matlab_verbose_orbitprop": {
+                    "type": "boolean",
+                    "description": "whether or not to have verbose output when running matlab orbit prop calcs scripts",
+                    "default" : false
+                }
+            }
+        }
+    }
+}

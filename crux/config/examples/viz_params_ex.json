@@ -1,4 +1,4 @@
 {
     "version": "0.1",
-    "orbit_time_precision": 500.0
+    "orbit_time_precision_s": 500.0
 }

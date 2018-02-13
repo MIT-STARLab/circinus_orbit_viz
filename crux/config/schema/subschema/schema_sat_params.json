@@ -1,0 +1,20 @@
+{
+    "version": "0.1",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Sat params",
+    "description": "General parameters for satellites in this scenario",
+    "type": "object",
+    "properties": {
+        "scenario_params": {
+            "type": "object",
+            "required":["num_satellites"],
+            "additionalProperties": false,
+            "properties": {
+                "num_satellites": {
+                    "type": "integer",
+                    "description": "number of satellites in this scenario",
+                }
+            }
+        }
+    }
+}
