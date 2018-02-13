@@ -190,3 +190,6 @@ This code is meant to be run as a component within a Crux pipeline. That means i
 
    Contain storyboard files used for scripting time-related actions in a visualization ( use for example for making movies)
 
+## Work In Progress
+
+This is still a work in progress and is yet to be tested with the full Crux pipeline. More work to be done!
