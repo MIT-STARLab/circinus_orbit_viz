@@ -64,7 +64,7 @@ Note that you can't use HTTPS with the MIT enterprise github. See [this page](ht
 
 You should now be set up to run the visualization code!
 
-FYI about the submodule:
+### FYI About Submodules
 
 #### CSTAR
 
@@ -87,16 +87,6 @@ OrbitViz has a reference to a particular commit of the submodules, the code snap
 $ git submodule update
 ```
 
-### 3. Look at all the pretty visualizationzzz
-
-The Cesium files are provided by a webserver (hence the "node server.js" command), but the actual rendering is done in a web browser. So after you start up the server again (see section 1), open a web browser! I strongly recommend you use Google Chrome. I won't give any guarantees of functionality in other browsers.
-
-So open the browser and navigate to: [http://localhost:8080/Apps/OrbitViz/runner.html](http://localhost:8080/Apps/OrbitViz/runner.html)
-
-The visualization should start running immediately. It should look something like the below.
-
-![Viz image](viz_shot.png)
-
 
 ## Execution
 
@@ -104,7 +94,16 @@ TODO: this needs an update when the crux pipeline is more fully baked
 
 ### 1. Open The Visualization In A Browser
 
-Open [http://localhost:8080/Apps/OrbitViz/runner.html](http://localhost:8080/Apps/OrbitViz/runner.html) in a browser.  If you have not yet modified `sats_file.czml`, this should display a default visualization of two satellites over a few hour period.
+The Cesium files are provided by a webserver (hence the "node server.js" command), but the actual rendering is done in a web browser. So after you start up the server again (see section 1), open a web browser! I strongly recommend you use Google Chrome. I won't give any guarantees of functionality in other browsers.
+
+So open the browser and navigate to: [http://localhost:8080/Apps/OrbitViz/runner.html](http://localhost:8080/Apps/OrbitViz/runner.html)
+
+The visualization should start running immediately.  If you have not yet modified `sats_file.czml`, this should display a default visualization of two satellites over a few hour period. 
+
+Here is an example of what a more complex visualization looks like:
+
+![Viz image](viz_example.png)
+
 
 <!-- ### 1. Clone the Comm_constellation_MDO repo
 
