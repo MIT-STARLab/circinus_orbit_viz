@@ -194,7 +194,7 @@ class PipelineRunner:
 		else:
 			raise NotImplementedError
 
-		if orbit_prop_inputs['version'] == "0.1":
+		if orbit_prop_inputs['version'] == "0.2":
 			scenario_params = orbit_prop_inputs['scenario_params']
 
 			# add ground stations to czml file
@@ -237,10 +237,11 @@ if __name__ == "__main__":
 
 	pr = PipelineRunner()
 
-	with open(os.path.join(REPO_BASE,'crux/config/examples/orbit_prop_inputs_ex.json'),'r') as f:
+	# with open(os.path.join(REPO_BASE,'crux/config/examples/orbit_prop_inputs_ex.json'),'r') as f:
+	with open(os.path.join(REPO_BASE,'crux/config/examples/orbit_prop_inputs_ex_small.json'),'r') as f:
 		orbit_prop_inputs = json.load(f)
 
-	with open(os.path.join(REPO_BASE,'crux/config/examples/prop_data_2.json'),'r') as f:
+	with open(os.path.join(REPO_BASE,'crux/config/examples/orbit_prop_data_ex_small.json'),'r') as f:
 	# with open(os.path.join(REPO_BASE,'crux/config/examples/orbit_prop_data_ex.json'),'r') as f:
 		orbit_prop_data = json.load(f)
 
