@@ -53,8 +53,9 @@ class PipelineRunner:
             cz.make_doc_header(name,scenario_params['start_utc'],scenario_params['end_utc'])
 
             # add satellites to czml file
-            for elem in sat_orbit_data:
+            for sat_indx,elem in enumerate ( sat_orbit_data):
                 cz.make_sat(
+                    sat_id = sat_indx,
                     name=sat_name_prefix+str(elem['sat_indx']),
                     name_pretty='sat'+str(elem['sat_indx']),
                     start_utc=scenario_params['start_utc'],
@@ -74,6 +75,8 @@ class PipelineRunner:
         gs_names= None
         start_utc_dt = None
         end_utc_dt = None
+        sat_ids = None
+        gs_ids = None
 
         if orbit_prop_inputs['version'] == "0.2":
             scenario_params = orbit_prop_inputs['scenario_params']
@@ -88,9 +91,14 @@ class PipelineRunner:
             gs_params = orbit_prop_inputs['gs_params']
             gs_names = [gs['name'] for gs in gs_params['stations']]
 
+            #  todo: currently satellite IDs  are just in their lexicographic order. Is there a better way to do this?
+            sat_ids = [indx for indx in range (num_sats)]
+            gs_ids = [station ['id'] for station in gs_params['stations']]
+
             for station in gs_params['stations']:
 
                 cz.make_gs(
+                    gs_id=station ['id'],
                     name=station['name'],
                     name_pretty=station['name_pretty'],
                     start_utc=scenario_params['start_utc'],
@@ -105,6 +113,7 @@ class PipelineRunner:
 
             for targ in obs_params['targets']:
                 cz.make_obs_target(
+                    targ_id=targ ['id'],
                     name=targ['name'],
                     name_pretty=targ['name_pretty'],
                     start_utc=scenario_params['start_utc'],
@@ -119,19 +128,26 @@ class PipelineRunner:
         if viz_sat_history['version'] == "0.1":
             viz_data = viz_sat_history['viz_data']
 
-            for station in gs_params['stations']:
+            cz.make_downlinks(
+                viz_data['dlnk_times_flat'],
+                viz_data['dlnk_partners'],
+                num_sats,
+                num_gs,
+                gs_names,
+                sat_ids,
+                gs_ids,
+                start_utc_dt,
+                end_utc_dt
+            )
 
-                cz.make_downlinks(
-                    viz_data['dlnk_times_flat'],
-                    viz_data['dlnk_partners'],
-                    num_sats,
-                    num_gs,
-                    gs_names,
-                    sat_name_prefix,
-                    start_utc_dt,
-                    end_utc_dt
-                )
-
+            cz.make_crosslinks(
+                viz_data['xlnk_times_flat'],
+                viz_data['xlnk_partners'],
+                num_sats,
+                sat_ids,
+                start_utc_dt,
+                end_utc_dt
+            )
         else:
             raise NotImplementedError
 

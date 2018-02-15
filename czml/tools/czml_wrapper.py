@@ -23,7 +23,8 @@ class CzmlWrapper:
     SAT_PROTO = pkg_resources.resource_filename(package_name, '/'.join(('prototypes','satellite_proto.json')))
     PROTO_DEFS = pkg_resources.resource_filename(package_name, '/'.join(('prototypes','definitions.json')))
 
-    czml_dict_keys = ['header','ground stations','observations','satellites','downlinks']
+
+    czml_dict_keys = ['header','ground stations','observations','satellites','downlinks','crosslinks']
 
     def __init__(self):
         with open(self.DOC_HEADER_PROTO,'r') as f:
@@ -75,6 +76,7 @@ class CzmlWrapper:
         return orbit_t_r_flat
 
     def make_sat(self,
+                 sat_id,
                  name,
                  name_pretty,
                  start_utc="2017-03-15T10:00:00Z",
@@ -89,7 +91,7 @@ class CzmlWrapper:
         if self.SAT_PROTO_JSON['PROTO_VERSION'] == '0.1':
             the_json = copy.deepcopy(self.SAT_PROTO_JSON)
             del the_json['PROTO_VERSION']
-            the_json['id'] = "Satellite/"+name
+            the_json['id'] = self.PROTO_DEFS['sat_ref_pre']+str(sat_id)
             the_json['name'] = name
             the_json['label']['text'] = name_pretty
             the_json['availability'] = start_utc+'/'+end_utc
@@ -107,6 +109,7 @@ class CzmlWrapper:
             raise NotImplementedError
 
     def make_gs(self,
+                 gs_id,
                  name,
                  name_pretty,
                  start_utc="2017-03-15T10:00:00Z",
@@ -119,7 +122,7 @@ class CzmlWrapper:
         if self.GS_PROTO_JSON['PROTO_VERSION'] == '0.1':
             the_json = copy.deepcopy(self.GS_PROTO_JSON)
             del the_json['PROTO_VERSION']
-            the_json['id'] = "Facility/"+name
+            the_json['id'] = self.PROTO_DEFS['gs_ref_pre']+str (gs_id)
             the_json['name'] = name
             the_json['label']['text'] = name_pretty
             the_json['availability'] = start_utc+'/'+end_utc
@@ -134,6 +137,7 @@ class CzmlWrapper:
             raise NotImplementedError
 
     def make_obs_target(self,
+             targ_id,
              name,
              name_pretty,
              start_utc="2017-03-15T10:00:00Z",
@@ -146,7 +150,7 @@ class CzmlWrapper:
         if self.OBS_PROTO_JSON['PROTO_VERSION'] == '0.1':
             the_json = copy.deepcopy(self.OBS_PROTO_JSON)
             del the_json['PROTO_VERSION']
-            the_json['id'] = "Target/"+name
+            the_json['id'] = self.PROTO_DEFS['obs_target_ref_pre']+str (targ_id)
             the_json['name'] = name
             the_json['label']['text'] = name_pretty
             the_json['availability'] = start_utc+'/'+end_utc
@@ -169,6 +173,28 @@ class CzmlWrapper:
         See https://oneau.wordpress.com/2011/08/30/jdcal/
         jdcal.jd2gcal(jdcal.MJD_0,57827.5774306)
         (have to pass both base date of MJD and the MJD to this function)
+
+        times_mat should look like:
+            "xlnk_times_flat": [
+            [
+                [
+                    58136.48652222222,
+                    58136.48767962963
+                ],
+                [
+                    58136.487968981484,
+                    58136.489126388886
+                ],
+                ...
+            ]
+
+        activity_partners_mat should look like:
+            "xlnk_partners": [
+            [
+                2,
+                2,
+                ...
+            ]
 
         :param times_mat: [description]
         :type times_mat: [type]
@@ -225,7 +251,8 @@ class CzmlWrapper:
             num_sats,
             num_gs,
             gs_names,
-            sat_name_prefix,
+            sat_ids,
+            gs_ids,
             start_utc,
             end_utc):
 
@@ -244,16 +271,50 @@ class CzmlWrapper:
                     dlnk_winds_sat = dlink_winds[sat_indx][gs_indx]
 
                     # print dlnks_winds
-                    ID = 'Dlnk/Sat'+str(sat_indx+1)+'-GS'+str(gs_indx+1)
+                    ID = 'Dlnk/Sat'+str(sat_ids[sat_indx])+'-GS'+str(gs_ids[gs_indx])
 
-                    ref1 =  self.PROTO_DEFS['sat_pos_ref_pre']+ sat_name_prefix +str(sat_indx)+self.PROTO_DEFS['pos_ref_post']
+                    ref1 =  self.PROTO_DEFS['sat_ref_pre'] +str(sat_ids[sat_indx])+self.PROTO_DEFS['pos_ref_post']
                     gs_name = gs_names[gs_indx]
-                    ref2 = self.PROTO_DEFS['gs_pos_ref_pre']+gs_name+self.PROTO_DEFS['pos_ref_post']
+                    ref2 = self.PROTO_DEFS['gs_ref_pre']+str(gs_ids[gs_indx])+self.PROTO_DEFS['pos_ref_post']
                     czml_content.append(cztl.createLinkPacket(ID,name,start_utc,end_utc, polyline_show_times = dlnk_winds_sat, color=dlnk_color,reference1=ref1,reference2=ref2))
 
                     i+=1
 
             self.czml_dict['downlinks'] = czml_content
+
+    def make_crosslinks(self,
+            xlnk_times_flat,
+            xlnk_partners,
+            num_sats,
+            sat_ids,
+            start_utc,
+            end_utc):
+
+        xlnk_winds =  self.convert_flat_times_to_windows(xlnk_times_flat, num_sats, xlnk_partners, num_sats)
+
+        if len(xlnk_winds) > 0:
+            czml_content = []
+
+            xlnk_color = [255,0,0,255]
+            i = 0
+            for sat_indx in range(num_sats):
+                for other_sat_indx in range(sat_indx+1,num_sats):
+                    name = 'crosslink '+str(i)
+
+                    xlnk_winds_sat = xlnk_winds[sat_indx][other_sat_indx]
+
+                    # print dlnks_winds
+                    ID = 'Xlnk/Sat'+str(sat_ids[sat_indx])+'-Sat'+str(sat_ids[other_sat_indx])
+
+                    ref1 =  self.PROTO_DEFS['sat_ref_pre'] +str(sat_ids[sat_indx])+self.PROTO_DEFS['pos_ref_post']
+                    ref2 = self.PROTO_DEFS['sat_ref_pre']+str(sat_ids[other_sat_indx])+self.PROTO_DEFS['pos_ref_post']
+
+                    czml_content.append(cztl.createLinkPacket(ID,name, start_utc, end_utc, polyline_show_times = xlnk_winds_sat, color=xlnk_color,reference1=ref1,reference2=ref2))
+
+                    i+=1
+
+
+            self.czml_dict['crosslinks'] = czml_content
 
 
     def get_czml( self,key_list=None):
