@@ -1,0 +1,6 @@
+{
+    "sat_pos_ref_pre": "Satellite/",
+    "pos_ref_post": "#position",
+    "orient_ref_post": "#orientation",
+    "gs_pos_ref_pre": "Facility/"
+}
