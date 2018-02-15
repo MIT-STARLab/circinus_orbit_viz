@@ -11,7 +11,7 @@ import json
 from datetime import datetime
 
 
-
+import time_tools as tt
 import sys
 sys.path.append ('..')
 from czml import CzmlWrapper
@@ -34,8 +34,10 @@ class PipelineRunner:
         orbit_prop_data = data['orbit_prop_data']
         orbit_prop_inputs = data['orbit_prop_inputs']
         viz_params = data['viz_params']
+        viz_sat_history = data['viz_sat_history']
 
-        the_czml = []
+        sat_name_prefix = "sat"
+
         cz = CzmlWrapper()
 
         if viz_params['version'] == "0.1":
@@ -48,63 +50,92 @@ class PipelineRunner:
 
             # add czml file document header
             name = "sats_file_"+datetime.utcnow().isoformat()
-            the_czml.append(
-                cz.make_doc_header(name,scenario_params['start_utc'],scenario_params['end_utc'])
-            )
+            cz.make_doc_header(name,scenario_params['start_utc'],scenario_params['end_utc'])
 
             # add satellites to czml file
             for elem in sat_orbit_data:
-                the_czml.append(
-                    cz.make_sat(
-                        name='sat'+str(elem['sat_indx']),
-                        name_pretty='sat'+str(elem['sat_indx']),
-                        start_utc=scenario_params['start_utc'],
-                        end_utc=scenario_params['end_utc'],
-                        orbit_t_r= elem['time_s_pos_km'],
-                        orbit_epoch= scenario_params['start_utc'],
-                        orbit_time_precision=orbit_time_precision,
-                        orbit_pos_units_mult = 1000
-                ))
+                cz.make_sat(
+                    name=sat_name_prefix+str(elem['sat_indx']),
+                    name_pretty='sat'+str(elem['sat_indx']),
+                    start_utc=scenario_params['start_utc'],
+                    end_utc=scenario_params['end_utc'],
+                    orbit_t_r= elem['time_s_pos_km'],
+                    orbit_epoch= scenario_params['start_utc'],
+                    orbit_time_precision=orbit_time_precision,
+                    orbit_pos_units_mult = 1000
+                )
         else:
             raise NotImplementedError
+
+        # initializing these here so they will be in scope for use down below
+        num_sats = None
+        num_gs = None
+        num_targets = None
+        gs_names= None
+        start_utc_dt = None
+        end_utc_dt = None
 
         if orbit_prop_inputs['version'] == "0.2":
             scenario_params = orbit_prop_inputs['scenario_params']
 
+            start_utc_dt =tt.iso_string_to_dt (scenario_params['start_utc'] ) 
+            end_utc_dt = tt.iso_string_to_dt (scenario_params['end_utc'] ) 
+            num_sats = orbit_prop_inputs['sat_params']['num_satellites']
+            num_gs = orbit_prop_inputs['gs_params']['num_stations']
+            num_targets = orbit_prop_inputs['obs_params']['num_targets']
+
             # add ground stations to czml file
             gs_params = orbit_prop_inputs['gs_params']
+            gs_names = [gs['name'] for gs in gs_params['stations']]
 
             for station in gs_params['stations']:
 
-                the_czml.append(
-                    cz.make_gs(
-                        name=station['name'],
-                        name_pretty=station['name_pretty'],
-                        start_utc=scenario_params['start_utc'],
-                        end_utc=scenario_params['end_utc'],
-                        lat_deg=station['latitude_deg'],
-                        lon_deg=station['longitude_deg'],
-                        h_m=station['height_m']
-                ))
+                cz.make_gs(
+                    name=station['name'],
+                    name_pretty=station['name_pretty'],
+                    start_utc=scenario_params['start_utc'],
+                    end_utc=scenario_params['end_utc'],
+                    lat_deg=station['latitude_deg'],
+                    lon_deg=station['longitude_deg'],
+                    h_m=station['height_m']
+                )
 
             # add observation targets to czml file
             obs_params = orbit_prop_inputs['obs_params']
 
             for targ in obs_params['targets']:
-                the_czml.append(
-                    cz.make_obs(
-                        name=targ['name'],
-                        name_pretty=targ['name_pretty'],
-                        start_utc=scenario_params['start_utc'],
-                        end_utc=scenario_params['end_utc'],
-                        lat_deg=targ['latitude_deg'],
-                        lon_deg=targ['longitude_deg'],
-                        h_m=targ['height_m']
-                    ))
+                cz.make_obs_target(
+                    name=targ['name'],
+                    name_pretty=targ['name_pretty'],
+                    start_utc=scenario_params['start_utc'],
+                    end_utc=scenario_params['end_utc'],
+                    lat_deg=targ['latitude_deg'],
+                    lon_deg=targ['longitude_deg'],
+                    h_m=targ['height_m']
+                )
         else:
             raise NotImplementedError
 
-        return the_czml
+        if viz_sat_history['version'] == "0.1":
+            viz_data = viz_sat_history['viz_data']
+
+            for station in gs_params['stations']:
+
+                cz.make_downlinks(
+                    viz_data['dlnk_times_flat'],
+                    viz_data['dlnk_partners'],
+                    num_sats,
+                    num_gs,
+                    gs_names,
+                    sat_name_prefix,
+                    start_utc_dt,
+                    end_utc_dt
+                )
+
+        else:
+            raise NotImplementedError
+
+        return cz.get_czml ()
 
 
 if __name__ == "__main__":
