@@ -24,7 +24,7 @@ class CzmlWrapper:
     PROTO_DEFS = pkg_resources.resource_filename(package_name, '/'.join(('prototypes','definitions.json')))
 
 
-    czml_dict_keys = ['header','ground stations','targets','satellites','downlinks','crosslinks','observations']
+    czml_dict_keys = ['header','ground stations','targets','satellites','downlinks','crosslinks','observations', 'downlink_rates','crosslink_rates']
 
     def __init__(self):
         with open(self.DOC_HEADER_PROTO,'r') as f:
@@ -287,11 +287,11 @@ class CzmlWrapper:
 
                     dlnk_winds_sat = dlink_winds[sat_indx][gs_indx]
 
-                    # print dlnks_winds
+                    # aux renderer datarate.js depends on "Dlnk"
+                    # todo:  make this not hardcoded
                     ID = 'Dlnk/Sat'+str(sat_ids[sat_indx])+'-GS'+str(gs_ids[gs_indx])
 
                     ref1 =  self.PROTO_DEFS['sat_ref_pre'] +str(sat_ids[sat_indx])+self.PROTO_DEFS['pos_ref_post']
-                    gs_name = gs_names[gs_indx]
                     ref2 = self.PROTO_DEFS['gs_ref_pre']+str(gs_ids[gs_indx])+self.PROTO_DEFS['pos_ref_post']
                     czml_content.append(cztl.createLinkPacket(ID,name,start_utc,end_utc, polyline_show_times = dlnk_winds_sat, color=dlnk_color,reference1=ref1,reference2=ref2))
 
@@ -320,7 +320,8 @@ class CzmlWrapper:
 
                     xlnk_winds_sat = xlnk_winds[sat_indx][other_sat_indx]
 
-                    # print dlnks_winds
+                    # aux renderer datarate.js depends on "Dlnk"
+                    # todo:  make this not hardcoded
                     ID = 'Xlnk/Sat'+str(sat_ids[sat_indx])+'-Sat'+str(sat_ids[other_sat_indx])
 
                     ref1 =  self.PROTO_DEFS['sat_ref_pre'] +str(sat_ids[sat_indx])+self.PROTO_DEFS['pos_ref_post']
@@ -361,6 +362,77 @@ class CzmlWrapper:
 
             self.czml_dict['observations'] = czml_content
 
+    def make_downlink_rates(self,
+            dlnk_rate_history,
+            history_epoch,
+            num_sats,
+            num_gs,
+            sat_ids,
+            gs_ids,
+            end_utc):
+
+        
+        if len(dlnk_rate_history) > 0:
+            czml_content = []
+
+            filter_seconds_beg=0
+            filter_seconds_end= (end_utc- history_epoch).total_seconds ()
+
+            i = 0
+            for sat_indx in range(num_sats):
+                for gs_indx in range(num_gs):
+
+                    name = 'dlnk_rate_history for downlink '+str(i)+', satellite '+str(sat_ids[sat_indx])+' and GS '+str(gs_ids[gs_indx])
+
+                    # needs to have same ID as original downlink to work
+                    ID = 'Dlnk/Sat'+str(sat_ids[sat_indx])+'-GS'+str(gs_ids[gs_indx])
+
+                    if len (dlnk_rate_history[sat_indx][gs_indx]) >0:
+                        pkt = cztl.createSampledPropertyHistory(ID,name, 'datarate',history_epoch, dlnk_rate_history[sat_indx][gs_indx], filter_seconds_beg,filter_seconds_end)
+
+                        # attach a proxy position for displaying data rate text
+                        pkt['position_proxy'] = {"reference": self.PROTO_DEFS['gs_ref_pre']+str(gs_ids[gs_indx])+self.PROTO_DEFS['pos_ref_post']}
+
+                        czml_content.append(pkt)
+
+                    i+=1
+
+            self.czml_dict['downlink_rates'] = czml_content
+
+    def make_crosslink_rates(self,
+            xlnk_rate_history,
+            history_epoch,
+            num_sats,
+            sat_ids,
+            end_utc):
+
+        
+        if len(xlnk_rate_history) > 0:
+            czml_content = []
+
+            filter_seconds_beg=0
+            filter_seconds_end= (end_utc- history_epoch).total_seconds ()
+
+            i = 0
+            for sat_indx in range(num_sats):
+                for  other_sat_indx in range(sat_indx+1,num_sats):
+
+                    name = 'xlnk_rate_history for crosslink '+str(i)+', satellite '+str(sat_ids[sat_indx])+' and xsat '+str(sat_ids[sat_indx])
+
+                    # needs to have same ID as original downlink to work
+                    ID = 'Xlnk/Sat'+str(sat_ids[sat_indx])+'-Sat'+str(sat_ids[ other_sat_indx])
+
+                    if len (xlnk_rate_history[sat_indx][other_sat_indx]) >0:
+                        pkt = cztl.createSampledPropertyHistory(ID,name, 'datarate',history_epoch, xlnk_rate_history[sat_indx][other_sat_indx], filter_seconds_beg,filter_seconds_end)
+
+                        # attach a proxy position for displaying data rate text
+                        pkt['position_proxy'] = {"reference": self.PROTO_DEFS['sat_ref_pre'] +str(sat_ids[sat_indx])+self.PROTO_DEFS['pos_ref_post']}
+
+                        czml_content.append(pkt)   
+
+                    i+=1
+
+            self.czml_dict['crosslink_rates'] = czml_content
 
     def get_czml( self,key_list=None):
 
@@ -389,6 +461,40 @@ class CzmlWrapper:
 
         for callback in self.viz_objects_callbacks.keys ():
             the_json['callbacks'][callback] = self.viz_objects_callbacks[callback]
+
+        return the_json
+
+    def get_renderer_description(self,renderers_list,renderer_mapping,num_sats,num_gs,sat_ids,gs_ids,dlnk_rate_history,xlnk_rate_history):
+        the_json = OrderedDict()
+
+        the_json['renderers'] = renderers_list
+
+        renderMapping = OrderedDict()
+
+        if 'Satellite' in renderer_mapping.keys():
+            for sat_indx in range(num_sats):
+                renderMapping[self.PROTO_DEFS['sat_ref_pre']+str(sat_ids[sat_indx])] = renderer_mapping['Satellite']
+
+        if 'Facility' in renderer_mapping.keys():
+            for gs_indx in  range (num_gs):
+                renderMapping[self.PROTO_DEFS['gs_ref_pre']+str (gs_ids[gs_indx])] = renderer_mapping['Facility']
+
+        # aux renderer datarate.js depends on "Dlnk"  and  "Xlnk"
+        # todo:  make this not hardcoded
+
+        if 'Dlnk' in renderer_mapping.keys() and len(dlnk_rate_history)>0:
+            for sat_indx in range(num_sats):
+                for gs_indx in  range (num_gs):
+                    if len (dlnk_rate_history[sat_indx][gs_indx]) >0:
+                        renderMapping['Dlnk/Sat'+str(sat_ids[sat_indx])+'-GS'+str(gs_ids[gs_indx])] = renderer_mapping['Dlnk']
+
+        if 'Xlnk' in renderer_mapping.keys() and len(xlnk_rate_history)>0:
+            for sat_indx in range(num_sats):
+                for  other_sat_indx in range(sat_indx+1,num_sats):
+                    if len (xlnk_rate_history[sat_indx][other_sat_indx]) > 0:
+                        renderMapping['Xlnk/Sat'+str(sat_ids[sat_indx])+'-Sat'+str(sat_ids[other_sat_indx])] = renderer_mapping['Xlnk']
+
+        the_json['renderMapping'] = renderMapping
 
         return the_json
         

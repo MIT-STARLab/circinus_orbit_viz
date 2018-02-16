@@ -4,5 +4,23 @@
     "satellite_callbacks": [
         "orientation",
         "drawNadirRF"
-    ]
+    ],
+    "available_renderers":  {
+        "Test": "/Apps/OrbitViz/renderers/test.js",
+        "DataVol": "/Apps/OrbitViz/renderers/datavol.js",
+        "GSavail": "/Apps/OrbitViz/renderers/gsavail.js",
+        "Battery": "/Apps/OrbitViz/renderers/battery.js",
+        "Eclipses": "/Apps/OrbitViz/renderers/eclipses.js",
+        "DataRate": "/Apps/OrbitViz/renderers/datarate.js"
+    },
+    "available_renderer_mapping": {
+        "Satellite":["DataVol","Battery","Eclipses", "Test"],
+        "Facility":["GSavail"],
+        "Dlnk": ["DataRate"],
+        "Xlnk": ["DataRate"]
+    },
+    "selected_renderer_mapping": {
+        "Dlnk": ["DataRate"],
+        "Xlnk": ["DataRate"]
+    }
 }

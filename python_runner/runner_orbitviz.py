@@ -41,9 +41,13 @@ class PipelineRunner:
         cz = CzmlWrapper()
 
         satellite_callbacks = None
+        renderers_list =  None
+        renderer_mapping =  None
         if viz_params['version'] == "0.1":
             orbit_time_precision = viz_params['orbit_time_precision_s']
             satellite_callbacks = viz_params['satellite_callbacks']
+            renderers_list =  [rndr for rndr in viz_params['available_renderers'].values()]
+            renderer_mapping =  viz_params['selected_renderer_mapping']
 
         if orbit_prop_data['version'] == "0.1":
 
@@ -128,6 +132,7 @@ class PipelineRunner:
         else:
             raise NotImplementedError
 
+        renderer_description= None
         if viz_sat_history['version'] == "0.1":
             viz_data = viz_sat_history['viz_data']
 
@@ -159,10 +164,44 @@ class PipelineRunner:
                 start_utc_dt,
                 end_utc_dt
             )
+
+            dlnk_rate_history_epoch_dt= tt.iso_string_to_dt (viz_data['dlnk_rate_history_epoch'])
+            cz.make_downlink_rates(
+                viz_data['dlnk_rate_history'],
+                dlnk_rate_history_epoch_dt,
+                num_sats,
+                num_gs,
+                sat_ids,
+                gs_ids,
+                end_utc_dt
+            )
+
+            xlnk_rate_history_epoch_dt= tt.iso_string_to_dt (viz_data['xlnk_rate_history_epoch'])
+            cz.make_crosslink_rates(
+                viz_data['xlnk_rate_history'],
+                xlnk_rate_history_epoch_dt,
+                num_sats,
+                sat_ids,
+                end_utc_dt
+            )
+
+            renderer_description = cz.get_renderer_description(
+                renderers_list,
+                renderer_mapping,
+                num_sats,
+                num_gs,
+                sat_ids,
+                gs_ids,
+                viz_data['dlnk_rate_history'],
+                viz_data['xlnk_rate_history']
+            )
+
         else:
             raise NotImplementedError
 
-        return cz.get_czml(), cz.get_viz_objects ()
+
+
+        return cz.get_czml(), cz.get_viz_objects (), renderer_description
 
 
 if __name__ == "__main__":
@@ -198,5 +237,7 @@ if __name__ == "__main__":
         json.dump(output [0],f)
     with open('../app_data_files/viz_objects.json','w') as f:
         json.dump(output [1],f)
+    with open('../renderers/description.json','w') as f:
+        json.dump(output [2],f)
 
     print('run time: %f'%(b-a))
