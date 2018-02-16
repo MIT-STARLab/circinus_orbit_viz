@@ -40,8 +40,10 @@ class PipelineRunner:
 
         cz = CzmlWrapper()
 
+        satellite_callbacks = None
         if viz_params['version'] == "0.1":
             orbit_time_precision = viz_params['orbit_time_precision_s']
+            satellite_callbacks = viz_params['satellite_callbacks']
 
         if orbit_prop_data['version'] == "0.1":
 
@@ -63,7 +65,8 @@ class PipelineRunner:
                     orbit_t_r= elem['time_s_pos_km'],
                     orbit_epoch= scenario_params['start_utc'],
                     orbit_time_precision=orbit_time_precision,
-                    orbit_pos_units_mult = 1000
+                    orbit_pos_units_mult = 1000,
+                    callbacks =satellite_callbacks
                 )
         else:
             raise NotImplementedError
@@ -148,10 +151,18 @@ class PipelineRunner:
                 start_utc_dt,
                 end_utc_dt
             )
+
+            cz.make_observations(
+                viz_data['obs_times_flat'],
+                num_sats,
+                sat_ids,
+                start_utc_dt,
+                end_utc_dt
+            )
         else:
             raise NotImplementedError
 
-        return cz.get_czml ()
+        return cz.get_czml(), cz.get_viz_objects ()
 
 
 if __name__ == "__main__":
@@ -184,6 +195,8 @@ if __name__ == "__main__":
     b = time.time()
 
     with open('../app_data_files/sats_file.czml','w') as f:
-        json.dump(output,f)
+        json.dump(output [0],f)
+    with open('../app_data_files/viz_objects.json','w') as f:
+        json.dump(output [1],f)
 
     print('run time: %f'%(b-a))
