@@ -4,7 +4,7 @@ import json
 from collections import OrderedDict
 import copy
 import math
-import datetime
+from datetime import datetime
 
 import jdcal
 
@@ -24,7 +24,7 @@ class CzmlWrapper:
     PROTO_DEFS = pkg_resources.resource_filename(package_name, '/'.join(('prototypes','definitions.json')))
 
 
-    czml_dict_keys = ['header','ground stations','observations','satellites','downlinks','crosslinks']
+    czml_dict_keys = ['header','ground stations','targets','satellites','downlinks','crosslinks','observations']
 
     def __init__(self):
         with open(self.DOC_HEADER_PROTO,'r') as f:
@@ -39,6 +39,15 @@ class CzmlWrapper:
             self.PROTO_DEFS = json.load(f)
 
         self.czml_dict = {key: None for key in  self.czml_dict_keys}
+
+        self.viz_objects_callbacks=  {}
+
+        self.json_metadata = {
+            "simulation_output_updated": None,
+            "visualization_output_updated": str (datetime.utcnow ())
+        }
+
+        # self.renderers = renderers
 
     def make_doc_header(self,
                  name,
@@ -86,12 +95,14 @@ class CzmlWrapper:
                  orbit_t_r=[],
                  orbit_epoch="2017-03-15T10:00:00Z",
                  orbit_time_precision=1.0,
-                 orbit_pos_units_mult=1):
+                 orbit_pos_units_mult=1,
+                 callbacks= ['orientation','drawNadirRF']):
 
+        sat_name =self.PROTO_DEFS['sat_ref_pre']+str(sat_id)
         if self.SAT_PROTO_JSON['PROTO_VERSION'] == '0.1':
             the_json = copy.deepcopy(self.SAT_PROTO_JSON)
             del the_json['PROTO_VERSION']
-            the_json['id'] = self.PROTO_DEFS['sat_ref_pre']+str(sat_id)
+            the_json['id'] = sat_name
             the_json['name'] = name
             the_json['label']['text'] = name_pretty
             the_json['availability'] = start_utc+'/'+end_utc
@@ -107,6 +118,12 @@ class CzmlWrapper:
 
         else:
             raise NotImplementedError
+
+        for callback  in callbacks:
+            if not callback  in self.viz_objects_callbacks.keys ():
+                self.viz_objects_callbacks[callback] = []
+            self.viz_objects_callbacks[callback].append (sat_name)
+
 
     def make_gs(self,
                  gs_id,
@@ -157,9 +174,9 @@ class CzmlWrapper:
             the_json['description'] = "<!--HTML-->\\r\\n<p>"+ description +"</p>"
             the_json['position']['cartographicDegrees'] = [lon_deg,lat_deg,h_m]
 
-            if self.czml_dict['observations'] is None:
-                self.czml_dict['observations'] = []
-            self.czml_dict['observations'].append(the_json)
+            if self.czml_dict['targets'] is None:
+                self.czml_dict['targets'] = []
+            self.czml_dict['targets'].append(the_json)
 
         else:
             raise NotImplementedError
@@ -233,8 +250,8 @@ class CzmlWrapper:
                     end_time_hours = math.floor(end_time[3]*24)
                     end_time_minutes = math.floor((end_time[3]*24-end_time_hours) * 60)
                     end_time_seconds = math.floor(((end_time[3]*24-end_time_hours) * 60 - end_time_minutes) * 60)
-                    start_time_datetime = datetime.datetime(start_time[0],start_time[1],start_time[2],int(start_time_hours),int(start_time_minutes),int(start_time_seconds))
-                    end_time_datetime = datetime.datetime(end_time[0],end_time[1],end_time[2],int(end_time_hours),int(end_time_minutes),int(end_time_seconds))
+                    start_time_datetime = datetime(start_time[0],start_time[1],start_time[2],int(start_time_hours),int(start_time_minutes),int(start_time_seconds))
+                    end_time_datetime = datetime(end_time[0],end_time[1],end_time[2],int(end_time_hours),int(end_time_minutes),int(end_time_seconds))
 
                     if activity_partners_mat:
                         activity_partner_number = int (activity_partners_mat[row_indx][times_indx]) 
@@ -316,6 +333,34 @@ class CzmlWrapper:
 
             self.czml_dict['crosslinks'] = czml_content
 
+    def make_observations(self,
+            obs_times_flat,
+            num_sats,
+            sat_ids,
+            start_utc,
+            end_utc):
+
+        obs_winds =  self.convert_flat_times_to_windows(obs_times_flat, num_sats)
+
+        if len(obs_winds) > 0:
+            czml_content = []
+
+            for sat_indx in range(num_sats):
+                name = 'observation sensor 1 for satellite '+str(sat_ids[sat_indx])
+
+                obs_winds_sat = obs_winds[sat_indx]
+
+                ID = self.PROTO_DEFS['sat_ref_pre']+str(sat_ids[sat_indx])+'/Sensor/Sensor1'
+                parent = self.PROTO_DEFS['sat_ref_pre']+str(sat_ids[sat_indx])
+
+                ref1 =  self.PROTO_DEFS['sat_ref_pre'] +str(sat_ids[sat_indx])+self.PROTO_DEFS['pos_ref_post']
+                ref2 =  self.PROTO_DEFS['sat_ref_pre'] +str(sat_ids[sat_indx])+self.PROTO_DEFS['orient_ref_post']
+
+                czml_content.append(cztl.createObsPacket(ID,name,parent,start_utc,end_utc, sensor_show_times = obs_winds_sat, lateral_color=[0,255,0,51],intersection_color=[0,255,0,255],position_ref=ref1,orientation_ref=ref2))
+
+
+            self.czml_dict['observations'] = czml_content
+
 
     def get_czml( self,key_list=None):
 
@@ -330,5 +375,20 @@ class CzmlWrapper:
             else:
                 raise RuntimeError ('key %s either is not a valid key or has not been initialized')
 
+        #  Have to add the metadata after everything else because it must be placed after the document  prototype
+        the_czml.append(self.json_metadata)
+
         return the_czml
+        
+
+    def get_viz_objects( self,):
+
+        the_json = {}
+        the_json ['metadata']=self.json_metadata
+        the_json['callbacks']={}
+
+        for callback in self.viz_objects_callbacks.keys ():
+            the_json['callbacks'][callback] = self.viz_objects_callbacks[callback]
+
+        return the_json
         

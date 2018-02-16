@@ -1,4 +1,8 @@
 {
     "version": "0.1",
-    "orbit_time_precision_s": 500.0
+    "orbit_time_precision_s": 500.0,
+    "satellite_callbacks": [
+        "orientation",
+        "drawNadirRF"
+    ]
 }
