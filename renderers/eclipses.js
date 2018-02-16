@@ -1,5 +1,5 @@
 /**
- *  Auxillary renderer for satellite data volume
+ *  Auxillary renderer for satellite eclipse times
  *
  * RGB chart: http://www.rapidtables.com/web/color/RGB_Color.htm
  */
