@@ -6,8 +6,7 @@ import copy
 import math
 from datetime import datetime
 
-import jdcal
-
+from circinus_tools  import time_tools as tt
 from circinus_tools.activity_window import ActivityWindow
 from . import czml_text_tools as cztl
 
@@ -186,10 +185,6 @@ class CzmlWrapper:
         
         [description]
 
-        Uses jdcal package for dealing with modified julian dates from MATLAB code. 
-        See https://oneau.wordpress.com/2011/08/30/jdcal/
-        jdcal.jd2gcal(jdcal.MJD_0,57827.5774306)
-        (have to pass both base date of MJD and the MJD to this function)
 
         times_mat should look like:
             "xlnk_times_flat": [
@@ -241,17 +236,9 @@ class CzmlWrapper:
                 # if it's not empty
                 if len (times)  > 0:
 
-                    # do a bunch of crap to convert to datetime. Note that jd2gcal returns year,month,day, FRACTION OF DAY (GOD WHY!?) so we have to convert.
-                    start_time = jdcal.jd2gcal(jdcal.MJD_0,times[0])
-                    end_time = jdcal.jd2gcal(jdcal.MJD_0,times[1])
-                    start_time_hours = math.floor(start_time[3]*24)
-                    start_time_minutes = math.floor((start_time[3]*24-start_time_hours) * 60)
-                    start_time_seconds = math.floor(((start_time[3]*24-start_time_hours) * 60 - start_time_minutes) * 60)
-                    end_time_hours = math.floor(end_time[3]*24)
-                    end_time_minutes = math.floor((end_time[3]*24-end_time_hours) * 60)
-                    end_time_seconds = math.floor(((end_time[3]*24-end_time_hours) * 60 - end_time_minutes) * 60)
-                    start_time_datetime = datetime(start_time[0],start_time[1],start_time[2],int(start_time_hours),int(start_time_minutes),int(start_time_seconds))
-                    end_time_datetime = datetime(end_time[0],end_time[1],end_time[2],int(end_time_hours),int(end_time_minutes),int(end_time_seconds))
+                    #  convert from modified Julian date to date time
+                    start_time_datetime = tt.mjd2datetime (times[0])
+                    end_time_datetime = tt.mjd2datetime (times[1])
 
                     if activity_partners_mat:
                         activity_partner_number = int (activity_partners_mat[row_indx][times_indx]) 

@@ -7,6 +7,11 @@ UNASSIGNED_DT = datetime.strptime('1856-02-22 00:00:00','%Y-%m-%d %H:%M:%S')
 # For use as an effective infinity datetime value
 UNASSIGNED_DT_INF = datetime.strptime('2100-01-01 00:00:00','%Y-%m-%d %H:%M:%S')
 
+## date formats
+MODIFIED_JULIAN_DATE = 0
+
+# todo: move the below stuff elsewhere
+
 obs_routing_preference_Mb=1000  # prefer downlinking up to this much data from a single obs before moving on to the next one
 
 dv_lowest_total_consider_Mb = 100 # If total data volume for a lnk goes below this, don't consider it schedulable
