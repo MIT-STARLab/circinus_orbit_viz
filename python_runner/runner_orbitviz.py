@@ -9,11 +9,10 @@ import time
 import os.path
 import json
 from datetime import datetime
-
-
-import time_tools as tt
 import sys
+
 sys.path.append ('..')
+from circinus_tools  import time_tools as tt
 from czml import CzmlWrapper
 
 REPO_BASE = os.path.abspath(os.pardir)  # os.pardir aka '..'
