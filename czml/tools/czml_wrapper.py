@@ -8,7 +8,7 @@ from datetime import datetime
 
 import jdcal
 
-from  .activity_window import ActivityWindow
+from circinus_tools.activity_window import ActivityWindow
 from . import czml_text_tools as cztl
 
 # should be 'czml', the package name

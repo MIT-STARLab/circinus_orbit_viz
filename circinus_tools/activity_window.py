@@ -46,17 +46,17 @@ class ActivityWindow(object):
         # create a timedelta object from by subtracting two datetimes
         self.duration = end - start
 
-    def printSelf(self):
+    def print_self(self):
         print('ActivityWindow')
         print('start: ' + str(self.start))
         print('end: ' + str(self.end))
         print('duration: ' + str(self.duration))
         print('......')
 
-    def refreshDuration(self):
+    def refresh_duration(self):
         self.duration = self.end - self.start
 
-    def compareWithWindow(self, wind2):
+    def compare_with_window(self, wind2):
         '''
         A seemingly very complicated function that in reality just returns an integer that describes the degree of overlap in two time windows.
 
@@ -147,7 +147,7 @@ class ActivityWindow(object):
 
         return comparison
 
-    def combineWithWindow(self,other_act):
+    def combine_with_window(self,other_act):
         '''
         Note: deprecated
 
