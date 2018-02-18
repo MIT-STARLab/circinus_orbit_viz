@@ -7,5 +7,5 @@
 .idea
 
 #compiled python
-.pyc
+*.pyc
 __pycache__

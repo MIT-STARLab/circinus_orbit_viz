@@ -23,6 +23,7 @@ OUTPUT_JSON_VER = '0.1'
 
 class PipelineRunner:
 
+
     def run(self, data):
         """
         Run orbit propagation pipeline element using the inputs supplied per input.json schema. Formats the high level output json and calls various subcomponents for processing
@@ -48,32 +49,9 @@ class PipelineRunner:
             satellite_callbacks = viz_params['satellite_callbacks']
             renderers_list =  [rndr for rndr in viz_params['available_renderers'].values()]
             renderer_mapping =  viz_params['selected_renderer_mapping']
-
-        if orbit_prop_data['version'] == "0.1":
-
-            scenario_params = orbit_prop_data['scenario_params']
-            sat_orbit_data = orbit_prop_data['sat_orbit_data']
-
-            # add czml file document header
-            name = "sats_file_"+datetime.utcnow().isoformat()
-            cz.make_doc_header(name,scenario_params['start_utc'],scenario_params['end_utc'])
-
-            # add satellites to czml file
-            for sat_indx,elem in enumerate ( sat_orbit_data):
-                cz.make_sat(
-                    sat_id = sat_indx,
-                    name=sat_name_prefix+str(elem['sat_indx']),
-                    name_pretty='sat'+str(elem['sat_indx']),
-                    start_utc=scenario_params['start_utc'],
-                    end_utc=scenario_params['end_utc'],
-                    orbit_t_r= elem['time_s_pos_km'],
-                    orbit_epoch= scenario_params['start_utc'],
-                    orbit_time_precision=orbit_time_precision,
-                    orbit_pos_units_mult = 1000,
-                    callbacks =satellite_callbacks
-                )
         else:
             raise NotImplementedError
+
 
         # initializing these here so they will be in scope for use down below
         num_sats = None
@@ -85,7 +63,7 @@ class PipelineRunner:
         sat_ids = None
         gs_ids = None
 
-        if orbit_prop_inputs['version'] == "0.2":
+        if orbit_prop_inputs['version'] == "0.3":
             scenario_params = orbit_prop_inputs['scenario_params']
 
             start_utc_dt =tt.iso_string_to_dt (scenario_params['start_utc'] ) 
@@ -98,8 +76,8 @@ class PipelineRunner:
             gs_params = orbit_prop_inputs['gs_params']
             gs_names = [gs['name'] for gs in gs_params['stations']]
 
-            #  todo: currently satellite IDs  are just in their lexicographic order. Is there a better way to do this?
-            sat_ids = [indx for indx in range (num_sats)]
+            # todo: should really verify that sat_id_order is correctly formatted
+            sat_ids = orbit_prop_inputs ['sat_params']['sat_id_order']
             gs_ids = [station ['id'] for station in gs_params['stations']]
 
             for station in gs_params['stations']:
@@ -128,6 +106,33 @@ class PipelineRunner:
                     lat_deg=targ['latitude_deg'],
                     lon_deg=targ['longitude_deg'],
                     h_m=targ['height_m']
+                )
+        else:
+            raise NotImplementedError
+
+
+        if orbit_prop_data['version'] == "0.2":
+
+            scenario_params = orbit_prop_data['scenario_params']
+            sat_orbit_data = orbit_prop_data['sat_orbit_data']
+
+            # add czml file document header
+            name = "sats_file_"+datetime.utcnow().isoformat()
+            cz.make_doc_header(name,scenario_params['start_utc'],scenario_params['end_utc'])
+
+            # add satellites to czml file
+            for sat_indx,elem in enumerate ( sat_orbit_data):
+                cz.make_sat(
+                    sat_id = elem['sat_id'],
+                    name=sat_name_prefix+str(elem['sat_id']),
+                    name_pretty='sat'+str(elem['sat_id']),
+                    start_utc=scenario_params['start_utc'],
+                    end_utc=scenario_params['end_utc'],
+                    orbit_t_r= elem['time_s_pos_km'],
+                    orbit_epoch= scenario_params['start_utc'],
+                    orbit_time_precision=orbit_time_precision,
+                    orbit_pos_units_mult = 1000,
+                    callbacks =satellite_callbacks
                 )
         else:
             raise NotImplementedError
@@ -209,17 +214,17 @@ if __name__ == "__main__":
     pr = PipelineRunner()
 
     # with open(os.path.join(REPO_BASE,'crux/config/examples/orbit_prop_inputs_ex.json'),'r') as f:
-    with open(os.path.join(REPO_BASE,'crux/config/examples/orbit_prop_inputs_ex_small.json'),'r') as f:
+    with open(os.path.join(REPO_BASE,'crux/config/examples/orbit_prop_inputs.json'),'r') as f:
         orbit_prop_inputs = json.load(f)
 
-    with open(os.path.join(REPO_BASE,'crux/config/examples/orbit_prop_data_ex_small.json'),'r') as f:
+    with open(os.path.join(REPO_BASE,'crux/config/examples/orbit_prop_data.json'),'r') as f:
     # with open(os.path.join(REPO_BASE,'crux/config/examples/orbit_prop_data_ex.json'),'r') as f:
         orbit_prop_data = json.load(f)
 
     with open(os.path.join(REPO_BASE,'crux/config/examples/viz_params_ex.json'),'r') as f:
         viz_params = json.load(f)
 
-    with open(os.path.join(REPO_BASE,'crux/config/examples/viz_sat_history_ex_small.json'),'r') as f:
+    with open(os.path.join(REPO_BASE,'crux/config/examples/sat_link_history.json'),'r') as f:
         viz_sat_history = json.load(f)
 
     data = {
