@@ -10,6 +10,7 @@ import os.path
 import json
 from datetime import datetime
 import sys
+import argparse
 
 sys.path.append ('..')
 from circinus_tools  import time_tools as tt
@@ -209,11 +210,18 @@ class PipelineRunner:
 
 
 if __name__ == "__main__":
+    ap = argparse.ArgumentParser(description='orbit propagation')
+    ap.add_argument('--prop_inputs_file',
+                    type=str,
+                    default='orbit_prop_inputs.json',
+                    help='specify orbit propagation inputs file')
+
+    args = ap.parse_args()
 
     pr = PipelineRunner()
 
     # with open(os.path.join(REPO_BASE,'crux/config/examples/orbit_prop_inputs_ex.json'),'r') as f:
-    with open(os.path.join(REPO_BASE,'crux/config/examples/orbit_prop_inputs.json'),'r') as f:
+    with open(os.path.join(REPO_BASE,args.prop_inputs_file),'r') as f:
         orbit_prop_inputs = json.load(f)
 
     with open(os.path.join(REPO_BASE,'crux/config/examples/orbit_prop_data.json'),'r') as f:
