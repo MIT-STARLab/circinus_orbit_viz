@@ -12,6 +12,4 @@
 # temp example file
 prop_data_2.json
 
-orbit_prop_data.json
-orbit_prop_inputs.json
-sat_link_history.json
+*.json
