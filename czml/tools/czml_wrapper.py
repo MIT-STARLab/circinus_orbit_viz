@@ -23,7 +23,7 @@ class CzmlWrapper:
     PROTO_DEFS = pkg_resources.resource_filename(package_name, '/'.join(('prototypes','definitions.json')))
 
 
-    czml_dict_keys = ['header','ground stations','targets','satellites','downlinks','crosslinks','observations', 'downlink_rates','crosslink_rates']
+    czml_dict_keys = ['header','ground stations','targets','satellites','downlinks','crosslinks','observations', 'downlink_rates','crosslink_rates','downlink_link_info','crosslink_link_info']
 
     def __init__(self):
         with open(self.DOC_HEADER_PROTO,'r') as f:
@@ -180,7 +180,7 @@ class CzmlWrapper:
         else:
             raise NotImplementedError
 
-    def convert_flat_times_to_windows(self, times_mat, mat_num_rows, activity_partners_mat= None, mat_num_cols=None):
+    def convert_flat_times_to_windows(self, times_mat, mat_num_rows, activity_partners_mat= None, mat_num_cols=None,converted_outputs= {}):
         """Converts an imported time history matrix to activity windows
         
         [description]
@@ -242,7 +242,14 @@ class CzmlWrapper:
 
                     if activity_partners_mat:
                         activity_partner_number = int (activity_partners_mat[row_indx][times_indx]) 
-                        times_winds[row_indx][activity_partner_number-1].append(ActivityWindow(start_time_datetime,end_time_datetime))
+                        wind  =ActivityWindow(start_time_datetime,end_time_datetime)
+
+                        #  let's add any specially requested converted outputs to the window
+                        wind.converted_outputs ={}
+                        for key, func in converted_outputs.items():
+                             wind.converted_outputs[ key] = func(times)
+
+                        times_winds[row_indx][activity_partner_number-1].append(wind)
                     else:
                         times_winds[row_indx].append(ActivityWindow(start_time_datetime,end_time_datetime))
 
@@ -280,7 +287,7 @@ class CzmlWrapper:
 
                     ref1 =  self.PROTO_DEFS['sat_ref_pre'] +str(sat_ids[sat_indx])+self.PROTO_DEFS['pos_ref_post']
                     ref2 = self.PROTO_DEFS['gs_ref_pre']+str(gs_ids[gs_indx])+self.PROTO_DEFS['pos_ref_post']
-                    czml_content.append(cztl.createLinkPacket(ID,name,start_utc,end_utc, polyline_show_times = dlnk_winds_sat, color=dlnk_color,reference1=ref1,reference2=ref2))
+                    czml_content.append(cztl.create_link_packet(ID,name,start_utc,end_utc, polyline_show_times = dlnk_winds_sat, color=dlnk_color,reference1=ref1,reference2=ref2))
 
                     i+=1
 
@@ -314,7 +321,7 @@ class CzmlWrapper:
                     ref1 =  self.PROTO_DEFS['sat_ref_pre'] +str(sat_ids[sat_indx])+self.PROTO_DEFS['pos_ref_post']
                     ref2 = self.PROTO_DEFS['sat_ref_pre']+str(sat_ids[other_sat_indx])+self.PROTO_DEFS['pos_ref_post']
 
-                    czml_content.append(cztl.createLinkPacket(ID,name, start_utc, end_utc, polyline_show_times = xlnk_winds_sat, color=xlnk_color,reference1=ref1,reference2=ref2))
+                    czml_content.append(cztl.create_link_packet(ID,name, start_utc, end_utc, polyline_show_times = xlnk_winds_sat, color=xlnk_color,reference1=ref1,reference2=ref2))
 
                     i+=1
 
@@ -344,7 +351,7 @@ class CzmlWrapper:
                 ref1 =  self.PROTO_DEFS['sat_ref_pre'] +str(sat_ids[sat_indx])+self.PROTO_DEFS['pos_ref_post']
                 ref2 =  self.PROTO_DEFS['sat_ref_pre'] +str(sat_ids[sat_indx])+self.PROTO_DEFS['orient_ref_post']
 
-                czml_content.append(cztl.createObsPacket(ID,name,parent,start_utc,end_utc, sensor_show_times = obs_winds_sat, lateral_color=[0,255,0,51],intersection_color=[0,255,0,255],position_ref=ref1,orientation_ref=ref2))
+                czml_content.append(cztl.create_obs_packet(ID,name,parent,start_utc,end_utc, sensor_show_times = obs_winds_sat, lateral_color=[0,255,0,51],intersection_color=[0,255,0,255],position_ref=ref1,orientation_ref=ref2))
 
 
             self.czml_dict['observations'] = czml_content
@@ -375,7 +382,7 @@ class CzmlWrapper:
                     ID = 'Dlnk/Sat'+str(sat_ids[sat_indx])+'-GS'+str(gs_ids[gs_indx])
 
                     if len (dlnk_rate_history[sat_indx][gs_indx]) >0:
-                        pkt = cztl.createSampledPropertyHistory(ID,name, 'datarate',history_epoch, dlnk_rate_history[sat_indx][gs_indx], filter_seconds_beg,filter_seconds_end)
+                        pkt = cztl.create_sampled_property_history(ID,name, 'datarate',history_epoch, dlnk_rate_history[sat_indx][gs_indx], filter_seconds_beg,filter_seconds_end)
 
                         # attach a proxy position for displaying data rate text
                         pkt['position_proxy'] = {"reference": self.PROTO_DEFS['gs_ref_pre']+str(gs_ids[gs_indx])+self.PROTO_DEFS['pos_ref_post']}
@@ -385,6 +392,49 @@ class CzmlWrapper:
                     i+=1
 
             self.czml_dict['downlink_rates'] = czml_content
+
+    def make_downlink_link_info(self,
+            dlnk_link_info_history_flat,
+            dlnk_partners,
+            num_sats,
+            num_gs,
+            sat_ids,
+            gs_ids,
+            start_utc,
+            end_utc):
+
+        dlnk_link_info_history =  self.convert_flat_times_to_windows(dlnk_link_info_history_flat, num_sats, dlnk_partners, num_gs,  converted_outputs= {'link_info':lambda entry: entry[2]})
+
+        if len(dlnk_link_info_history) > 0:
+            czml_content = []
+
+            for sat_indx in range(num_sats):
+                for gs_indx  in range ( num_gs):
+
+                    pkt =  {}
+
+                    pkt['name'] = 'dlnk_link_info_history for satellite '+str(sat_ids[sat_indx])+' and GS '+str(gs_ids[gs_indx])
+
+                    # needs to have same ID as original downlink to work
+                    pkt['id'] = 'Dlnk/Sat'+str(sat_ids[sat_indx])+'-GS'+str(gs_ids[gs_indx])
+
+                    if len (dlnk_link_info_history[sat_indx][ gs_indx]) >0:
+                        #  the dict member converted_outputs  was added to each window in the call to convert_flat_times_to_windows above
+                        pkt['link_info']=cztl.get_value_intervals(
+                            dlnk_link_info_history[sat_indx][ gs_indx], 
+                            start_utc, 
+                            end_utc, 
+                            value_functions=  (lambda wind: wind.converted_outputs['link_info'],'none'), 
+                            value_type='string'
+                        )
+                        
+                        # attach a proxy position for displaying  link  info text ( note this clobbers  any position proxy elements already added to this downlink)
+                        pkt['position_proxy'] = {"reference": self.PROTO_DEFS['gs_ref_pre']+str(gs_ids[gs_indx])+self.PROTO_DEFS['pos_ref_post']}
+
+                        czml_content.append(pkt)
+
+
+            self.czml_dict['downlink_link_info'] = czml_content
 
     def make_crosslink_rates(self,
             xlnk_rate_history,
@@ -404,13 +454,13 @@ class CzmlWrapper:
             for sat_indx in range(num_sats):
                 for  other_sat_indx in range(sat_indx+1,num_sats):
 
-                    name = 'xlnk_rate_history for crosslink '+str(i)+', satellite '+str(sat_ids[sat_indx])+' and xsat '+str(sat_ids[sat_indx])
+                    name = 'xlnk_rate_history for crosslink '+str(i)+', satellite '+str(sat_ids[sat_indx])+' and xsat '+str(sat_ids[other_sat_indx])
 
                     # needs to have same ID as original downlink to work
                     ID = 'Xlnk/Sat'+str(sat_ids[sat_indx])+'-Sat'+str(sat_ids[ other_sat_indx])
 
                     if len (xlnk_rate_history[sat_indx][other_sat_indx]) >0:
-                        pkt = cztl.createSampledPropertyHistory(ID,name, 'datarate',history_epoch, xlnk_rate_history[sat_indx][other_sat_indx], filter_seconds_beg,filter_seconds_end)
+                        pkt = cztl.create_sampled_property_history(ID,name, 'datarate',history_epoch, xlnk_rate_history[sat_indx][other_sat_indx], filter_seconds_beg,filter_seconds_end)
 
                         # attach a proxy position for displaying data rate text
                         pkt['position_proxy'] = {"reference": self.PROTO_DEFS['sat_ref_pre'] +str(sat_ids[sat_indx])+self.PROTO_DEFS['pos_ref_post']}
@@ -420,6 +470,50 @@ class CzmlWrapper:
                     i+=1
 
             self.czml_dict['crosslink_rates'] = czml_content
+
+    def make_crosslink_link_info(self,
+            xlnk_link_info_history_flat,
+            xlnk_partners,
+            num_sats,
+            sat_ids,
+            start_utc,
+            end_utc):
+
+        xlnk_link_info_history =  self.convert_flat_times_to_windows(xlnk_link_info_history_flat, num_sats, xlnk_partners, num_sats,  converted_outputs= {'link_info':lambda entry: entry[2]})
+
+        if len(xlnk_link_info_history) > 0:
+            czml_content = []
+
+            i = 0
+            for sat_indx in range(num_sats):
+                for  other_sat_indx in range(sat_indx+1,num_sats):
+
+                    pkt =  {}
+
+                    pkt['name'] = 'xlnk_link_info_history for satellite '+str(sat_ids[sat_indx])+' and xsat '+str(sat_ids[other_sat_indx])
+
+                    # needs to have same ID as original downlink to work
+                    pkt['id'] = 'Xlnk/Sat'+str(sat_ids[sat_indx])+'-Sat'+str(sat_ids[ other_sat_indx])
+
+                    if len (xlnk_link_info_history[sat_indx][ other_sat_indx]) >0:
+                        #  the dict member converted_outputs  was added to each window in the call to convert_flat_times_to_windows above
+                        pkt['link_info']=cztl.get_value_intervals(
+                            xlnk_link_info_history[sat_indx][ other_sat_indx], 
+                            start_utc, 
+                            end_utc, 
+                            value_functions=  (lambda wind: wind.converted_outputs['link_info'],'none'), 
+                            value_type='string'
+                        )
+                        
+                        # attach a proxy position for displaying  link  info text ( note this clobbers  any position proxy elements already added to this downlink)
+                        pkt['position_proxy'] = {"reference": self.PROTO_DEFS['sat_ref_pre'] +str(sat_ids[sat_indx])+self.PROTO_DEFS['pos_ref_post']}
+
+                        czml_content.append(pkt)
+
+                    i+=1
+
+            self.czml_dict['crosslink_link_info'] = czml_content
+
 
     def get_czml( self,key_list=None):
 
@@ -451,7 +545,9 @@ class CzmlWrapper:
 
         return the_json
 
-    def get_renderer_description(self,renderers_list,renderer_mapping,num_sats,num_gs,sat_ids,gs_ids,dlnk_rate_history,xlnk_rate_history):
+    def get_renderer_description(self,renderers_list,renderer_mapping,num_sats,num_gs,sat_ids,gs_ids,dlnk_rate_history,xlnk_rate_history,dlnk_link_info_history_flat,dlnk_partners,xlnk_link_info_history_flat,xlnk_partners):
+        # TODO: this function feels really messy, it really should be cleaned up to match the structure of the other functions in this file
+
         the_json = OrderedDict()
 
         the_json['renderers'] = renderers_list
@@ -469,17 +565,35 @@ class CzmlWrapper:
         # aux renderer datarate.js depends on "Dlnk"  and  "Xlnk"
         # todo:  make this not hardcoded
 
-        if 'Dlnk' in renderer_mapping.keys() and len(dlnk_rate_history)>0:
+        dlnk_link_info_history =  self.convert_flat_times_to_windows(dlnk_link_info_history_flat, num_sats, dlnk_partners, num_gs)
+        if 'Dlnk' in renderer_mapping.keys() :
             for sat_indx in range(num_sats):
                 for gs_indx in  range (num_gs):
-                    if len (dlnk_rate_history[sat_indx][gs_indx]) >0:
-                        renderMapping['Dlnk/Sat'+str(sat_ids[sat_indx])+'-GS'+str(gs_ids[gs_indx])] = renderer_mapping['Dlnk']
+                    rm = []
+                    if len(dlnk_rate_history[sat_indx])>0:
+                        if len (dlnk_rate_history[sat_indx][gs_indx]) >0:
+                            rm.append ('DataRate')
+                    if len(dlnk_link_info_history[sat_indx])>0:
+                        if len (dlnk_link_info_history[sat_indx][gs_indx]) >0:
+                            rm.append ('LinkInfo')
 
+                    if len (rm)  >0:
+                        renderMapping['Dlnk/Sat'+str(sat_ids[sat_indx])+'-GS'+str(gs_ids[gs_indx])] = rm
+
+        xlnk_link_info_history =  self.convert_flat_times_to_windows(xlnk_link_info_history_flat, num_sats, xlnk_partners, num_sats)
         if 'Xlnk' in renderer_mapping.keys() and len(xlnk_rate_history)>0:
             for sat_indx in range(num_sats):
                 for  other_sat_indx in range(sat_indx+1,num_sats):
-                    if len (xlnk_rate_history[sat_indx][other_sat_indx]) > 0:
-                        renderMapping['Xlnk/Sat'+str(sat_ids[sat_indx])+'-Sat'+str(sat_ids[other_sat_indx])] = renderer_mapping['Xlnk']
+                    rm = []
+                    if len(xlnk_rate_history[sat_indx])>0:
+                        if len (xlnk_rate_history[sat_indx][other_sat_indx]) >0:
+                            rm.append ('DataRate')
+                    if len(xlnk_link_info_history[sat_indx])>0:
+                        if len (xlnk_link_info_history[sat_indx][other_sat_indx]) >0:
+                            rm.append ('LinkInfo')
+
+                    if len (rm)  >0:
+                        renderMapping['Xlnk/Sat'+str(sat_ids[sat_indx])+'-Sat'+str(sat_ids[other_sat_indx])] = rm
 
         the_json['renderMapping'] = renderMapping
 
