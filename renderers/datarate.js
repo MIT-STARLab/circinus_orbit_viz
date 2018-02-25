@@ -2,6 +2,8 @@
  *  Auxillary renderer for for link data rates
  *
  * RGB chart: http://www.rapidtables.com/web/color/RGB_Color.htm
+ *
+ * note: also have to set up the datarate property in setupczml.js
  */
 class DataRateAuxRenderer {
 	/**

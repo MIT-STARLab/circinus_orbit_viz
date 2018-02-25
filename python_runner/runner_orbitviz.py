@@ -181,12 +181,32 @@ class PipelineRunner:
                 end_utc_dt
             )
 
+            cz.make_downlink_link_info(
+                viz_data['dlnk_link_info_history_flat'],
+                viz_data['dlnk_partners'],
+                num_sats,
+                num_gs,
+                sat_ids,
+                gs_ids,
+                start_utc_dt,
+                end_utc_dt
+            )
+
             xlnk_rate_history_epoch_dt= tt.iso_string_to_dt (viz_data['xlnk_rate_history_epoch'])
             cz.make_crosslink_rates(
                 viz_data['xlnk_rate_history'],
                 xlnk_rate_history_epoch_dt,
                 num_sats,
                 sat_ids,
+                end_utc_dt
+            )
+
+            cz.make_crosslink_link_info(
+                viz_data['xlnk_link_info_history_flat'],
+                viz_data['xlnk_partners'],
+                num_sats,
+                sat_ids,
+                start_utc_dt,
                 end_utc_dt
             )
 
@@ -198,7 +218,11 @@ class PipelineRunner:
                 sat_ids,
                 gs_ids,
                 viz_data['dlnk_rate_history'],
-                viz_data['xlnk_rate_history']
+                viz_data['xlnk_rate_history'],
+                viz_data['dlnk_link_info_history_flat'],
+                viz_data['dlnk_partners'],
+                viz_data['xlnk_link_info_history_flat'],
+                viz_data['xlnk_partners'],
             )
 
         else:

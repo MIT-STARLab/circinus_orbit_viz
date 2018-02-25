@@ -11,16 +11,17 @@
         "GSavail": "/Apps/OrbitViz/renderers/gsavail.js",
         "Battery": "/Apps/OrbitViz/renderers/battery.js",
         "Eclipses": "/Apps/OrbitViz/renderers/eclipses.js",
-        "DataRate": "/Apps/OrbitViz/renderers/datarate.js"
+        "DataRate": "/Apps/OrbitViz/renderers/datarate.js",
+        "LinkInfo": "/Apps/OrbitViz/renderers/linkinfo.js"
     },
     "available_renderer_mapping": {
         "Satellite":["DataVol","Battery","Eclipses", "Test"],
         "Facility":["GSavail"],
-        "Dlnk": ["DataRate"],
-        "Xlnk": ["DataRate"]
+        "Dlnk": ["DataRate","LinkInfo"],
+        "Xlnk": ["DataRate","LinkInfo"]
     },
     "selected_renderer_mapping": {
-        "Dlnk": ["DataRate"],
-        "Xlnk": ["DataRate"]
+        "Dlnk": ["DataRate","LinkInfo"],
+        "Xlnk": ["DataRate","LinkInfo"]
     }
 }
