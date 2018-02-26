@@ -42,7 +42,7 @@ class CzmlWrapper:
         self.viz_objects_callbacks=  {}
 
         self.json_metadata = {
-            "simulation_output_updated": None,
+            "input_data_updated": None,
             "visualization_output_updated": str (datetime.utcnow ())
         }
 
@@ -249,7 +249,7 @@ class CzmlWrapper:
                         for key, func in converted_outputs.items():
                              wind.converted_outputs[ key] = func(times)
 
-                        times_winds[row_indx][activity_partner_number-1].append(wind)
+                        times_winds[row_indx][activity_partner_number].append(wind)
                     else:
                         times_winds[row_indx].append(ActivityWindow(start_time_datetime,end_time_datetime))
 
@@ -523,10 +523,8 @@ class CzmlWrapper:
 
         the_czml = []
         for key in key_list:
-            if not self.czml_dict.get(key,None) is None:
+            if self.czml_dict.get(key,None):
                 the_czml +=self.czml_dict[key]
-            else:
-                raise RuntimeError ('key %s either is not a valid key or has not been initialized')
 
         #  Have to add the metadata after everything else because it must be placed after the document  prototype
         the_czml.append(self.json_metadata)

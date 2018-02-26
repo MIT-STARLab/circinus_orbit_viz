@@ -41,7 +41,7 @@ class DataRateAuxRenderer {
 
                     if (datarate !== undefined) {
 
-                        if ( !(show === false &&  datarate <= 0)) {
+                        if ( show ===  true) {
                             // write the data rate
                             let link_char = undefined;
                             if (ent.id.includes('Xlnk')) {
@@ -62,7 +62,7 @@ class DataRateAuxRenderer {
 
                             var show_rate_change = true
                             if (show_rate_change) {
-                                ent.polyline.width = datarate/10;
+                                ent.polyline.width =  Math.max (datarate/10,1);
                             }
                             else {
                                 ent.polyline.width = 6;
@@ -85,19 +85,19 @@ class DataRateAuxRenderer {
                             }
 
                         }
-                        // data rate shouldn't be zero with polyline displayed
-                        else if (show === true &&  datarate <= 0) {
-                            ent.polyline.width = 100;
-                            ent.polyline.material.color._value.alpha = 1;
-                            ent.polyline.material.color._value.blue = 0;
-                            ent.polyline.material.color._value.red = 1;
-                            ent.polyline.material.color._value.green = 1;
-                            ctx.drawImage(this.xImg, pos.x + 70, pos.y - 20, 40 ,40);
-                        }
-                        // data rate shouldn't be greater than zero if this isn't a link time
-                        else if (show === false &&  datarate > 0) {
-                            ctx.drawImage(this.xImg, pos.x + 70, pos.y - 20, 40 ,40);
-                        }
+                        // // data rate shouldn't be zero with polyline displayed
+                        // else if (show === true &&  datarate <= 0) {
+                        //     ent.polyline.width = 100;
+                        //     ent.polyline.material.color._value.alpha = 1;
+                        //     ent.polyline.material.color._value.blue = 0;
+                        //     ent.polyline.material.color._value.red = 1;
+                        //     ent.polyline.material.color._value.green = 1;
+                        //     ctx.drawImage(this.xImg, pos.x + 70, pos.y - 20, 40 ,40);
+                        // }
+                        // // data rate shouldn't be greater than zero if this isn't a link time
+                        // else if (show === false &&  datarate > 0) {
+                        //     ctx.drawImage(this.xImg, pos.x + 70, pos.y - 20, 40 ,40);
+                        // }
                     }
                 }
             }
