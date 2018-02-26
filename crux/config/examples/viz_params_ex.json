@@ -1,6 +1,7 @@
 {
     "version": "0.1",
     "orbit_time_precision_s": 500.0,
+    "history_input_option":  "gp_and_sat_link",
     "satellite_callbacks": [
         "orientation",
         "drawNadirRF"

@@ -23,6 +23,45 @@ OUTPUT_JSON_VER = '0.1'
 
 class PipelineRunner:
 
+    def consolidate_viz_data( self,sat_link_history, gp_history, option ='gp_and_sat_link'):
+        if not (sat_link_history['version'] ==  "0.1" and
+                gp_history['version'] ==  "0.1" ):
+            raise NotImplementedError
+
+        viz_data = {}
+
+        sat_link_history_v=sat_link_history.get('viz_data', {})
+        gp_history_v=gp_history.get('viz_data', {})
+
+        if option ==  "gp_and_sat_link":
+            viz_data['update_time'] = gp_history['update_time']
+            viz_data['obs_times_flat'] = gp_history_v['obs_times_flat']
+            viz_data['obs_locations'] = gp_history_v['obs_locations']
+            viz_data['dlnk_times_flat'] = gp_history_v['dlnk_times_flat']
+            viz_data['dlnk_partners'] = gp_history_v['dlnk_partners']
+            viz_data['dlnk_link_info_history_flat'] = gp_history_v['dlnk_link_info_history_flat']
+            viz_data['xlnk_times_flat'] = gp_history_v['xlnk_times_flat']
+            viz_data['xlnk_partners'] = gp_history_v['xlnk_partners']
+            viz_data['xlnk_link_info_history_flat'] = gp_history_v['xlnk_link_info_history_flat']
+            viz_data['xlnk_rate_history_epoch'] = sat_link_history_v['xlnk_rate_history_epoch']
+            viz_data['xlnk_rate_history'] = sat_link_history_v['xlnk_rate_history']
+            viz_data['dlnk_rate_history_epoch'] = sat_link_history_v['dlnk_rate_history_epoch']
+            viz_data['dlnk_rate_history'] = sat_link_history_v['dlnk_rate_history']
+
+        elif option == "sat_link_only":
+            viz_data['obs_times_flat'] = sat_link_history_v['obs_times_flat']
+            viz_data['obs_locations'] = sat_link_history_v['obs_locations']
+            viz_data['dlnk_times_flat'] = sat_link_history_v['dlnk_times_flat']
+            viz_data['dlnk_partners'] = sat_link_history_v['dlnk_partners']
+            viz_data['xlnk_times_flat'] = sat_link_history_v['xlnk_times_flat']
+            viz_data['xlnk_partners'] = sat_link_history_v['xlnk_partners']
+            viz_data['xlnk_rate_history_epoch'] = sat_link_history_v['xlnk_rate_history_epoch']
+            viz_data['xlnk_rate_history'] = sat_link_history_v['xlnk_rate_history']
+            viz_data['dlnk_rate_history_epoch'] = sat_link_history_v['dlnk_rate_history_epoch']
+            viz_data['dlnk_rate_history'] = sat_link_history_v['dlnk_rate_history']
+
+        return viz_data
+
 
     def run(self, data):
         """
@@ -35,7 +74,8 @@ class PipelineRunner:
         orbit_prop_data = data['orbit_prop_data']
         orbit_prop_inputs = data['orbit_prop_inputs']
         viz_params = data['viz_params']
-        viz_sat_history = data['viz_sat_history']
+        sat_link_history = data['sat_link_history']
+        gp_history = data['gp_history']
 
         sat_name_prefix = "sat"
 
@@ -44,11 +84,13 @@ class PipelineRunner:
         satellite_callbacks = None
         renderers_list =  None
         renderer_mapping =  None
+        history_input_option = None
         if viz_params['version'] == "0.1":
             orbit_time_precision = viz_params['orbit_time_precision_s']
             satellite_callbacks = viz_params['satellite_callbacks']
             renderers_list =  [rndr for rndr in viz_params['available_renderers'].values()]
             renderer_mapping =  viz_params['selected_renderer_mapping']
+            history_input_option =  viz_params['history_input_option']
         else:
             raise NotImplementedError
 
@@ -137,50 +179,53 @@ class PipelineRunner:
         else:
             raise NotImplementedError
 
-        renderer_description= None
-        if viz_sat_history['version'] == "0.1":
-            viz_data = viz_sat_history['viz_data']
+        #  now make all the cesium outputs
+        print (history_input_option)
+        viz_data =self.consolidate_viz_data(sat_link_history, gp_history, option =history_input_option)
+        
+        cz.json_metadata['input_data_updated'] = viz_data.get('update_time', None)
 
-            cz.make_downlinks(
-                viz_data['dlnk_times_flat'],
-                viz_data['dlnk_partners'],
-                num_sats,
-                num_gs,
-                gs_names,
-                sat_ids,
-                gs_ids,
-                start_utc_dt,
-                end_utc_dt
-            )
+        cz.make_downlinks(
+            viz_data['dlnk_times_flat'],
+            viz_data['dlnk_partners'],
+            num_sats,
+            num_gs,
+            gs_names,
+            sat_ids,
+            gs_ids,
+            start_utc_dt,
+            end_utc_dt
+        )
 
-            cz.make_crosslinks(
-                viz_data['xlnk_times_flat'],
-                viz_data['xlnk_partners'],
-                num_sats,
-                sat_ids,
-                start_utc_dt,
-                end_utc_dt
-            )
+        cz.make_crosslinks(
+            viz_data['xlnk_times_flat'],
+            viz_data['xlnk_partners'],
+            num_sats,
+            sat_ids,
+            start_utc_dt,
+            end_utc_dt
+        )
 
-            cz.make_observations(
-                viz_data['obs_times_flat'],
-                num_sats,
-                sat_ids,
-                start_utc_dt,
-                end_utc_dt
-            )
+        cz.make_observations(
+            viz_data['obs_times_flat'],
+            num_sats,
+            sat_ids,
+            start_utc_dt,
+            end_utc_dt
+        )
 
-            dlnk_rate_history_epoch_dt= tt.iso_string_to_dt (viz_data['dlnk_rate_history_epoch'])
-            cz.make_downlink_rates(
-                viz_data['dlnk_rate_history'],
-                dlnk_rate_history_epoch_dt,
-                num_sats,
-                num_gs,
-                sat_ids,
-                gs_ids,
-                end_utc_dt
-            )
+        dlnk_rate_history_epoch_dt= tt.iso_string_to_dt (viz_data['dlnk_rate_history_epoch'])
+        cz.make_downlink_rates(
+            viz_data['dlnk_rate_history'],
+            dlnk_rate_history_epoch_dt,
+            num_sats,
+            num_gs,
+            sat_ids,
+            gs_ids,
+            end_utc_dt
+        )
 
+        if viz_data.get ('dlnk_link_info_history_flat'):
             cz.make_downlink_link_info(
                 viz_data['dlnk_link_info_history_flat'],
                 viz_data['dlnk_partners'],
@@ -192,15 +237,16 @@ class PipelineRunner:
                 end_utc_dt
             )
 
-            xlnk_rate_history_epoch_dt= tt.iso_string_to_dt (viz_data['xlnk_rate_history_epoch'])
-            cz.make_crosslink_rates(
-                viz_data['xlnk_rate_history'],
-                xlnk_rate_history_epoch_dt,
-                num_sats,
-                sat_ids,
-                end_utc_dt
-            )
+        xlnk_rate_history_epoch_dt= tt.iso_string_to_dt (viz_data['xlnk_rate_history_epoch'])
+        cz.make_crosslink_rates(
+            viz_data['xlnk_rate_history'],
+            xlnk_rate_history_epoch_dt,
+            num_sats,
+            sat_ids,
+            end_utc_dt
+        )
 
+        if viz_data.get ('xlnk_link_info_history_flat'):
             cz.make_crosslink_link_info(
                 viz_data['xlnk_link_info_history_flat'],
                 viz_data['xlnk_partners'],
@@ -210,24 +256,20 @@ class PipelineRunner:
                 end_utc_dt
             )
 
-            renderer_description = cz.get_renderer_description(
-                renderers_list,
-                renderer_mapping,
-                num_sats,
-                num_gs,
-                sat_ids,
-                gs_ids,
-                viz_data['dlnk_rate_history'],
-                viz_data['xlnk_rate_history'],
-                viz_data['dlnk_link_info_history_flat'],
-                viz_data['dlnk_partners'],
-                viz_data['xlnk_link_info_history_flat'],
-                viz_data['xlnk_partners'],
-            )
-
-        else:
-            raise NotImplementedError
-
+        renderer_description = cz.get_renderer_description(
+            renderers_list,
+            renderer_mapping,
+            num_sats,
+            num_gs,
+            sat_ids,
+            gs_ids,
+            viz_data['dlnk_rate_history'],
+            viz_data['xlnk_rate_history'],
+            viz_data.get ('dlnk_link_info_history_flat',[]),
+            viz_data['dlnk_partners'],
+            viz_data.get ('xlnk_link_info_history_flat',[]),
+            viz_data['xlnk_partners'],
+        )
 
 
         return cz.get_czml(), cz.get_viz_objects (), renderer_description
@@ -256,13 +298,17 @@ if __name__ == "__main__":
         viz_params = json.load(f)
 
     with open(os.path.join(REPO_BASE,'crux/config/examples/sat_link_history.json'),'r') as f:
-        viz_sat_history = json.load(f)
+        sat_link_history = json.load(f)
+    
+    with open(os.path.join(REPO_BASE,'crux/config/examples/gp_outputs.json'),'r') as f:
+        gp_history = json.load(f)
 
     data = {
         "orbit_prop_data": orbit_prop_data,
         "orbit_prop_inputs": orbit_prop_inputs,
         "viz_params": viz_params,
-        "viz_sat_history": viz_sat_history
+        "sat_link_history": sat_link_history,
+        "gp_history": gp_history
     }
 
     a = time.time()
@@ -277,3 +323,4 @@ if __name__ == "__main__":
         json.dump(output [2],f)
 
     print('run time: %f'%(b-a))
+ 
