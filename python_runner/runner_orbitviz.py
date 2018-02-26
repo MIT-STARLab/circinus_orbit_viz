@@ -282,6 +282,16 @@ if __name__ == "__main__":
                     default='orbit_prop_inputs.json',
                     help='specify orbit propagation inputs file')
 
+    ap.add_argument('--prop_data_file',
+                    type=str,
+                    default='orbit_prop_data.json',
+                    help='specify orbit propagation data output file')
+
+    ap.add_argument('--sat_link_file',
+                    type=str,
+                    default='sat_link_history.json',
+                    help='specify sat link file')
+
     args = ap.parse_args()
 
     pr = PipelineRunner()
@@ -290,14 +300,14 @@ if __name__ == "__main__":
     with open(os.path.join(REPO_BASE,args.prop_inputs_file),'r') as f:
         orbit_prop_inputs = json.load(f)
 
-    with open(os.path.join(REPO_BASE,'crux/config/examples/orbit_prop_data.json'),'r') as f:
+    with open(os.path.join(REPO_BASE,args.prop_data_file),'r') as f:
     # with open(os.path.join(REPO_BASE,'crux/config/examples/orbit_prop_data_ex.json'),'r') as f:
         orbit_prop_data = json.load(f)
 
     with open(os.path.join(REPO_BASE,'crux/config/examples/viz_params_ex.json'),'r') as f:
         viz_params = json.load(f)
 
-    with open(os.path.join(REPO_BASE,'crux/config/examples/sat_link_history.json'),'r') as f:
+    with open(os.path.join(REPO_BASE,args.sat_link_file),'r') as f:
         sat_link_history = json.load(f)
     
     with open(os.path.join(REPO_BASE,'crux/config/examples/gp_outputs.json'),'r') as f:
