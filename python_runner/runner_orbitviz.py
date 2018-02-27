@@ -63,7 +63,7 @@ class PipelineRunner:
         return viz_data
 
 
-    def run(self, data):
+    def run(self, data, params):
         """
         Run orbit propagation pipeline element using the inputs supplied per input.json schema. Formats the high level output json and calls various subcomponents for processing
 
@@ -77,6 +77,8 @@ class PipelineRunner:
         sat_link_history = data['sat_link_history']
         gp_history = data['gp_history']
 
+        history_input_option = params['history_input_option']
+
         sat_name_prefix = "sat"
 
         cz = CzmlWrapper()
@@ -84,13 +86,12 @@ class PipelineRunner:
         satellite_callbacks = None
         renderers_list =  None
         renderer_mapping =  None
-        history_input_option = None
+        
         if viz_params['version'] == "0.1":
             orbit_time_precision = viz_params['orbit_time_precision_s']
             satellite_callbacks = viz_params['satellite_callbacks']
             renderers_list =  [rndr for rndr in viz_params['available_renderers'].values()]
             renderer_mapping =  viz_params['selected_renderer_mapping']
-            history_input_option =  viz_params['history_input_option']
         else:
             raise NotImplementedError
 
@@ -120,6 +121,8 @@ class PipelineRunner:
 
             # todo: should really verify that sat_id_order is correctly formatted
             sat_ids = orbit_prop_inputs ['sat_params']['sat_id_order']
+            if sat_ids == 'default':
+                sat_ids = [str (sat_indx) for sat_indx in range (num_sats)]
             gs_ids = [station ['id'] for station in gs_params['stations']]
 
             for station in gs_params['stations']:
@@ -292,6 +295,11 @@ if __name__ == "__main__":
                     default='sat_link_history.json',
                     help='specify sat link file')
 
+    ap.add_argument('--history_input_option',
+                    type=str,
+                    default='sat_link_only',
+                    help= "specify what link data to use for visualization. Options:['sat_link_only','gp_and_sat_link']")
+
     args = ap.parse_args()
 
     pr = PipelineRunner()
@@ -321,8 +329,12 @@ if __name__ == "__main__":
         "gp_history": gp_history
     }
 
+    params =  {
+        'history_input_option':args.history_input_option
+    }
+
     a = time.time()
-    output = pr.run(data)
+    output = pr.run(data,params)
     b = time.time()
 
     with open('../app_data_files/sats_file.czml','w') as f:
