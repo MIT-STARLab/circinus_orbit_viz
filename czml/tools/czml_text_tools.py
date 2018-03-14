@@ -217,6 +217,9 @@ def create_link_packet(ID='Xlnk/SatN-to-SatM',name='a link',start_avail=datetime
         'material':material}
     link['polyline'] = polyline
 
+    #  we need to add a position proxy here so that a basic link packet can be used with auxrenderer without throwing missing position errors
+    link['position_proxy'] = {'reference':reference2}
+
     return link
 
 

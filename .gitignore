@@ -2,6 +2,7 @@
 .DS_Store
 ~$*
 *.orig
+*_mod*
 
 # pycharm project directory
 .idea
