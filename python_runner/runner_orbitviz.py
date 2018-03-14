@@ -27,7 +27,7 @@ class PipelineRunner:
         
         viz_data = {}
         if option ==  "gp_and_sat_link":
-            if not(gp_history['version'] ==  "0.1"):
+            if not ((gp_history['version'] ==  "0.1") and (sat_link_history['version'] ==  "0.1")):
                 raise NotImplementedError
 
             gp_history_v=gp_history.get('viz_data', {})
@@ -323,14 +323,10 @@ if __name__ == "__main__":
         with open(os.path.join(REPO_BASE,'crux/config/examples/gp_outputs.json'),'r') as f:
             gp_history = json.load(f)
 
-        params =  {
-            'history_input_option':args.history_input_option
-        }
+        history_param = args.history_input_option
     except:
         gp_history = ""
-        params =  {
-            'history_input_option':'sat_link_only'
-        }
+        history_param = 'sat_link_only'
 
     data = {
         "orbit_prop_data": orbit_prop_data,
@@ -338,6 +334,10 @@ if __name__ == "__main__":
         "viz_params": viz_params,
         "sat_link_history": sat_link_history,
         "gp_history": gp_history
+    }
+
+    params =  {
+        'history_input_option':history_param
     }
 
     a = time.time()
