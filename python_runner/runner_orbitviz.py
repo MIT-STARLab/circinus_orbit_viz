@@ -24,16 +24,13 @@ OUTPUT_JSON_VER = '0.1'
 class PipelineRunner:
 
     def consolidate_viz_data( self,sat_link_history, gp_history, option ='gp_and_sat_link'):
-        if not (sat_link_history['version'] ==  "0.1" and
-                gp_history['version'] ==  "0.1" ):
-            raise NotImplementedError
-
+        
         viz_data = {}
-
-        sat_link_history_v=sat_link_history.get('viz_data', {})
-        gp_history_v=gp_history.get('viz_data', {})
-
         if option ==  "gp_and_sat_link":
+            if not ((gp_history['version'] ==  "0.1") and (sat_link_history['version'] ==  "0.1")):
+                raise NotImplementedError
+
+            gp_history_v=gp_history.get('viz_data', {})
             viz_data['update_time'] = gp_history['update_time']
             viz_data['obs_times_flat'] = gp_history_v['obs_times_flat']
             viz_data['obs_locations'] = gp_history_v['obs_locations']
@@ -49,6 +46,10 @@ class PipelineRunner:
             viz_data['dlnk_rate_history'] = sat_link_history_v['dlnk_rate_history']
 
         elif option == "sat_link_only":
+            if not (sat_link_history['version'] ==  "0.1"):
+                raise NotImplementedError
+            
+            sat_link_history_v=sat_link_history.get('viz_data', {})
             viz_data['obs_times_flat'] = sat_link_history_v['obs_times_flat']
             viz_data['obs_locations'] = sat_link_history_v['obs_locations']
             viz_data['dlnk_times_flat'] = sat_link_history_v['dlnk_times_flat']
@@ -318,8 +319,14 @@ if __name__ == "__main__":
     with open(os.path.join(REPO_BASE,args.sat_link_file),'r') as f:
         sat_link_history = json.load(f)
     
-    with open(os.path.join(REPO_BASE,'crux/config/examples/gp_outputs.json'),'r') as f:
-        gp_history = json.load(f)
+    try:
+        with open(os.path.join(REPO_BASE,'crux/config/examples/gp_outputs.json'),'r') as f:
+            gp_history = json.load(f)
+
+        history_param = args.history_input_option
+    except:
+        gp_history = ""
+        history_param = 'sat_link_only'
 
     data = {
         "orbit_prop_data": orbit_prop_data,
@@ -330,7 +337,7 @@ if __name__ == "__main__":
     }
 
     params =  {
-        'history_input_option':args.history_input_option
+        'history_input_option':history_param
     }
 
     a = time.time()
