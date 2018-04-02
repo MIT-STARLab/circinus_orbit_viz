@@ -6,6 +6,7 @@ UNASSIGNED_DT = datetime.strptime('1856-02-22 00:00:00','%Y-%m-%d %H:%M:%S')
 
 # For use as an effective infinity datetime value
 UNASSIGNED_DT_INF = datetime.strptime('2100-01-01 00:00:00','%Y-%m-%d %H:%M:%S')
+UNASSIGNED_DT_NEG_INF = datetime.strptime('1900-01-01 00:00:00','%Y-%m-%d %H:%M:%S')
 
 ## date formats
 MODIFIED_JULIAN_DATE = 0
