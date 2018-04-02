@@ -9,6 +9,8 @@ from datetime import datetime
 from circinus_tools  import time_tools as tt
 from circinus_tools.activity_window import ActivityWindow
 from . import czml_text_tools as cztl
+from circinus_tools  import  constants as const
+
 
 # should be 'czml', the package name
 package_name = __name__.split('.')[0] 
@@ -242,7 +244,7 @@ class CzmlWrapper:
 
                     if activity_partners_mat:
                         activity_partner_number = int (activity_partners_mat[row_indx][times_indx]) 
-                        wind  =ActivityWindow(start_time_datetime,end_time_datetime)
+                        wind  =ActivityWindow(start_time_datetime,end_time_datetime,window_ID=const.UNASSIGNED)
 
                         #  let's add any specially requested converted outputs to the window
                         wind.converted_outputs ={}
@@ -251,7 +253,7 @@ class CzmlWrapper:
 
                         times_winds[row_indx][activity_partner_number].append(wind)
                     else:
-                        times_winds[row_indx].append(ActivityWindow(start_time_datetime,end_time_datetime))
+                        times_winds[row_indx].append(ActivityWindow(start_time_datetime,end_time_datetime,window_ID=const.UNASSIGNED))
 
         return times_winds
 
