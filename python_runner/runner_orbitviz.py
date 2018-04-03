@@ -30,7 +30,8 @@ class PipelineRunner:
             if not ((gp_history['version'] ==  "0.1") and (sat_link_history['version'] ==  "0.1")):
                 raise NotImplementedError
 
-            gp_history_v=gp_history.get('viz_data', {})
+            gp_history_v=gp_history['viz_data']
+            sat_link_history_v=sat_link_history['viz_data']
             viz_data['update_time'] = gp_history['update_time']
             viz_data['obs_times_flat'] = gp_history_v['obs_times_flat']
             viz_data['obs_locations'] = gp_history_v['obs_locations']
@@ -49,7 +50,7 @@ class PipelineRunner:
             if not (sat_link_history['version'] ==  "0.1"):
                 raise NotImplementedError
             
-            sat_link_history_v=sat_link_history.get('viz_data', {})
+            sat_link_history_v=sat_link_history['viz_data']
             viz_data['obs_times_flat'] = sat_link_history_v['obs_times_flat']
             viz_data['obs_locations'] = sat_link_history_v['obs_locations']
             viz_data['dlnk_times_flat'] = sat_link_history_v['dlnk_times_flat']
@@ -77,6 +78,7 @@ class PipelineRunner:
         viz_params = data['viz_params']
         sat_link_history = data['sat_link_history']
         gp_history = data['gp_history']
+        display_link_info = data['display_link_info']
 
         history_input_option = params['history_input_option']
 
@@ -229,7 +231,7 @@ class PipelineRunner:
             end_utc_dt
         )
 
-        if viz_data.get ('dlnk_link_info_history_flat'):
+        if viz_data.get ('dlnk_link_info_history_flat') and display_link_info:
             cz.make_downlink_link_info(
                 viz_data['dlnk_link_info_history_flat'],
                 viz_data['dlnk_partners'],
@@ -250,7 +252,7 @@ class PipelineRunner:
             end_utc_dt
         )
 
-        if viz_data.get ('xlnk_link_info_history_flat'):
+        if viz_data.get ('xlnk_link_info_history_flat') and display_link_info:
             cz.make_crosslink_link_info(
                 viz_data['xlnk_link_info_history_flat'],
                 viz_data['xlnk_partners'],
@@ -301,6 +303,10 @@ if __name__ == "__main__":
                     default='sat_link_only',
                     help= "specify what link data to use for visualization. Options:['sat_link_only','gp_and_sat_link']")
 
+    ap.add_argument('--display_link_info',
+                    action='store_true',
+                    help= "Whether or not to display link info text")
+
     args = ap.parse_args()
 
     pr = PipelineRunner()
@@ -333,7 +339,8 @@ if __name__ == "__main__":
         "orbit_prop_inputs": orbit_prop_inputs,
         "viz_params": viz_params,
         "sat_link_history": sat_link_history,
-        "gp_history": gp_history
+        "gp_history": gp_history,
+        "display_link_info": args.display_link_info
     }
 
     params =  {
