@@ -4,3 +4,6 @@
 [submodule "OrbitPropagation"]
 	path = OrbitPropagation
 	url = git@github.mit.edu:star-lab/OrbitPropagation.git
+[submodule "circinus_tools"]
+	path = circinus_tools
+	url = git@github.mit.edu:star-lab/CIRCINUS_tools.git
