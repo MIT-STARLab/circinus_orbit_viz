@@ -71,4 +71,4 @@ def mod_file(sats_file = "./sats_file_test.czml"):
 
 
 if __name__ == '__main__':
-    mod_file(sats_file = "./sats_file_mod2.czml")
+    mod_file(sats_file = "./sats_file.czml")

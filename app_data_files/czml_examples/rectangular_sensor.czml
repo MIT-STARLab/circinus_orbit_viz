@@ -1,0 +1,278 @@
+{
+    "id": "Satellite/17/Sensor/Sensor1",
+    "name": "observation sensor 1 for satellite 17",
+    "parent": "Satellite/17",
+    "availability": "2018-01-18T00:00:00Z/2018-01-18T04:00:00Z",
+    "agi_rectangularSensor": {
+        "xHalfAngle": 0.1,
+        "yHalfAngle": 0.1,
+        "lateralSurfaceMaterial": {
+            "solidColor": {
+                "color": {
+                    "rgba": [
+                        0,
+                        255,
+                        0,
+                        51
+                    ]
+                }
+            }
+        },
+        "showIntersection": true,
+        "intersectionColor": {
+            "rgba": [
+                0,
+                255,
+                0,
+                255
+            ]
+        },
+        "show": [
+            {
+                "interval": "2018-01-18T00:00:00Z/2018-01-18T00:06:30Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T00:06:30Z/2018-01-18T00:06:49Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T00:06:49Z/2018-01-18T00:09:02Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T00:09:02Z/2018-01-18T00:09:06Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T00:09:06Z/2018-01-18T00:12:17Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T00:12:17Z/2018-01-18T00:12:20Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T00:12:20Z/2018-01-18T00:29:33Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T00:29:33Z/2018-01-18T00:30:05Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T00:30:05Z/2018-01-18T00:33:22Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T00:33:22Z/2018-01-18T00:33:25Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T00:33:25Z/2018-01-18T00:42:17Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T00:42:17Z/2018-01-18T00:42:20Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T00:42:20Z/2018-01-18T00:45:12Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T00:45:12Z/2018-01-18T00:45:15Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T00:45:15Z/2018-01-18T00:51:57Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T00:51:57Z/2018-01-18T00:52:01Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T00:52:01Z/2018-01-18T00:54:28Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T00:54:28Z/2018-01-18T00:54:30Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T00:54:30Z/2018-01-18T00:56:43Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T00:56:43Z/2018-01-18T00:56:46Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T00:56:46Z/2018-01-18T00:58:52Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T00:58:52Z/2018-01-18T00:58:55Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T00:58:55Z/2018-01-18T00:59:13Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T00:59:13Z/2018-01-18T00:59:16Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T00:59:16Z/2018-01-18T00:59:27Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T00:59:27Z/2018-01-18T00:59:52Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T00:59:52Z/2018-01-18T01:49:09Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T01:49:09Z/2018-01-18T01:49:58Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T01:49:58Z/2018-01-18T01:53:43Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T01:53:43Z/2018-01-18T01:53:46Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T01:53:46Z/2018-01-18T01:57:22Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T01:57:22Z/2018-01-18T01:57:25Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T01:57:25Z/2018-01-18T02:10:08Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T02:10:08Z/2018-01-18T02:10:11Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T02:10:11Z/2018-01-18T02:24:53Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T02:24:53Z/2018-01-18T02:24:56Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T02:24:56Z/2018-01-18T02:27:53Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T02:27:53Z/2018-01-18T02:27:56Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T02:27:56Z/2018-01-18T02:30:18Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T02:30:18Z/2018-01-18T02:30:21Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T02:30:21Z/2018-01-18T02:32:22Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T02:32:22Z/2018-01-18T02:32:25Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T02:32:25Z/2018-01-18T02:34:38Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T02:34:38Z/2018-01-18T02:34:41Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T02:34:41Z/2018-01-18T02:37:17Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T02:37:17Z/2018-01-18T02:37:20Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T02:37:20Z/2018-01-18T02:42:03Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T02:42:03Z/2018-01-18T02:42:06Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T02:42:06Z/2018-01-18T02:45:18Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T02:45:18Z/2018-01-18T02:45:21Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T02:45:21Z/2018-01-18T02:51:48Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T02:51:48Z/2018-01-18T02:51:51Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T02:51:51Z/2018-01-18T03:30:33Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T03:30:33Z/2018-01-18T03:30:36Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T03:30:36Z/2018-01-18T03:34:12Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T03:34:12Z/2018-01-18T03:34:15Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T03:34:15Z/2018-01-18T03:37:57Z",
+                "boolean": false
+            },
+            {
+                "interval": "2018-01-18T03:37:57Z/2018-01-18T03:38:01Z",
+                "boolean": true
+            },
+            {
+                "interval": "2018-01-18T03:38:01Z/2018-01-18T04:00:00Z",
+                "boolean": false
+            }
+        ],
+        "intersectionWidth": 2,
+        "radius": 50000000.0,
+        "portionToDisplay": "COMPLETE"
+    },
+    "position": {
+        "reference": "Satellite/17#position"
+    },
+    "orientation": {
+        "reference": "Satellite/17#orientation"
+    }
+}
