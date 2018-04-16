@@ -52,7 +52,7 @@ class DataRateAuxRenderer {
                             }
                             ctx.font = '12px monospace';
                             ctx.fillStyle = 'white';
-                            // ctx.fillText(link_char + ' ' + datarate.toPrecision(3).toString() + ' Mbps', pos.x + 60, pos.y - 20);
+                            ctx.fillText(link_char + ' ' + datarate.toPrecision(3).toString() + ' Mbps', pos.x + 60, pos.y - 20);
                         }
 
                         // do things with polyline - including displaying errors if necessary

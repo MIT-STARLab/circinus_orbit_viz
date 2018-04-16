@@ -109,7 +109,7 @@ class PipelineRunner:
         sat_ids = None
         gs_ids = None
 
-        if orbit_prop_inputs['version'] == "0.3":
+        if orbit_prop_inputs['version'] == "0.4":
             scenario_params = orbit_prop_inputs['scenario_params']
 
             start_utc_dt =tt.iso_string_to_dt (scenario_params['start_utc'] ) 
