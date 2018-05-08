@@ -159,7 +159,7 @@ class PipelineRunner:
             raise NotImplementedError
 
 
-        if orbit_prop_data['version'] == "0.2":
+        if orbit_prop_data['version'] == "0.3":
 
             scenario_params = orbit_prop_data['scenario_params']
             sat_orbit_data = orbit_prop_data['sat_orbit_data']
