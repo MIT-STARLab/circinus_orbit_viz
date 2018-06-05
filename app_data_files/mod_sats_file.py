@@ -1,20 +1,24 @@
 import json
 from collections import OrderedDict
 
+keep_target_indcs= [1,3,5,9,11,16,21,26,13,18,23,27,15,29,39,34,54,41,36,43,52,48,58,46,61,66,69,65,75,89,77,81,91,78,83,88,80,95,94,98]
+
 def mod_file(sats_file = "./sats_file_test.czml"):
     fd = open(sats_file, "r")
 
     czml = json.load(fd,object_pairs_hook=OrderedDict)
     fd.close()
 
+    czml_out = []
+
     for pkt in czml:
 
         if 'id' in pkt.keys():
 
             if ('document' in pkt['id']):
-                pass
+                czml_out.append(pkt)
             elif ('Satellite' in pkt['id']) and ('billboard' in pkt.keys()):
-                pass
+                czml_out.append(pkt)
                 # name = pkt['name']
                 # num = int(name.split('CubeSat')[1])
 
@@ -59,15 +63,23 @@ def mod_file(sats_file = "./sats_file_test.czml"):
             elif ('Facility/' in pkt['id']) and ('billboard' in pkt.keys()):
                 pkt['label']['show']=False
                 pkt['billboard']['show']=  True
+
+                czml_out.append(pkt)
+
             elif ('Target/' in pkt['id']):
-                pkt['label']['show']=False
-                pkt['billboard']['show']=  True
+                target_indx = int(pkt['id'].split('/')[1])
+
+                # pkt['label']['show']=False
+                # pkt['billboard']['show']=  True
+
+                if target_indx in keep_target_indcs:
+                    czml_out.append(pkt)
             else:
-                continue
+                czml_out.append(pkt)
 
 
     fd = open(sats_file, "w")
-    json.dump(czml,fd,indent=4)
+    json.dump(czml_out,fd,indent=4)
 
 
 if __name__ == '__main__':
