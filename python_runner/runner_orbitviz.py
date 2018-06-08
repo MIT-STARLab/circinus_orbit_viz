@@ -16,6 +16,8 @@ sys.path.append ('..')
 from circinus_tools  import time_tools as tt
 from czml import CzmlWrapper
 
+from circinus_tools import debug_tools
+
 REPO_BASE = os.path.abspath(os.pardir)  # os.pardir aka '..'
 
 OUTPUT_JSON_VER = '0.1'
@@ -27,12 +29,12 @@ class PipelineRunner:
         
         viz_data = {}
         if option ==  "gp_and_sat_link":
-            if not ((gp_history['version'] ==  "0.1") and (sat_link_history['version'] ==  "0.1")):
+            if not ((gp_history['version'] ==  "0.2") and (sat_link_history['version'] ==  "0.1")):
                 raise NotImplementedError
 
             gp_history_v=gp_history['viz_data']
             sat_link_history_v=sat_link_history['viz_data']
-            viz_data['update_time'] = gp_history['update_time']
+            viz_data['update_time'] = gp_history['update_wall_clock_utc']
             viz_data['obs_times_flat'] = gp_history_v['obs_times_flat']
             viz_data['obs_locations'] = gp_history_v['obs_locations']
             viz_data['dlnk_times_flat'] = gp_history_v['dlnk_times_flat']
