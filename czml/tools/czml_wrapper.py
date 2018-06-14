@@ -7,7 +7,7 @@ import math
 from datetime import datetime
 
 from circinus_tools  import time_tools as tt
-from circinus_tools.activity_window import ActivityWindow
+from circinus_tools.scheduling.base_window import ActivityWindow
 from . import czml_text_tools as cztl
 from circinus_tools  import  constants as const
 
