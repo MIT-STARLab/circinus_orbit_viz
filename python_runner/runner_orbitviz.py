@@ -13,6 +13,7 @@ import sys
 import argparse
 
 sys.path.append ('..')
+from circinus_tools import io_tools
 from circinus_tools  import time_tools as tt
 from czml import CzmlWrapper
 
@@ -84,8 +85,6 @@ class PipelineRunner:
 
         history_input_option = params['history_input_option']
 
-        sat_name_prefix = "sat"
-
         cz = CzmlWrapper()
 
         satellite_callbacks = None
@@ -108,10 +107,10 @@ class PipelineRunner:
         gs_names= None
         start_utc_dt = None
         end_utc_dt = None
-        sat_ids = None
-        gs_ids = None
+        sat_id_order = None
+        gs_id_order = None
 
-        if orbit_prop_inputs['version'] == "0.7":
+        if orbit_prop_inputs['version'] == "0.8":
             scenario_params = orbit_prop_inputs['scenario_params']
 
             start_utc_dt =tt.iso_string_to_dt (scenario_params['start_utc'] ) 
@@ -124,11 +123,18 @@ class PipelineRunner:
             gs_params = orbit_prop_inputs['gs_params']
             gs_names = [gs['name'] for gs in gs_params['stations']]
 
-            # todo: should really verify that sat_id_order is correctly formatted
-            sat_ids = orbit_prop_inputs ['sat_params']['sat_id_order']
-            if sat_ids == 'default':
-                sat_ids = [str (sat_indx) for sat_indx in range (num_sats)]
-            gs_ids = [station ['id'] for station in gs_params['stations']]
+            num_satellites = orbit_prop_inputs['sat_params']['num_satellites']
+            sat_id_prefix = orbit_prop_inputs['sat_params']['sat_id_prefix']
+
+            sat_id_order= orbit_prop_inputs['sat_params']['sat_id_order']
+            # in the case that this is default, then we need to grab a list of all the satellite IDs. We'll take this from all of the satellite IDs found in the orbit parameters
+            if sat_id_order == 'default':
+                dummy, all_sat_ids = io_tools.unpack_sat_entry_list(  orbit_prop_inputs['orbit_params']['sat_orbital_elems'],force_duplicate =  True)
+            #  make the satellite ID order. if the input ID order is default, then will assume that the order is the same as all of the IDs passed as argument
+            sat_id_order = io_tools.make_and_validate_sat_id_order(sat_id_order,sat_id_prefix,num_satellites,all_sat_ids)
+            io_tools.validate_ids(validator=sat_id_order,validatee=all_sat_ids)
+
+            gs_id_order = io_tools.make_and_validate_gs_id_order(orbit_prop_inputs['gs_params'])
 
             for station in gs_params['stations']:
 
@@ -174,8 +180,8 @@ class PipelineRunner:
             for sat_indx,elem in enumerate ( sat_orbit_data):
                 cz.make_sat(
                     sat_id = elem['sat_id'],
-                    name=sat_name_prefix+str(elem['sat_id']),
-                    name_pretty='sat'+str(elem['sat_id']),
+                    name=elem['sat_id'],
+                    name_pretty=elem['sat_id'],
                     start_utc=scenario_params['start_utc'],
                     end_utc=scenario_params['end_utc'],
                     orbit_t_r= elem['time_s_pos_eci_km'],
@@ -199,8 +205,8 @@ class PipelineRunner:
             num_sats,
             num_gs,
             gs_names,
-            sat_ids,
-            gs_ids,
+            sat_id_order,
+            gs_id_order,
             start_utc_dt,
             end_utc_dt
         )
@@ -209,7 +215,7 @@ class PipelineRunner:
             viz_data['xlnk_times_flat'],
             viz_data['xlnk_partners'],
             num_sats,
-            sat_ids,
+            sat_id_order,
             start_utc_dt,
             end_utc_dt
         )
@@ -217,7 +223,7 @@ class PipelineRunner:
         cz.make_observations(
             viz_data['obs_times_flat'],
             num_sats,
-            sat_ids,
+            sat_id_order,
             start_utc_dt,
             end_utc_dt
         )
@@ -228,8 +234,8 @@ class PipelineRunner:
             dlnk_rate_history_epoch_dt,
             num_sats,
             num_gs,
-            sat_ids,
-            gs_ids,
+            sat_id_order,
+            gs_id_order,
             end_utc_dt
         )
 
@@ -239,8 +245,8 @@ class PipelineRunner:
                 viz_data['dlnk_partners'],
                 num_sats,
                 num_gs,
-                sat_ids,
-                gs_ids,
+                sat_id_order,
+                gs_id_order,
                 start_utc_dt,
                 end_utc_dt
             )
@@ -250,7 +256,7 @@ class PipelineRunner:
             viz_data['xlnk_rate_history'],
             xlnk_rate_history_epoch_dt,
             num_sats,
-            sat_ids,
+            sat_id_order,
             end_utc_dt
         )
 
@@ -259,7 +265,7 @@ class PipelineRunner:
                 viz_data['xlnk_link_info_history_flat'],
                 viz_data['xlnk_partners'],
                 num_sats,
-                sat_ids,
+                sat_id_order,
                 start_utc_dt,
                 end_utc_dt
             )
@@ -269,8 +275,8 @@ class PipelineRunner:
             renderer_mapping,
             num_sats,
             num_gs,
-            sat_ids,
-            gs_ids,
+            sat_id_order,
+            gs_id_order,
             viz_data['dlnk_rate_history'],
             viz_data['xlnk_rate_history'],
             viz_data.get ('dlnk_link_info_history_flat',[]),
