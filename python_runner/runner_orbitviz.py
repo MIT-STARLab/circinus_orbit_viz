@@ -13,11 +13,25 @@ import sys
 import argparse
 
 sys.path.append ('..')
-from circinus_tools import io_tools
-from circinus_tools  import time_tools as tt
+
+try: # First try will work if subrepo circinus_tools is populated, or if prior module imported from elsewhere (so this covers all the rest of the imports in this module as well)
+    from circinus_tools  import time_tools as tt
+    from circinus_tools  import io_tools
+    from circinus_tools  import debug_tools
+except ImportError:
+    print("Importing circinus_tools from parent repo...")
+    try:
+        sys.path.insert(0, "../../")
+        from circinus_tools  import time_tools as tt
+        from circinus_tools  import io_tools
+        from circinus_tools  import debug_tools
+    except ImportError:
+        print("Neither local nor parent-level circinus_tools found.")
+
+
+
 from czml import CzmlWrapper
 
-from circinus_tools import debug_tools
 
 REPO_BASE = os.path.abspath(os.pardir)  # os.pardir aka '..'
 
