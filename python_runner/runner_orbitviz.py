@@ -374,11 +374,11 @@ if __name__ == "__main__":
     b = time.time()
 
     with open('../app_data_files/sats_file.czml','w') as f:
-        json.dump(output [0],f)
+        json.dump(output[0], f, indent=4, separators=(',', ': '))
     with open('../app_data_files/viz_objects.json','w') as f:
-        json.dump(output [1],f)
+        json.dump(output[1], f, indent=4, separators=(',', ': '))
     with open('../renderers/description.json','w') as f:
-        json.dump(output [2],f)
+        json.dump(output[2], f, indent=4, separators=(',', ': '))
 
     print('run time: %f'%(b-a))
  
