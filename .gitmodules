@@ -1,7 +1,3 @@
 [submodule "CSTAR"]
 	path = CSTAR
 	url = git@github.com:apollokit/CSTAR.git
-[submodule "circinus_tools"]
-	path = circinus_tools
-	url = git@github.com:apollokit/circinus_tools.git
-    branch = master
