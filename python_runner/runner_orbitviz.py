@@ -13,6 +13,7 @@ import sys
 import argparse
 
 sys.path.append ('..')
+
 try: # First try will work if subrepo circinus_tools is populated, or if prior module imported from elsewhere (so this covers all the rest of the imports in this module as well)
     from circinus_tools  import time_tools as tt
     from circinus_tools  import io_tools
@@ -26,10 +27,8 @@ except ImportError:
         from circinus_tools  import debug_tools
     except ImportError:
         print("Neither local nor parent-level circinus_tools found.")
-        
-from czml import CzmlWrapper
 
-from circinus_tools import debug_tools
+from czml import CzmlWrapper
 
 REPO_BASE = os.path.abspath(os.pardir)  # os.pardir aka '..'
 
@@ -372,11 +371,11 @@ if __name__ == "__main__":
     b = time.time()
 
     with open('../app_data_files/sats_file.czml','w') as f:
-        json.dump(output [0],f)
+        json.dump(output[0], f, indent=4, separators=(',', ': '))
     with open('../app_data_files/viz_objects.json','w') as f:
-        json.dump(output [1],f)
+        json.dump(output[1], f, indent=4, separators=(',', ': '))
     with open('../renderers/description.json','w') as f:
-        json.dump(output [2],f)
+        json.dump(output[2], f, indent=4, separators=(',', ': '))
 
     print('run time: %f'%(b-a))
  
