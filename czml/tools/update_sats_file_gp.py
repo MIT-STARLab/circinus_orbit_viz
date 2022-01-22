@@ -10,10 +10,13 @@ import sys
 
 # might have to also modify the slashes in here if you're in e.g. windows / -> \
 
-simulation_input_file_path = '[pathtoglobalplanner]/matlab_preprocess/landing_pad/timing_output.mat'
+simulation_input_file_path = '/Users/ktikennedy/Dropbox (MIT)/MIT/Research/ACCESS/GlobalPlanner/matlab_preprocess/landing_pad/timing_output.mat'
 czml_tools_path = '../OrbitPropagation/czml/Tools'
 # czml_header_file = './sats_file.czml'
-czml_header_file = '[pathtoglobalplanner]/orbit_inputs/orbitprop_walker_orb3-30_gs2_t86400-10.czml'
+# czml_header_file = '/Users/ktikennedy/Dropbox (MIT)/MIT/Research/MDO Paper Work/Comm_constellation_MDO/orbit_inputs/sso_and_equatorial/czml/orbitprop_ssoequat_orb30-0-0_gs5_t259200-10.czml'
+
+# czml_header_file = '/Users/ktikennedy/Desktop/MDO_paper_sim_results/walker/czml/orbitprop_walker_orb3-30_gs5_t259200-10.czml'
+czml_header_file = '/Users/ktikennedy/Dropbox (MIT)/MIT/Research/ACCESS/GlobalPlanner/orbit_inputs/orbitprop_walker_orb3-30_gs2_t86400-10.czml'
 
 output_file = './sats_file.czml'
 renderer_description_file = '../renderers/description.json'
